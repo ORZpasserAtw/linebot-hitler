@@ -33,9 +33,9 @@ def callback():
     return 'OK'
 
 # 處理訊息
-@handler.add(MessageEvent, message="TEST")
+@handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if TextMessage == "no" :
+    if event.message.text == "no" :
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="brrrrr"))
