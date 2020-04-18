@@ -33,7 +33,7 @@ def callback():
     return 'OK'
 
 # 處理訊息
-@handler.add(MessageEvent, message=TextMessage)
+@handler.add(MessageEvent, message="TEST")
 def handle_message(event):
     if TextMessage == "no" :
         line_bot_api.reply_message(
@@ -42,7 +42,7 @@ def handle_message(event):
     else:
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="HEHEHEHEHE"))
+            TextSendMessage(text=event.message.text))
 
 import os
 if __name__ == "__main__":
