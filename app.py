@@ -38,7 +38,7 @@ def handle_message(event):
     if event.message.text == "no" :
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="brrrrr"))
+            TextSendMessage(text="nein!"))
     elif event.message.text == "send nudes" :
         message = ImageSendMessage(
         original_content_url='https://cdn.donmai.us/original/cc/24/__bismarck_kantai_collection_drawn_by_kuon_kwonchanji__cc246a8e793daf930446af915c187774.jpg',
