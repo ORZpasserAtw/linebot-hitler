@@ -49,7 +49,7 @@ def handle_message(event):
         elif ran == 2:
             RNGmsg = "https://youtu.be/1snEYPg8TXs"
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=RNGmsg))
-    elif event.message.text == "1+1":
+    elif "=" in event.message.text:
         ans = 1+1
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))
     elif event.message.text == "send nudes" :
