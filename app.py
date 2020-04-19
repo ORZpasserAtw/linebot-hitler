@@ -1,3 +1,5 @@
+import os,random
+
 from flask import Flask, request, abort
 
 from linebot import (
@@ -37,10 +39,10 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if event.message.text == "no" :
+    if event.message.text == "RNG" :
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="nein!"))
+            TextSendMessage(text=random.randint(1,6)))
     elif event.message.text == "send nudes" :
         message = ImageSendMessage(
         original_content_url='https://cdn.donmai.us/original/cc/24/__bismarck_kantai_collection_drawn_by_kuon_kwonchanji__cc246a8e793daf930446af915c187774.jpg',
@@ -56,7 +58,7 @@ def handle_message(event):
 message = StickerSendMessage(package_id='11538',sticker_id='51626518')
 line_bot_api.push_message(to, message)
 
-import os
+
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
