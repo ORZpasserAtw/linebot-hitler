@@ -40,14 +40,23 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if event.message.text == "RNG" :
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=random.randint(1,6)))
+        RNGmsg = ""
+        ran = random.randrange(5)
+        if ran == 0 :
+            RNGmsg = "0"
+        elif ran == 1:
+            RNGmsg = "1"
+        elif ran == 2:
+            RNGmsg = "2"
+        elif ran == 3:
+            RNGmsg = "3"
+        elif ran == 4:
+            RNGmsg = "4"
+        elif ran == 5:
+            RNGmsg = "5"
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=RNGmsg))
     elif event.message.text == "send nudes" :
-        message = ImageSendMessage(
-        original_content_url='https://cdn.donmai.us/original/cc/24/__bismarck_kantai_collection_drawn_by_kuon_kwonchanji__cc246a8e793daf930446af915c187774.jpg',
-        preview_image_url='https://cdn.donmai.us/preview/cc/24/cc246a8e793daf930446af915c187774.jpg'
-        )
+        message = ImageSendMessage(original_content_url='https://cdn.donmai.us/original/cc/24/__bismarck_kantai_collection_drawn_by_kuon_kwonchanji__cc246a8e793daf930446af915c187774.jpg',preview_image_url='https://cdn.donmai.us/preview/cc/24/cc246a8e793daf930446af915c187774.jpg')
         line_bot_api.reply_message(event.reply_token, message)
     else:
         line_bot_api.reply_message(
