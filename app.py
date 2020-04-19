@@ -49,9 +49,9 @@ def handle_message(event):
         elif ran == 2:
             RNGmsg = "https://youtu.be/1snEYPg8TXs"
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=RNGmsg))
-    elif "=" in event.message.text:
+    elif event.message.text == "1+1":
         ans = 1+1
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=("ANS=" & ans)))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))
     elif event.message.text == "send nudes" :
         message = ImageSendMessage(original_content_url='https://cdn.donmai.us/original/cc/24/__bismarck_kantai_collection_drawn_by_kuon_kwonchanji__cc246a8e793daf930446af915c187774.jpg',preview_image_url='https://cdn.donmai.us/preview/cc/24/cc246a8e793daf930446af915c187774.jpg')
         line_bot_api.reply_message(event.reply_token, message)
