@@ -43,10 +43,10 @@ def callback():
 def handle_message(event):
     if event.message.text == "呼叫助理":
         line_bot_api.reply_message(
-            event.reply_token, "你好，有甚麼需要分佈的嗎？")
+            event.reply_token, TextSendMessage(text="你好，有甚麼需要分佈的嗎？"))
     elif event.message.text == "推薦行程":
         carousel_template_message = TemplateSendMessage(
-            alt_text='Carousel template',
+            alt_text='Carousel Template 推薦行程',
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(
