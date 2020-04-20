@@ -62,16 +62,19 @@ def handle_message(event):
 
 rich_menu_to_create = RichMenu(
     size=RichMenuSize(width=2500, height=843),
-    selected=False,
-    name="Nice richmenu",
-    chat_bar_text="Tap here",
+    selected=True,
+    name="圖文選單 1",
+    chat_bar_text="查看更多資訊",
     areas=[RichMenuArea(
         bounds=RichMenuBounds(x=0, y=0, width=2500, height=843),
         action=URIAction(label='Go to line.me', uri='https://line.me'))]
 )
 rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
+with open("https://i.imgur.com/zDhlI2K.jpg", 'rb') as f:
+    line_bot_api.set_rich_menu_image(rich_menu_id,"image/jpeg",f)
 rich_menu = line_bot_api.get_rich_menu(rich_menu_id)
 print(rich_menu_id)
+line_bot_api.set_default_rich_menu(rich_menu_id)
 
 
 
