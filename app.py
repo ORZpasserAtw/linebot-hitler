@@ -9,7 +9,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, RichMenu, RichMenuSize, RichMenuArea,RichMenuBounds, URIAction
 )
 
 app = Flask(__name__)
@@ -60,10 +60,22 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=event.message.text))
 
+rich_menu_to_create = RichMenu(
+    size=RichMenuSize(width=2500, height=843),
+    selected=False,
+    name="Nice richmenu",
+    chat_bar_text="Tap here",
+    areas=[RichMenuArea(
+        bounds=RichMenuBounds(x=0, y=0, width=2500, height=843),
+        action=URIAction(label='Go to line.me', uri='https://line.me'))]
+)
+rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
+rich_menu = line_bot_api.get_rich_menu(rich_menu_id)
+
+
 
 message = StickerSendMessage(package_id='11538',sticker_id='51626518')
 line_bot_api.push_message(to, message)
-
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
