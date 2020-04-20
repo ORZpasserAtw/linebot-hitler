@@ -74,6 +74,7 @@ with open("https://i.imgur.com/zDhlI2K.jpg", 'rb') as f:
     line_bot_api.set_rich_menu_image(rich_menu_id,"image/jpeg",f)
 rich_menu = line_bot_api.get_rich_menu(rich_menu_id)
 print(rich_menu_id)
+
 line_bot_api.set_default_rich_menu(rich_menu_id)
 
 
