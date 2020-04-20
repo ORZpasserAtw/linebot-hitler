@@ -52,18 +52,12 @@ def handle_message(event):
                     CarouselColumn(
                         thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/e/e6/Wake_Island_air.JPG',
                         text='威克島',
-                        action=MessageTemplateAction(
-                            label='message1',
-                            text='開始導航',
-                        )
+                        actions=[MessageTemplateAction(label='message1',text='開始導航')]
                     ),
                     CarouselColumn(
                         thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG',
                         text='硫磺島',
-                        action=MessageTemplateAction(
-                            label='message1',
-                            text='開始導航',
-                        )
+                        actions=[MessageTemplateAction(label='message1',text='開始導航')]
                     )
                 ]
             )
