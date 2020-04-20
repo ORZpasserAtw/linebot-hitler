@@ -51,11 +51,13 @@ def handle_message(event):
                 columns=[
                     CarouselColumn(
                         thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/e/e6/Wake_Island_air.JPG',
+                        title='test',
                         text='威克島',
                         actions=[MessageTemplateAction(label='message1',text='開始導航')]
                     ),
                     CarouselColumn(
                         thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG',
+                        title='test',
                         text='硫磺島',
                         actions=[MessageTemplateAction(label='message1',text='開始導航')]
                     )
