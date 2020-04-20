@@ -65,7 +65,7 @@ def handle_message(event):
             )
         )
         line_bot_api.reply_message(
-            event.reply_token, TemplateSendMessage(alt_text="Temple", template=carousel_template_message))
+            event.reply_token, carousel_template_message)
     elif event.message.text == "RNG":
         RNGmsg = ""
         ran = random.randrange(3)
