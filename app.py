@@ -71,6 +71,7 @@ rich_menu_to_create = RichMenu(
 )
 rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
 rich_menu = line_bot_api.get_rich_menu(rich_menu_id)
+print(rich_menu_id)
 
 
 
