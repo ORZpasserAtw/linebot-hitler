@@ -10,7 +10,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, URIAction, MessageAction, TemplateSendMessage, CarouselTemplate, CarouselColumn, PostbackAction
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, URIAction, MessageAction, TemplateSendMessage, CarouselTemplate, CarouselColumn, MessageTemplateAction
 )
 
 app = Flask(__name__)
@@ -52,19 +52,17 @@ def handle_message(event):
                     CarouselColumn(
                         thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/e/e6/Wake_Island_air.JPG',
                         text='威克島',
-                        action=PostbackAction(
-                            label='postback1',
-                            display_text='開始導航',
-                            data='action=buy&itemid=1'
+                        action=MessageTemplateAction(
+                            label='message1',
+                            text='開始導航',
                         )
                     ),
                     CarouselColumn(
                         thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG',
                         text='硫磺島',
-                        action=PostbackAction(
-                            label='postback2',
-                            display_text='開始導航',
-                            data='action=buy&itemid=2'
+                        action=MessageTemplateAction(
+                            label='message1',
+                            text='開始導航',
                         )
                     )
                 ]
