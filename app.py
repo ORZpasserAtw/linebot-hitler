@@ -61,24 +61,33 @@ def handle_message(event):
             TextSendMessage(text=event.message.text))
 
 rich_menu_to_create = RichMenu(
-    size=RichMenuSize(width=2500, height=843),
+    size=RichMenuSize(width=2500, height=1686),
     selected=True,
     name="圖文選單 1",
     chat_bar_text="查看更多資訊",
     areas=[RichMenuArea(
-        bounds=RichMenuBounds(x=0, y=0, width=2500, height=281),
-        action=MessageAction(label="message", text="Ta 152")),
+        bounds=RichMenuBounds(x=0, y=0, width=854, height=843),
+        action=MessageAction(label="message", text="呼叫助理")),
         RichMenuArea(
-        bounds=RichMenuBounds(x=0, y=281, width=2500, height=281),
-        action=PostbackAction(label="postback", text="Fw 190",data="???")),
+        bounds=RichMenuBounds(x=854, y=0, width=854, height=843),
+        action=MessageAction(label="message", text="推薦行程")),
         RichMenuArea(
-        bounds=RichMenuBounds(x=0, y=562, width=2500, height=281),
-        action=URIAction(label="URI", uri="https://youtu.be/l7JF0k4lNdE"))
+        bounds=RichMenuBounds(x=1707, y=0, width=854, height=843),
+        action=URIAction(label="URI", uri="https://www.desmos.com/scientific")),
+        RichMenuArea(
+        bounds=RichMenuBounds(x=0, y=843, width=854, height=843),
+        action=MessageAction(label="message", text="天氣及空氣品質")),
+        RichMenuArea(
+        bounds=RichMenuBounds(x=854, y=843, width=854, height=843),
+        action=MessageAction(label="message", text="油價")),
+        RichMenuArea(
+        bounds=RichMenuBounds(x=1707, y=843, width=854, height=843),
+        action=MessageAction(label="message", text="幫助"))
         ]
 )
 rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
-with open("BG.jpg", 'rb') as f:
-    line_bot_api.set_rich_menu_image(rich_menu_id,"image/jpeg",f)
+with open("BG.png", 'rb') as f:
+    line_bot_api.set_rich_menu_image(rich_menu_id,"image/png",f)
 
 rich_menu = line_bot_api.get_rich_menu(rich_menu_id)
 print(rich_menu_id)
