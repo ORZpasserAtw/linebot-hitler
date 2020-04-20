@@ -43,7 +43,7 @@ def callback():
 def handle_message(event):
     if event.message.text == "呼叫助理":
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="你好，有甚麼需要分佈的嗎？"))
+            event.reply_token, "你好，有甚麼需要分佈的嗎？")
     elif event.message.text == "推薦行程":
         carousel_template_message = TemplateSendMessage(
             alt_text='Carousel template',
@@ -51,15 +51,15 @@ def handle_message(event):
                 columns=[
                     CarouselColumn(
                         thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/e/e6/Wake_Island_air.JPG',
-                        title='test',
                         text='威克島',
-                        actions=[MessageTemplateAction(label='message1',text='開始導航')]
+                        actions=[MessageTemplateAction(label='開始導航', text='威克島開始導航'), MessageTemplateAction(
+                            label='這個我不喜歡', text='不喜歡威克島')]
                     ),
                     CarouselColumn(
                         thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG',
-                        title='test',
                         text='硫磺島',
-                        actions=[MessageTemplateAction(label='message1',text='開始導航')]
+                        actions=[MessageTemplateAction(label='開始導航', text='硫磺島開始導航'), MessageTemplateAction(
+                            label='這個我不喜歡', text='不喜歡硫磺島')]
                     )
                 ]
             )
