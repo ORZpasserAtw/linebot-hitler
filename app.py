@@ -10,7 +10,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, URIAction, MessageAction, TemplateSendMessage
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, URIAction, MessageAction, TemplateSendMessage, ImageCarouselTemplate, ImageCarouselColumn, PostbackAction
 )
 
 app = Flask(__name__)
@@ -68,7 +68,7 @@ def handle_message(event):
                 ]
             )
         )
-         line_bot_api.reply_message(
+        line_bot_api.reply_message(
             event.reply_token, TemplateSendMessage(alt_text="Temple",template=image_carousel_template_message))
     elif event.message.text == "RNG":
         RNGmsg = ""
