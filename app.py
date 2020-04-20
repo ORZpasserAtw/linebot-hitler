@@ -9,7 +9,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, RichMenu, RichMenuSize, RichMenuArea,RichMenuBounds, URIAction, MessageAction
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, RichMenu, RichMenuSize, RichMenuArea,RichMenuBounds, URIAction, MessageAction, PostbackAction
 )
 
 app = Flask(__name__)
@@ -66,8 +66,15 @@ rich_menu_to_create = RichMenu(
     name="圖文選單 1",
     chat_bar_text="查看更多資訊",
     areas=[RichMenuArea(
-        bounds=RichMenuBounds(x=0, y=0, width=2500, height=420),
-        action=MessageAction(label="message", text="Ta 152"))]
+        bounds=RichMenuBounds(x=0, y=0, width=2500, height=281),
+        action=MessageAction(label="message", text="Ta 152")),
+        RichMenuArea(
+        bounds=RichMenuBounds(x=0, y=281, width=2500, height=281),
+        action=PostbackAction(label="postback", text="Fw 190",data="???")),
+        RichMenuArea(
+        bounds=RichMenuBounds(x=0, y=562, width=2500, height=281),
+        action=URIAction(label="URI", uri="https://youtu.be/l7JF0k4lNdE"))
+        ]
 )
 rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
 with open("BG.jpg", 'rb') as f:
