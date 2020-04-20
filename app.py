@@ -10,7 +10,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, URIAction, MessageAction, TemplateSendMessage, ImageCarouselTemplate, ImageCarouselColumn, PostbackAction
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, URIAction, MessageAction, TemplateSendMessage, CarouselTemplate, CarouselColumn, PostbackAction
 )
 
 app = Flask(__name__)
@@ -45,22 +45,22 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text="你好，有甚麼需要分佈的嗎？"))
     elif event.message.text == "推薦行程":
-        image_carousel_template_message = TemplateSendMessage(
-            alt_text='ImageCarousel template',
-            template=ImageCarouselTemplate(
+        carousel_template_message = TemplateSendMessage(
+            alt_text='Carousel template',
+            template=CarouselTemplate(
                 columns=[
-                    ImageCarouselColumn(
-                        image_url='https://upload.wikimedia.org/wikipedia/commons/e/e6/Wake_Island_air.JPG',
-                        message='威克島',
+                    CarouselColumn(
+                        thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/e/e6/Wake_Island_air.JPG',
+                        text='威克島',
                         action=PostbackAction(
                             label='postback1',
                             display_text='開始導航',
                             data='action=buy&itemid=1'
                         )
                     ),
-                    ImageCarouselColumn(
-                        image_url='https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG',
-                        message='硫磺島',
+                    CarouselColumn(
+                        thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG',
+                        text='硫磺島',
                         action=PostbackAction(
                             label='postback2',
                             display_text='開始導航',
@@ -71,7 +71,7 @@ def handle_message(event):
             )
         )
         line_bot_api.reply_message(
-            event.reply_token, TemplateSendMessage(alt_text="Temple",template=image_carousel_template_message))
+            event.reply_token, TemplateSendMessage(alt_text="Temple", template=carousel_template_message))
     elif event.message.text == "RNG":
         RNGmsg = ""
         ran = random.randrange(3)
