@@ -56,12 +56,12 @@ def handle_message(event):
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                        thumbnail_image_url=locations[0][4], title=locations[0][0], text="天氣："+locations[0][2]+" 溫度："+locations[0][3]+"\n"+locations[0][1],
+                        thumbnail_image_url=locations[0][4], title=locations[0][0], text=str("天氣："+locations[0][2]+" 溫度："+locations[0][3]+"\n"+locations[0][1]),
                         actions=[MessageTemplateAction(label="開始導航", text=locations[0][0]+"開始導航"), MessageTemplateAction(
                             label="這個我不喜歡", text="不喜歡"+locations[0][0])]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url=locations[1][4], title=locations[1][0], text="天氣："+locations[1][2]+" 溫度："+locations[1][3]+"\n"+locations[1][1],
+                        thumbnail_image_url=locations[1][4], title=locations[1][0], text=str("天氣："+locations[1][2]+" 溫度："+locations[1][3]+"\n"+locations[1][1]),
                         actions=[MessageTemplateAction(label="開始導航", text=locations[1][0]+"開始導航"), MessageTemplateAction(
                             label="這個我不喜歡", text="不喜歡"+locations[1][0])]
                     )
