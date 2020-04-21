@@ -10,14 +10,14 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, URIAction, MessageAction, TemplateSendMessage, CarouselTemplate, CarouselColumn, MessageTemplateAction
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, URIAction, MessageAction, TemplateSendMessage, CarouselTemplate, CarouselColumn, MessageTemplateAction, ConfirmTemplate
 )
 
 app = Flask(__name__)
 
 # Channel Access Token
 line_bot_api = LineBotApi(
-    'tWtoT0Ov770ISQVJqvjfvB3sElVfLVc+QkFvJ4Ug41CfzhQefISru3q1BAIgN67kO+hfd1kEkYFFVfZiXAekEvSOdgtcGbYOWKIQ5lST9x1QYZYmBPr4JDwUkUXQmydnviHU1FthYD7mcKv1JMzMJwdB04t89/1O/w1cDnyilFU=')
+    "tWtoT0Ov770ISQVJqvjfvB3sElVfLVc+QkFvJ4Ug41CfzhQefISru3q1BAIgN67kO+hfd1kEkYFFVfZiXAekEvSOdgtcGbYOWKIQ5lST9x1QYZYmBPr4JDwUkUXQmydnviHU1FthYD7mcKv1JMzMJwdB04t89/1O/w1cDnyilFU=")
 # User id
 to = "U6284cec02b95ace9fbdca6547bafadcb"
 # Channel Secret
@@ -45,27 +45,40 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text="你好，有甚麼需要分佈的嗎？"))
     elif event.message.text == "推薦行程":
-        carousel_template_message = TemplateSendMessage(
-            alt_text='Carousel Template 推薦行程',
+        carousel_template = TemplateSendMessage(
+            alt_text="Carousel Template 推薦行程",
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                        thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/e/e6/Wake_Island_air.JPG',
-                        text='威克島',
-                        actions=[MessageTemplateAction(label='開始導航', text='威克島開始導航'), MessageTemplateAction(
-                            label='這個我不喜歡', text='不喜歡威克島')]
+                        thumbnail_image_url="https://upload.wikimedia.org/wikipedia/commons/e/e6/Wake_Island_air.JPG",
+                        text="威克島",
+                        actions=[MessageTemplateAction(label="開始導航", text="威克島開始導航"), MessageTemplateAction(
+                            label="這個我不喜歡", text="不喜歡威克島")]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG',
-                        text='硫磺島',
-                        actions=[MessageTemplateAction(label='開始導航', text='硫磺島開始導航'), MessageTemplateAction(
-                            label='這個我不喜歡', text='不喜歡硫磺島')]
+                        thumbnail_image_url="https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG",
+                        text="硫磺島",
+                        actions=[MessageTemplateAction(label="開始導航", text="硫磺島開始導航"), MessageTemplateAction(
+                            label="這個我不喜歡", text="不喜歡硫磺島")]
                     )
                 ]
             )
         )
         line_bot_api.reply_message(
-            event.reply_token, carousel_template_message)
+            event.reply_token, carousel_template)
+    elif event.message.text == "天氣及空氣品質":
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text="天氣及空氣品質的程式"))
+    elif event.message.text == "油價":
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text="油價的程式"))
+    elif event.message.text == "幫助":
+        confirm_template = TemplateSendMessage(
+            alt_text="Confirm Template 幫助",
+            template=ConfirmTemplate(text="你是智障嗎？", actions=[MessageTemplateAction(
+                label="是", text="我是智障"), MessageTemplateAction(label="否", text="我不是智障")])
+        )
+        line_bot_api.reply_message(event.reply_token, confirm_template)
     elif event.message.text == "RNG":
         RNGmsg = ""
         ran = random.randrange(3)
@@ -82,12 +95,12 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=ans))
     elif event.message.text == "send nudes":
-        message = ImageSendMessage(original_content_url='https://cdn.donmai.us/original/cc/24/__bismarck_kantai_collection_drawn_by_kuon_kwonchanji__cc246a8e793daf930446af915c187774.jpg',
-                                   preview_image_url='https://cdn.donmai.us/preview/cc/24/cc246a8e793daf930446af915c187774.jpg')
+        message = ImageSendMessage(original_content_url="https://cdn.donmai.us/original/cc/24/__bismarck_kantai_collection_drawn_by_kuon_kwonchanji__cc246a8e793daf930446af915c187774.jpg",
+                                   preview_image_url="https://cdn.donmai.us/preview/cc/24/cc246a8e793daf930446af915c187774.jpg")
         line_bot_api.reply_message(event.reply_token, message)
     else:
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=event.message.text))
+            event.reply_token, TextSendMessage(text="我不知道：" + event.message.text))
 
 
 rich_menu_to_create = RichMenu(
@@ -124,7 +137,7 @@ print(rich_menu_id)
 
 line_bot_api.set_default_rich_menu(rich_menu_id)
 
-message = StickerSendMessage(package_id='11538', sticker_id='51626518')
+message = StickerSendMessage(package_id="11538", sticker_id="51626518")
 line_bot_api.push_message(to, message)
 
 if __name__ == "__main__":
