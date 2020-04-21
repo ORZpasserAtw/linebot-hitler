@@ -41,7 +41,7 @@ def callback():
 
 locations = [
     ["威克島","馬紹爾群島中的小島、北太平洋上的環礁","晴朗",99.9,"https://upload.wikimedia.org/wikipedia/commons/e/e6/Wake_Island_air.JPG"],
-    ["硫磺島","是位於西太平洋小笠原群島的火山島","晴朗",99.9,"https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG"],
+    ["硫磺島","西太平洋小笠原群島的火山島","晴朗",99.9,"https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG"],
 ]
 
 # 處理訊息
@@ -56,13 +56,13 @@ def handle_message(event):
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                        thumbnail_image_url=locations[0][4], title=locations[0][0], text="天氣："+locations[0][2]+" 溫度："+str(locations[0][3])+"\n"+locations[0][1],
-                        actions=[MessageTemplateAction(label="開始導航", text=locations[0][0]+"開始導航"), MessageTemplateAction(
+                        thumbnail_image_url=locations[0][4], title=locations[0][0], text="天氣："+locations[0][2]+" 溫度："+str(locations[0][3])+"°C"+"\n"+locations[0][1],
+                        actions=[MessageTemplateAction(label="開始導航", text="開始導航"+locations[0][0]), MessageTemplateAction(
                             label="這個我不喜歡", text="不喜歡"+locations[0][0])]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url=locations[1][4], title=locations[1][0], text="天氣："+locations[1][2]+" 溫度："+str(locations[1][3])+"\n"+locations[1][1],
-                        actions=[MessageTemplateAction(label="開始導航", text=locations[1][0]+"開始導航"), MessageTemplateAction(
+                        thumbnail_image_url=locations[1][4], title=locations[1][0], text="天氣："+locations[1][2]+" 溫度："+str(locations[1][3])+"°C"+"\n"+locations[1][1],
+                        actions=[MessageTemplateAction(label="開始導航", text="開始導航"+locations[1][0]), MessageTemplateAction(
                             label="這個我不喜歡", text="不喜歡"+locations[1][0])]
                     )
                 ]
@@ -70,6 +70,8 @@ def handle_message(event):
         )
         line_bot_api.reply_message(
             event.reply_token, carousel_template)
+    elif event.message.text == "開始導航"+locations[0][0]:
+        line_bot_api.reply_message(event.reply_token,LocationSendMessage(title='my location', address='Tainan', latitude=22.994821, longitude=120.196452))
     elif event.message.text == "天氣及空氣品質":
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text="天氣及空氣品質的程式"))
@@ -104,7 +106,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, message)
     else:
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="我不知道指令：\n" + event.message.text))
+            event.reply_token, TextSendMessage(text="未知指令：\n" + event.message.text))
 
 
 rich_menu_to_create = RichMenu(
