@@ -10,7 +10,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, URIAction, MessageAction, TemplateSendMessage, CarouselTemplate, CarouselColumn, MessageTemplateAction, ConfirmTemplate
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, LocationSendMessage, TemplateSendMessage, URIAction, MessageAction, MessageTemplateAction, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate
 )
 
 app = Flask(__name__)
@@ -38,6 +38,12 @@ def callback():
         abort(400)
     return 'OK'
 
+
+locations = [
+    ["威克島", 99.9, "https://upload.wikimedia.org/wikipedia/commons/e/e6/Wake_Island_air.JPG"],
+    ["硫磺島", 99.9, "https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG"],
+]
+
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -50,16 +56,14 @@ def handle_message(event):
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                        thumbnail_image_url="https://upload.wikimedia.org/wikipedia/commons/e/e6/Wake_Island_air.JPG",
-                        text="威克島",
-                        actions=[MessageTemplateAction(label="開始導航", text="威克島開始導航"), MessageTemplateAction(
-                            label="這個我不喜歡", text="不喜歡威克島")]
+                        thumbnail_image_url=locations[0][2], title=locations[0][0], text=locations[0][1],
+                        actions=[MessageTemplateAction(label="開始導航", text=locations[0][0]+"開始導航"), MessageTemplateAction(
+                            label="這個我不喜歡", text="不喜歡"+locations[0][0])]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url="https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG",
-                        text="硫磺島",
-                        actions=[MessageTemplateAction(label="開始導航", text="硫磺島開始導航"), MessageTemplateAction(
-                            label="這個我不喜歡", text="不喜歡硫磺島")]
+                        thumbnail_image_url=locations[1][2], title=locations[1][0], text=locations[1][1],
+                        actions=[MessageTemplateAction(label="開始導航", text=locations[1][0]+"開始導航"), MessageTemplateAction(
+                            label="這個我不喜歡", text="不喜歡"+locations[1][0])]
                     )
                 ]
             )
@@ -100,14 +104,14 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, message)
     else:
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="我不知道：" + event.message.text))
+            event.reply_token, TextSendMessage(text="我不知道指令：\n" + event.message.text))
 
 
 rich_menu_to_create = RichMenu(
     size=RichMenuSize(width=2500, height=1686),
     selected=True,
     name="圖文選單 1",
-    chat_bar_text="查看更多資訊",
+    chat_bar_text="查看快捷鍵",
     areas=[RichMenuArea(
         bounds=RichMenuBounds(x=0, y=0, width=854, height=843),
         action=MessageAction(label="message", text="呼叫助理")),
