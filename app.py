@@ -73,11 +73,11 @@ def handle_message(event):
     elif "開始導航" in event.message.text:
         if locations[0][0] in event.message.text:
             line_bot_api.reply_message(event.reply_token,LocationSendMessage(title="目的地", address=locations[0][0], latitude=locations[0][1], longitude=locations[0][2]))
-        elif locations[0][1] in event.message.text:
+        elif locations[1][0] in event.message.text:
             line_bot_api.reply_message(event.reply_token,LocationSendMessage(title="目的地", address=locations[1][0], latitude=locations[1][1], longitude=locations[1][2]))
     elif event.message.text == "天氣及空氣品質":
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="天氣及空氣品質的程式"))
+            event.reply_token, TextSendMessage(text="https://goo.gl/maps/SKVXk9jMww2XS79Y9")) #天氣及空氣品質的程式
     elif event.message.text == "油價":
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text="油價的程式"))
