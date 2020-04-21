@@ -10,7 +10,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, LocationSendMessage, TemplateSendMessage, URIAction, MessageAction, MessageTemplateAction, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, URIAction, MessageAction, MessageTemplateAction, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, BoxComponent, TextComponent, ButtonComponent, BubbleStyle
 )
 
 app = Flask(__name__)
@@ -40,8 +40,10 @@ def callback():
 
 
 locations = [
-    ["威克島",19.295278,166.631111,"馬紹爾群島中的小島、北太平洋上的環礁","晴朗",99.9,"https://upload.wikimedia.org/wikipedia/commons/e/e6/Wake_Island_air.JPG"],
-    ["硫磺島",24.783333,141.316667,"西太平洋小笠原群島的火山島","晴朗",99.9,"https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG"],
+    ["威克島", "馬紹爾群島中的小島、北太平洋上的環礁", "晴朗", 99.9,
+        "https://upload.wikimedia.org/wikipedia/commons/e/e6/Wake_Island_air.JPG"],
+    ["硫磺島", "西太平洋小笠原群島的火山島", "晴朗", 99.9,
+        "https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG"],
 ]
 
 # 處理訊息
@@ -56,12 +58,16 @@ def handle_message(event):
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                        thumbnail_image_url=locations[0][6], title=locations[0][0], text="天氣："+locations[0][4]+" 溫度："+str(locations[0][5])+"°C"+"\n"+locations[0][3],
+                        thumbnail_image_url=locations[0][4], title=locations[0][0], text="天氣：" +
+                        locations[0][2]+"　溫度：" +
+                        str(locations[0][3])+"°C"+"\n"+locations[0][1],
                         actions=[MessageTemplateAction(label="開始導航", text="開始導航"+locations[0][0]), MessageTemplateAction(
                             label="這個我不喜歡", text="不喜歡"+locations[0][0])]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url=locations[1][6], title=locations[1][0], text="天氣："+locations[1][4]+" 溫度："+str(locations[1][5])+"°C"+"\n"+locations[1][3],
+                        thumbnail_image_url=locations[1][4], title=locations[1][0], text="天氣：" +
+                        locations[1][2]+"　溫度：" +
+                        str(locations[1][3])+"°C"+"\n"+locations[1][1],
                         actions=[MessageTemplateAction(label="開始導航", text="開始導航"+locations[1][0]), MessageTemplateAction(
                             label="這個我不喜歡", text="不喜歡"+locations[1][0])]
                     )
@@ -72,12 +78,17 @@ def handle_message(event):
             event.reply_token, carousel_template)
     elif "開始導航" in event.message.text:
         if locations[0][0] in event.message.text:
-            line_bot_api.reply_message(event.reply_token,LocationSendMessage(title="目的地", address=locations[0][0], latitude=locations[0][1], longitude=locations[0][2]))
-        elif locations[1][0] in event.message.text:
-            line_bot_api.reply_message(event.reply_token,LocationSendMessage(title="目的地", address=locations[1][0], latitude=locations[1][1], longitude=locations[1][2]))
+            flex_message = FlexSendMessage(
+                alt_text="Flex Message 導航",
+                contents=BubbleContainer(
+                    direction="ltr",
+                    footer=[ButtonComponent(action=URIAction(label="URI", uri="https://www.desmos.com/scientific"))]
+                )
+            )
+        line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "天氣及空氣品質":
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="https://goo.gl/maps/SKVXk9jMww2XS79Y9")) #天氣及空氣品質的程式
+            event.reply_token, TextSendMessage(text="https://goo.gl/maps/SKVXk9jMww2XS79Y9"))  # 天氣及空氣品質的程式
     elif event.message.text == "油價":
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text="油價的程式"))
