@@ -82,7 +82,7 @@ def handle_message(event):
                 alt_text="Flex Message 導航",
                 contents=BubbleContainer(
                     body=BoxComponent(layout="vertical", contents=[TextComponent(text="TEXT")]),
-                    footer=ButtonComponent(layout="horizontal", action=URIAction(label="URI", uri="https://www.desmos.com/scientific"))
+                    footer=BoxComponent(layout="horizontal", action=URIAction(label="URI", uri="https://www.desmos.com/scientific"))
                     )
             )
         line_bot_api.reply_message(event.reply_token, flex_message)
