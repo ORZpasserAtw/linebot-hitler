@@ -80,7 +80,7 @@ def handle_message(event):
         if locations[0][0] in event.message.text:
             flex_message = FlexSendMessage(
                 alt_text="Flex Message 導航",
-                contents=BubbleContainer(direction="ltr",body=BoxComponent(layout="vertical",contents=TextComponent(text="text")))
+                contents=BubbleContainer(direction="ltr",body=BoxComponent(layout="vertical",contents=[TextComponent(text="TEXT")]))
             )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "天氣及空氣品質":
