@@ -81,9 +81,21 @@ def handle_message(event):
             flex_message = FlexSendMessage(
                 alt_text="Flex Message 導航",
                 contents=BubbleContainer(
-                    body=BoxComponent(layout="vertical", contents=[TextComponent(text="TEXT")]),
-                    footer=BoxComponent(layout="horizontal",contents=[ButtonComponent(action=URIAction(label="開啟 Google 地圖",uri=("https://www.google.com.tw/maps/place/"+str(locations[0][0]))))])
-                    )
+                    body=BoxComponent(layout="vertical", contents=[
+                                      TextComponent(text=locations[0][0]+"導航")]),
+                    footer=BoxComponent(layout="horizontal", contents=[ButtonComponent(action=URIAction(
+                        label="開啟 Google 地圖", uri=("https://www.google.com.tw/maps/place/"+locations[0][0])))])
+                )
+            )
+        elif locations[1][0] in event.message.text:
+            flex_message = FlexSendMessage(
+                alt_text="Flex Message 導航",
+                contents=BubbleContainer(
+                    body=BoxComponent(layout="vertical", contents=[
+                                      TextComponent(text=locations[1][0]+"導航")]),
+                    footer=BoxComponent(layout="horizontal", contents=[ButtonComponent(action=URIAction(
+                        label="開啟 Google 地圖", uri=("https://www.google.com.tw/maps/place/"+locations[1][0])))])
+                )
             )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "天氣及空氣品質":
