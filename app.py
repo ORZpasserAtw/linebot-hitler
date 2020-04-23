@@ -103,7 +103,7 @@ def handle_message(event):
             alt_text="Flex Message 記帳小本本",
             contents=BubbleContainer(
                 body=BoxComponent(layout="vertical", contents=[
-                    TextComponent(text="記帳小本本",height="xl"),
+                    TextComponent(text="記帳小本本",size="xl"),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="當前餘額"),
                         TextComponent(text="69 元",align="end")
@@ -114,7 +114,7 @@ def handle_message(event):
                         ])
                     ]
                 ),
-                footer=BoxComponent(layout="horizontal", contents=[
+                footer=BoxComponent(layout="horizontal", spacing="md", contents=[
                     ButtonComponent(action=MessageAction(label="開始記帳", text="開始記帳"),style="primary"),
                     ButtonComponent(action=MessageAction(label="餘額設定", text="餘額設定"),style="primary")
                     ]
