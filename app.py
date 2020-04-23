@@ -99,16 +99,8 @@ def handle_message(event):
             )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "記帳小本本":
-        flex_message = FlexSendMessage(
-                alt_text="Flex Message 記帳小本本",
-                contents=BubbleContainer(
-                    body=BoxComponent(layout="vertical", contents=[
-                                      TextComponent(text="記帳小本本")]),
-                    footer=BoxComponent(layout="horizontal", contents=[ButtonComponent(action=MessageAction(
-                        label="開始記帳",text="開始記帳"))])
-                )
-            )
-        line_bot_api.reply_message(event.reply_token, flex_message)
+        
+        line_bot_api.reply_message(event.reply_token, "test")
     elif event.message.text == "天氣及空氣品質":
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text="天氣及空氣品質的程式"))
@@ -135,7 +127,11 @@ def handle_message(event):
             event.reply_token, TextSendMessage(text=RNGmsg))
     elif "=" in event.message.text:
         x = event.message.text.split("=",1)
-
+        try:
+            line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=eval(x[0],{"__builtins__":None},{})))
+        except:
+            line_bot_api.reply_message(event.reply_token, "計算有誤")
     elif event.message.text == "send nudes":
         message = ImageSendMessage(original_content_url="https://cdn.donmai.us/original/cc/24/__bismarck_kantai_collection_drawn_by_kuon_kwonchanji__cc246a8e793daf930446af915c187774.jpg",
                                    preview_image_url="https://cdn.donmai.us/preview/cc/24/cc246a8e793daf930446af915c187774.jpg")
