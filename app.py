@@ -100,14 +100,15 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "記帳小本本":
         flex_message = FlexSendMessage(
-                alt_text="Flex Message 記帳小本本",
-                contents=BubbleContainer(
-                    body=BoxComponent(layout="vertical", contents=[
-                                      TextComponent(text="記帳小本本")]),
-                    footer=BoxComponent(layout="horizontal", contents=[ButtonComponent(action=MessageAction(
-                        label="開始記帳",text="開始記帳"))])
-                )
+            alt_text="Flex Message 記帳小本本",
+            contents=BubbleContainer(
+                body=BoxComponent(layout="vertical", contents=[
+                    TextComponent(text="記帳小本本")]),
+                footer=BoxComponent(layout="horizontal", contents=[
+                    ButtonComponent(action=MessageAction(label="開始記帳", text="開始記帳")), 
+                    ButtonComponent(action=MessageAction(label="餘額設定", text="餘額設定"))])
             )
+        )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "天氣及空氣品質":
         line_bot_api.reply_message(
@@ -134,10 +135,10 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=RNGmsg))
     elif "=" in event.message.text:
-        x = event.message.text.split("=",1)
+        x = event.message.text.split("=", 1)
         try:
             line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=eval(x[0],{"__builtins__":None},{})))
+                event.reply_token, TextSendMessage(text=eval(x[0], {"__builtins__": None}, {})))
         except:
             line_bot_api.reply_message(event.reply_token, "計算有誤")
     elif event.message.text == "send nudes":
