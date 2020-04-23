@@ -106,12 +106,16 @@ def handle_message(event):
                     TextComponent(text="記帳小本本",height="xl"),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="當前餘額"),
-                        TextComponent(text="1337 元")
+                        TextComponent(text="69 元",align="end")
+                        ]),
+                    BoxComponent(layout="horizontal", contents=[
+                        TextComponent(text="每日可用餘額"),
+                        TextComponent(text="420 元",align="end")
                         ])
                     ]
                 ),
                 footer=BoxComponent(layout="horizontal", contents=[
-                    ButtonComponent(action=MessageAction(label="開始記帳", text="開始記帳"),style="primary"), 
+                    ButtonComponent(action=MessageAction(label="開始記帳", text="開始記帳"),style="primary"),
                     ButtonComponent(action=MessageAction(label="餘額設定", text="餘額設定"),style="primary")
                     ]
                 )
