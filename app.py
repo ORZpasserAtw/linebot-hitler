@@ -135,11 +135,7 @@ def handle_message(event):
             event.reply_token, TextSendMessage(text=RNGmsg))
     elif "=" in event.message.text:
         x = event.message.text.split("=",1)
-        try:
-            line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=eval(x[0],{"__builtins__":None},{})))
-        except:
-            line_bot_api.reply_message(event.reply_token, "計算有誤！")
+
     elif event.message.text == "send nudes":
         message = ImageSendMessage(original_content_url="https://cdn.donmai.us/original/cc/24/__bismarck_kantai_collection_drawn_by_kuon_kwonchanji__cc246a8e793daf930446af915c187774.jpg",
                                    preview_image_url="https://cdn.donmai.us/preview/cc/24/cc246a8e793daf930446af915c187774.jpg")
