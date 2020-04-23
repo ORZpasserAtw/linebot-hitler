@@ -99,8 +99,16 @@ def handle_message(event):
             )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "記帳小本本":
-        
-        line_bot_api.reply_message(event.reply_token, "test")
+        flex_message = FlexSendMessage(
+                alt_text="Flex Message 記帳小本本",
+                contents=BubbleContainer(
+                    body=BoxComponent(layout="vertical", contents=[
+                                      TextComponent(text="記帳小本本")]),
+                    footer=BoxComponent(layout="horizontal", contents=[ButtonComponent(action=MessageAction(
+                        label="開始記帳",text="開始記帳"))])
+                )
+            )
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(flex_message))
     elif event.message.text == "天氣及空氣品質":
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text="天氣及空氣品質的程式"))
