@@ -108,7 +108,7 @@ def handle_message(event):
                         label="開始記帳",text="開始記帳"))])
                 )
             )
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(flex_message))
+        line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "天氣及空氣品質":
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text="天氣及空氣品質的程式"))
