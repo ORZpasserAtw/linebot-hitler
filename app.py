@@ -93,6 +93,16 @@ def handle_message(event):
                 contents=BubbleContainer(
                     body=BoxComponent(layout="vertical", contents=[
                                       TextComponent(text=locations[1][0]+"導航")]),
+                    footer=BoxComponent(layout="horizontal", contents=[ButtonComponent(action=MessageAction("開始記帳","開始記帳")),ButtonComponent(action=MessageAction("餘額設定","餘額設定"))])
+                )
+            )
+        line_bot_api.reply_message(event.reply_token, flex_message)
+    elif event.message.text == "記帳小本本":
+        flex_message = FlexSendMessage(
+                alt_text="Flex Message 導航",
+                contents=BubbleContainer(
+                    body=BoxComponent(layout="vertical", contents=[
+                                      TextComponent(text=locations[1][0]+"導航")]),
                     footer=BoxComponent(layout="horizontal", contents=[ButtonComponent(action=URIAction(
                         label="開啟 Google 地圖", uri=("https://www.google.com.tw/maps/place/"+locations[1][0])))])
                 )
@@ -100,7 +110,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "天氣及空氣品質":
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="https://goo.gl/maps/SKVXk9jMww2XS79Y9"))  # 天氣及空氣品質的程式
+            event.reply_token, TextSendMessage(text="天氣及空氣品質的程式"))
     elif event.message.text == "油價":
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text="油價的程式"))
@@ -126,7 +136,7 @@ def handle_message(event):
         x = event.message.text.split("=",1)
         try:
             line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=eval(x[0],{"__builtins__":None})))
+            event.reply_token, TextSendMessage(text=eval(x[0],{"__builtins__":None},{})))
         except:
             line_bot_api.reply_message(event.reply_token, "計算有誤！")
     elif event.message.text == "send nudes":
@@ -151,7 +161,7 @@ rich_menu_to_create = RichMenu(
         action=MessageAction(label="message", text="推薦行程")),
         RichMenuArea(
         bounds=RichMenuBounds(x=1707, y=0, width=854, height=843),
-        action=URIAction(label="URI", uri="https://www.desmos.com/scientific")),
+        action=URIAction(label="message", text="記帳小本本")),
         RichMenuArea(
         bounds=RichMenuBounds(x=0, y=843, width=854, height=843),
         action=MessageAction(label="message", text="天氣及空氣品質")),
