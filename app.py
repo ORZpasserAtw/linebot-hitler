@@ -126,8 +126,26 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text="天氣及空氣品質的程式"))
     elif event.message.text == "油價":
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="油價的程式"))
+        flex_message = FlexSendMessage(
+            alt_text="Flex Message 油價",
+            contents=BubbleContainer(
+                header=BoxComponent(layout="baseline", contents=[
+                    TextComponent(text="今日油價")
+                    ])
+                ,body=BoxComponent(layout="vertical", contents=[
+                    BoxComponent(layout="horizontal", contents=[
+                        TextComponent(text="92無鉛汽油"),
+                        TextComponent(text="66.6",align="end")
+                        ]),
+                    BoxComponent(layout="horizontal", contents=[
+                        TextComponent(text="95無鉛汽油"),
+                        TextComponent(text="42.0",align="end")
+                        ])
+                    ]
+                )
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "幫助":
         confirm_template = TemplateSendMessage(
             alt_text="Confirm Template 幫助",
@@ -196,8 +214,8 @@ print(rich_menu_id)
 
 line_bot_api.set_default_rich_menu(rich_menu_id)
 
-message = StickerSendMessage(package_id="11538", sticker_id="51626518")
-line_bot_api.push_message(to, message)
+"""message = StickerSendMessage(package_id="11538", sticker_id="51626518")
+line_bot_api.push_message(to, message)"""
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
