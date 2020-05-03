@@ -38,13 +38,19 @@ def callback():
         abort(400)
     return 'OK'
 
-gas = [42.0,42.6,66.6,0.0]
 locations = [
     ["威克島", "馬紹爾群島中的小島、北太平洋上的環礁", "晴朗", 99.9,
         "https://upload.wikimedia.org/wikipedia/commons/e/e6/Wake_Island_air.JPG"],
     ["硫磺島", "西太平洋小笠原群島的火山島", "晴朗", 99.9,
         "https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG"],
 ]
+
+money = 69
+budget = 420
+
+weather = 0
+
+gas = [42.0,42.6,66.6,0.0]
 
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
@@ -106,11 +112,11 @@ def handle_message(event):
                     TextComponent(text="記帳小本本", align="center", weight="bold", size="xl"),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="當前餘額"),
-                        TextComponent(text="69 元", align="end")
+                        TextComponent(text=str(money)+" 元", align="end")
                         ]),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="每日可用餘額"),
-                        TextComponent(text="420 元", align="end")
+                        TextComponent(text=str(budget)+" 元", align="end")
                         ])
                     ]
                 ),
@@ -129,10 +135,8 @@ def handle_message(event):
         flex_message = FlexSendMessage(
             alt_text="Flex Message 油價",
             contents=BubbleContainer(
-                header=BoxComponent(layout="baseline", contents=[
-                    TextComponent(text="今日油價", align="center", weight="bold", size="xl")
-                    ])
-                ,body=BoxComponent(layout="vertical", contents=[
+                body=BoxComponent(layout="vertical", contents=[
+                    TextComponent(text="今日油價", align="center", weight="bold", size="xl"),
                     BoxComponent(layout="baseline", contents=[
                         TextComponent(text="92無鉛汽油"),
                         TextComponent(text=str(gas[0])+" 元", align="end")
