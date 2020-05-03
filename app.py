@@ -10,7 +10,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, URIAction, MessageAction, MessageTemplateAction, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, BoxComponent, TextComponent, ButtonComponent
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, URIAction, PostbackAction, MessageAction, MessageTemplateAction, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, BoxComponent, TextComponent, ButtonComponent
 )
 
 app = Flask(__name__)
@@ -122,7 +122,7 @@ def handle_message(event):
                 ),
                 footer=BoxComponent(layout="horizontal", spacing="md", contents=[
                     ButtonComponent(action=MessageAction(label="開始記帳", text="開始記帳"),style="primary"),
-                    ButtonComponent(action=MessageAction(label="餘額設定", text="餘額設定"),style="primary")
+                    ButtonComponent(action=MessagekAction(label="餘額設定", text="餘額設定"),style="primary")
                     ]
                 )
             )
@@ -176,6 +176,9 @@ def handle_message(event):
             RNGmsg = "https://youtu.be/1snEYPg8TXs"
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=RNGmsg))
+    elif event.message.text == "Postback":
+        line_bot_api.reply_message(
+            event.reply_token, PostbackAction(label='postback', display_text='postback text', data='action=buy&itemid=1'))
     elif "=" in event.message.text:
         x = event.message.text.split("=", 1)
         try:
