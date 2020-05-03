@@ -10,7 +10,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, URIAction, PostbackAction, MessageAction, MessageTemplateAction, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, BoxComponent, TextComponent, ButtonComponent
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, PostbackAction, MessageAction, MessageTemplateAction, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, BoxComponent, TextComponent, ButtonComponent
 )
 
 app = Flask(__name__)
@@ -121,8 +121,8 @@ def handle_message(event):
                     ]
                 ),
                 footer=BoxComponent(layout="horizontal", spacing="md", contents=[
-                    ButtonComponent(action=MessageAction(label="開始記帳", text="開始記帳"),style="primary"),
-                    ButtonComponent(action=PostbackAction(label='postback', display_text='postback text', data='action=buy&itemid=1'),style="primary")
+                    ButtonComponent(action=URIAction(label="開始記帳", uri="https://liff.line.me/1654167293-Epky7wGm"),style="primary"),
+                    ButtonComponent(action=URIAction(label="餘額設定", uri="https://liff.line.me/1654167293-Epky7wGm"),style="primary")
                     ]
                 )
             )
