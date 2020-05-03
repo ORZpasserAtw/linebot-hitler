@@ -135,19 +135,19 @@ def handle_message(event):
                 ,body=BoxComponent(layout="vertical", contents=[
                     BoxComponent(layout="baseline", contents=[
                         TextComponent(text="92無鉛汽油"),
-                        TextComponent(text=gas[0], align="end")
+                        TextComponent(text=gas[0]+" 元", align="end")
                         ]),
                     BoxComponent(layout="baseline", contents=[
                         TextComponent(text="95無鉛汽油"),
-                        TextComponent(text=gas[1], align="end")
+                        TextComponent(text=gas[1]+" 元", align="end")
                         ]),
                     BoxComponent(layout="baseline", contents=[
                         TextComponent(text="98無鉛"),
-                        TextComponent(text=gas[2], align="end")
+                        TextComponent(text=gas[2]+" 元", align="end")
                         ]),
                     BoxComponent(layout="baseline", contents=[
                         TextComponent(text="超級柴油"),
-                        TextComponent(text=gas[3], align="end")
+                        TextComponent(text=gas[3]+" 元", align="end")
                         ]),
                     ]
                 )
