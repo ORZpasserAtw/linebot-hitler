@@ -130,17 +130,25 @@ def handle_message(event):
             alt_text="Flex Message 油價",
             contents=BubbleContainer(
                 header=BoxComponent(layout="baseline", contents=[
-                    TextComponent(text="今日油價")
+                    TextComponent(text="今日油價",align="center",weight="bold")
                     ])
                 ,body=BoxComponent(layout="vertical", contents=[
-                    BoxComponent(layout="horizontal", contents=[
+                    BoxComponent(layout="baseline", contents=[
                         TextComponent(text="92無鉛汽油"),
+                        TextComponent(text="42.0",align="end")
+                        ]),
+                    BoxComponent(layout="baseline", contents=[
+                        TextComponent(text="95無鉛汽油"),
+                        TextComponent(text="42.6",align="end")
+                        ]),
+                    BoxComponent(layout="baseline", contents=[
+                        TextComponent(text="98無鉛"),
                         TextComponent(text="66.6",align="end")
                         ]),
-                    BoxComponent(layout="horizontal", contents=[
-                        TextComponent(text="95無鉛汽油"),
-                        TextComponent(text="42.0",align="end")
-                        ])
+                    BoxComponent(layout="baseline", contents=[
+                        TextComponent(text="超級柴油"),
+                        TextComponent(text="0.0",align="end")
+                        ]),
                     ]
                 )
             )
