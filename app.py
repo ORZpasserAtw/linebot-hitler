@@ -49,8 +49,20 @@ locations = [
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if event.message.text == "呼叫助理":
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="你好，有甚麼需要分佈的嗎？"))
+        flex_message = FlexSendMessage(
+            alt_text="Flex Message 呼叫助理",
+            contents=BubbleContainer(
+                body=BoxComponent(layout="vertical", contents=[
+                    TextComponent(text="排程", align="center", weight="bold", size="xl"),
+                    BoxComponent(layout="baseline", contents=[
+                        TextComponent(text="沒事幹"),
+                        TextComponent(text="20/04/31 00:00", align="end")
+                        ]),
+                    ]
+                )
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "推薦行程":
         carousel_template = TemplateSendMessage(
             alt_text="Carousel Template 推薦行程",
