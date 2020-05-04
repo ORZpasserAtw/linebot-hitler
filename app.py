@@ -45,16 +45,6 @@ locations = [
         "https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG"],
 ]
 
-money = 69
-budget = 420
-
-weather = ["晴朗","多雲","陰天","小雨","大雨"]
-temperature = 99.9
-rain = 100
-air = 500
-
-gas = [42.0,42.6,66.6,0.0]
-
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -108,6 +98,10 @@ def handle_message(event):
             )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "記帳小本本":
+
+        money = 69
+        budget = 420
+
         flex_message = FlexSendMessage(
             alt_text="Flex Message 記帳小本本",
             contents=BubbleContainer(
@@ -132,12 +126,19 @@ def handle_message(event):
         )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "天氣及空氣品質":
+
+        weatherdice = random.randrange(5)
+        weather = ["晴朗","多雲","陰天","小雨","大雨"]
+        temperature = random.randrange(-500,500)
+        rain = random.randrange(100)
+        air = random.randrange(500)
+
         flex_message = FlexSendMessage(
             alt_text="Flex Message 天氣及空氣品質",
             contents=BubbleContainer(
                 body=BoxComponent(layout="vertical", padding_all="0px",contents=[
                     ImageComponent(
-                        url="https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg", 
+                        url="https://w.wallhaven.cc/full/lq/wallhaven-lqly2l.jpg", 
                         gravity="center",
                         margin="none",
                         size="full",
@@ -146,8 +147,8 @@ def handle_message(event):
                     ),
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
                         TextComponent(text="支那", size="sm"),
-                        TextComponent(text=str(weather), size="xxl"),
-                        TextComponent(text="溫度 "+str(temperature)+"°C", size="xl"),
+                        TextComponent(text=str(weather[weatherdice]), size="xxl"),
+                        TextComponent(text="溫度 "+str(temperature/10)+"°C", size="xl"),
                         TextComponent(text="降雨 "+str(rain)+"%"),
                         TextComponent(text="空氣品質"+str(air))
                     ])
@@ -156,6 +157,9 @@ def handle_message(event):
         )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "油價":
+
+        gas = [42.0,42.6,66.6,0.0]
+
         flex_message = FlexSendMessage(
             alt_text="Flex Message 油價",
             contents=BubbleContainer(
