@@ -10,7 +10,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, URIAction, MessageAction, MessageTemplateAction, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, BoxComponent, TextComponent, ButtonComponent
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, URIAction, MessageAction, MessageTemplateAction, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, BoxComponent, TextComponent, ButtonComponent, ImageComponent
 )
 
 app = Flask(__name__)
@@ -129,8 +129,18 @@ def handle_message(event):
         )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "天氣及空氣品質":
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="天氣及空氣品質的程式"))
+        flex_message = FlexSendMessage(
+            alt_text="Flex Message 天氣及空氣品質",
+            contents=BubbleContainer(
+                hero=ImageComponent(
+                    url="https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png", 
+                    size="full", 
+                    aspectRatio="16:9",
+                    aspectMode="cover"
+                    )
+                )
+            )
+        line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "油價":
         flex_message = FlexSendMessage(
             alt_text="Flex Message 油價",
