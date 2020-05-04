@@ -134,7 +134,6 @@ def handle_message(event):
             contents=BubbleContainer(
                 hero=ImageComponent(
                     url="https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png", 
-                    size="full", 
                     aspectRatio="16:9",
                     aspectMode="cover"
                     ),
@@ -143,6 +142,10 @@ def handle_message(event):
                     BoxComponent(layout="baseline", contents=[
                         TextComponent(text="晴朗", size="xl"),
                         TextComponent(text="99 °C", align="end")
+                    ]),
+                    BoxComponent(layout="baseline", contents=[
+                        TextComponent(text="降雨 99%"),
+                        TextComponent(text="空氣品質 500", align="end")
                     ])
                 ])
             )
