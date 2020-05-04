@@ -137,8 +137,14 @@ def handle_message(event):
                     size="full", 
                     aspectRatio="16:9",
                     aspectMode="cover"
-                    )
-                )
+                    ),
+                body=BoxComponent(layout="vertical",contents=[
+                    TextComponent(text="支那", size="sm"),
+                    BoxComponent(layout="baseline", contents=[
+                        TextComponent(text="晴朗", size="xl"),
+                        TextComponent(text="99 °C", align="end")
+                    ])
+                ])
             )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "油價":
