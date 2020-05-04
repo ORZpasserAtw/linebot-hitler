@@ -132,20 +132,20 @@ def handle_message(event):
         flex_message = FlexSendMessage(
             alt_text="Flex Message 天氣及空氣品質",
             contents=BubbleContainer(
-                hero=ImageComponent(
-                    url="https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png", 
-                    margin="none",
-                    size="full",
-                    aspectRatio="16:9",
-                    aspectMode="fit"
-                    ),
                 body=BoxComponent(layout="vertical",contents=[
+                    ImageComponent(
+                        url="https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png", 
+                        margin="none",
+                        size="full",
+                        aspectRatio="20:13",
+                        aspectMode="cover"
+                    ),
                     TextComponent(text="支那", size="sm"),
-                    BoxComponent(layout="baseline", contents=[
+                    BoxComponent(layout="baseline", position="absolute", contents=[
                         TextComponent(text="晴朗", size="xl"),
                         TextComponent(text="溫度 99 °C")
                     ]),
-                    BoxComponent(layout="baseline", contents=[
+                    BoxComponent(layout="baseline", position="absolute", contents=[
                         TextComponent(text="降雨 99%"),
                         TextComponent(text="空氣品質 500", align="end")
                     ])
