@@ -133,6 +133,7 @@ def handle_message(event):
         temperature = random.randrange(-50,50)
         rain = random.randrange(100)
         air = random.randrange(500)
+        airrate = "錯誤"
         if air <= 50:
             airrate = "良好"
         elif air >= 51 and air <= 100:
@@ -150,7 +151,7 @@ def handle_message(event):
             contents=BubbleContainer(
                 body=BoxComponent(layout="vertical", padding_all="0px",contents=[
                     ImageComponent(
-                        url="https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip3.jpg", 
+                        url="https://w.wallhaven.cc/full/47/wallhaven-477mv3.jpg", 
                         gravity="center",
                         margin="none",
                         size="full",
