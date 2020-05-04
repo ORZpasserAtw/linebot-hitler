@@ -57,14 +57,18 @@ def handle_message(event):
                     BoxComponent(layout="baseline", contents=[
                         TextComponent(text="沒事幹"),
                         TextComponent(text="20/04/31 00:00", align="end")
-                        ]),
-                    ]
-                ),
+                        ])
+                    ]),
                 footer=BoxComponent(layout="horizontal", spacing="md", contents=[
-                    ButtonComponent(action=URIAction(label="我要排程", uri="https://liff.line.me/1654169096-Vdqa8XZZ"),style="primary"),
-                    ButtonComponent(action=URIAction(label="修改行程", uri="https://liff.line.me/1654169096-Vdqa8XZZ"),style="primary")
-                    ]
-                )
+                    ButtonComponent(action=URIAction(
+                        label="我要排程", 
+                        uri="https://liff.line.me/1654169096-Vdqa8XZZ"), 
+                        style="primary"),
+                    ButtonComponent(action=URIAction(
+                        label="修改行程", 
+                        uri="https://liff.line.me/1654169096-Vdqa8XZZ"), 
+                        style="primary")
+                    ])
             )
         )
         line_bot_api.reply_message(event.reply_token, flex_message)
@@ -77,15 +81,17 @@ def handle_message(event):
                         thumbnail_image_url=locations[0][4], title=locations[0][0], text="天氣：" +
                         locations[0][2]+"　溫度：" +
                         str(locations[0][3])+"°C"+"\n"+locations[0][1],
-                        actions=[MessageTemplateAction(label="開始導航", text="開始導航"+locations[0][0]), MessageTemplateAction(
-                            label="這個我不喜歡", text="不喜歡"+locations[0][0])]
+                        actions=[
+                            MessageTemplateAction(label="開始導航", text="開始導航"+locations[0][0]), 
+                            MessageTemplateAction(label="這個我不喜歡", text="不喜歡"+locations[0][0])]
                     ),
                     CarouselColumn(
                         thumbnail_image_url=locations[1][4], title=locations[1][0], text="天氣：" +
                         locations[1][2]+"　溫度：" +
                         str(locations[1][3])+"°C"+"\n"+locations[1][1],
-                        actions=[MessageTemplateAction(label="開始導航", text="開始導航"+locations[1][0]), MessageTemplateAction(
-                            label="這個我不喜歡", text="不喜歡"+locations[1][0])]
+                        actions=[
+                            MessageTemplateAction(label="開始導航", text="開始導航"+locations[1][0]), 
+                            MessageTemplateAction(label="這個我不喜歡", text="不喜歡"+locations[1][0])]
                     )
                 ]
             )
@@ -98,9 +104,13 @@ def handle_message(event):
                 alt_text="Flex Message 導航",
                 contents=BubbleContainer(
                     body=BoxComponent(layout="vertical", contents=[
-                                      TextComponent(text=locations[0][0]+"導航")]),
-                    footer=BoxComponent(layout="horizontal", contents=[ButtonComponent(action=URIAction(
-                        label="開啟 Google 地圖", uri=("https://www.google.com/maps/search/?api=1&query="+locations[0][0])))])
+                        TextComponent(text=locations[0][0]+"導航")
+                        ]),
+                    footer=BoxComponent(layout="horizontal", contents=[
+                        ButtonComponent(action=URIAction(
+                            label="開啟 Google 地圖", 
+                            uri=("https://www.google.com/maps/search/?api=1&query="+locations[0][0])))
+                        ])
                 )
             )
         elif locations[1][0] in event.message.text:
@@ -108,9 +118,13 @@ def handle_message(event):
                 alt_text="Flex Message 導航",
                 contents=BubbleContainer(
                     body=BoxComponent(layout="vertical", contents=[
-                                      TextComponent(text=locations[1][0]+"導航")]),
-                    footer=BoxComponent(layout="horizontal", contents=[ButtonComponent(action=URIAction(
-                        label="開啟 Google 地圖", uri=("https://www.google.com/maps/search/?api=1&query="+locations[1][0])))])
+                        TextComponent(text=locations[1][0]+"導航")
+                        ]),
+                    footer=BoxComponent(layout="horizontal", contents=[
+                        ButtonComponent(action=URIAction(
+                            label="開啟 Google 地圖", 
+                            uri=("https://www.google.com/maps/search/?api=1&query="+locations[1][0])))
+                        ])
                 )
             )
         line_bot_api.reply_message(event.reply_token, flex_message)
@@ -135,8 +149,14 @@ def handle_message(event):
                     ]
                 ),
                 footer=BoxComponent(layout="horizontal", spacing="md", contents=[
-                    ButtonComponent(action=URIAction(label="開始記帳", uri="https://liff.line.me/1654169096-Vdqa8XZZ"),style="primary"),
-                    ButtonComponent(action=URIAction(label="餘額設定", uri="https://liff.line.me/1654169096-Vdqa8XZZ"),style="primary")
+                    ButtonComponent(action=URIAction(
+                        label="開始記帳", 
+                        uri="https://liff.line.me/1654169096-Vdqa8XZZ"), 
+                        style="primary"),
+                    ButtonComponent(action=URIAction(
+                        label="餘額設定", 
+                        uri="https://liff.line.me/1654169096-Vdqa8XZZ"), 
+                        style="primary")
                     ]
                 )
             )
@@ -219,8 +239,10 @@ def handle_message(event):
     elif event.message.text == "幫助":
         confirm_template = TemplateSendMessage(
             alt_text="Confirm Template 幫助",
-            template=ConfirmTemplate(text="你是智障嗎？", actions=[MessageTemplateAction(
-                label="是", text="我是智障"), MessageTemplateAction(label="否", text="我不是智障")])
+            template=ConfirmTemplate(text="你是智障嗎？", actions=[
+                MessageTemplateAction(label="是", text="我是智障"), 
+                MessageTemplateAction(label="否", text="我不是智障")
+                ])
         )
         line_bot_api.reply_message(event.reply_token, confirm_template)
     elif event.message.text == "RNG":
