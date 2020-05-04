@@ -134,10 +134,11 @@ def handle_message(event):
             contents=BubbleContainer(
                 body=BoxComponent(layout="vertical", padding_all="0px",contents=[
                     ImageComponent(
-                        url="https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png", 
+                        url="https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip3.jpg", 
+                        gravity="center",
                         margin="none",
                         size="full",
-                        aspectRatio="20:13",
+                        aspectRatio="1:1",
                         aspectMode="cover"
                     ),
                     TextComponent(text="支那", size="sm"),
