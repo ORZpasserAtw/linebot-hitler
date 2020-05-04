@@ -128,8 +128,9 @@ def handle_message(event):
     elif event.message.text == "天氣及空氣品質":
 
         weatherdice = random.randrange(5)
+        wlocation = ["支那"]
         weather = ["晴朗","多雲","陰天","小雨","大雨"]
-        temperature = random.randrange(-500,500)
+        temperature = random.randrange(-50,50)
         rain = random.randrange(100)
         air = random.randrange(500)
 
@@ -138,7 +139,7 @@ def handle_message(event):
             contents=BubbleContainer(
                 body=BoxComponent(layout="vertical", padding_all="0px",contents=[
                     ImageComponent(
-                        url="https://w.wallhaven.cc/full/lq/wallhaven-lqly2l.jpg", 
+                        url="https://w.wallhaven.cc/full/x1/wallhaven-x19eeo.jpg", 
                         gravity="center",
                         margin="none",
                         size="full",
@@ -146,11 +147,11 @@ def handle_message(event):
                         aspectMode="cover"
                     ),
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
-                        TextComponent(text="支那", size="sm"),
-                        TextComponent(text=str(weather[weatherdice]), size="xxl"),
-                        TextComponent(text="溫度 "+str(temperature/10)+"°C", size="xl"),
+                        TextComponent(text=wlocation[0], size="sm"),
+                        TextComponent(text=weather[weatherdice], size="xxl"),
+                        TextComponent(text="溫度 "+str(temperature)+"°C", size="xl"),
                         TextComponent(text="降雨 "+str(rain)+"%"),
-                        TextComponent(text="空氣品質"+str(air))
+                        TextComponent(text="空氣品質 "+str(air))
                     ])
                 ])
             )
