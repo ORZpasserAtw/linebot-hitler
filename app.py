@@ -59,6 +59,11 @@ def handle_message(event):
                         TextComponent(text="20/04/31 00:00", align="end")
                         ]),
                     ]
+                ),
+                footer=BoxComponent(layout="horizontal", spacing="md", contents=[
+                    ButtonComponent(action=URIAction(label="我要排程", uri="https://liff.line.me/1654169096-Vdqa8XZZ"),style="primary"),
+                    ButtonComponent(action=URIAction(label="修改行程", uri="https://liff.line.me/1654169096-Vdqa8XZZ"),style="primary")
+                    ]
                 )
             )
         )
