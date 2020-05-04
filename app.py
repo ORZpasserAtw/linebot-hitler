@@ -48,7 +48,10 @@ locations = [
 money = 69
 budget = 420
 
-weather = 0
+weather = ["晴朗","多雲","陰天","小雨","大雨"]
+temperature = 99.9
+rain = 100
+air = 500
 
 gas = [42.0,42.6,66.6,0.0]
 
@@ -134,19 +137,19 @@ def handle_message(event):
             contents=BubbleContainer(
                 body=BoxComponent(layout="vertical", padding_all="0px",contents=[
                     ImageComponent(
-                        url="https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip3.jpg", 
+                        url="https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg", 
                         gravity="center",
                         margin="none",
                         size="full",
-                        aspectRatio="1:1",
+                        aspectRatio="3:2",
                         aspectMode="cover"
                     ),
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
                         TextComponent(text="支那", size="sm"),
-                        TextComponent(text="晴朗", size="xxl"),
-                        TextComponent(text="溫度 99 °C", size="xl"),
-                        TextComponent(text="降雨 99%"),
-                        TextComponent(text="空氣品質 500")
+                        TextComponent(text=str(weather), size="xxl"),
+                        TextComponent(text="溫度 "+str(temperature)+"°C", size="xl"),
+                        TextComponent(text="降雨 "+str(rain)+"%"),
+                        TextComponent(text="空氣品質"+str(air))
                     ])
                 ])
             )
