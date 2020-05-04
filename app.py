@@ -109,11 +109,11 @@ def handle_message(event):
                     TextComponent(text="記帳小本本", align="center", weight="bold", size="xl"),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="當前餘額"),
-                        TextComponent(text=str(money)+" 元", align="end")
+                        TextComponent(text=str(money) + " 元", align="end")
                         ]),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="每日可用餘額"),
-                        TextComponent(text=str(budget)+" 元", align="end")
+                        TextComponent(text=str(budget) + " 元", align="end")
                         ])
                     ]
                 ),
@@ -133,25 +133,36 @@ def handle_message(event):
         temperature = random.randrange(-50,50)
         rain = random.randrange(100)
         air = random.randrange(500)
-
+        if air <= 50:
+            airrate = "良好"
+        elif air >= 51 and air <= 100:
+            airrate = "普通"
+        elif air >= 101 and air <= 150:
+            airrate = "敏感不健康"
+        elif air >= 151 and air <= 200:
+            airrate = "所有不健康"
+        elif air >= 201 and air <= 300:
+            airrate = "非常不健康"
+        elif air >= 301:
+            airrate = "危害"
         flex_message = FlexSendMessage(
             alt_text="Flex Message 天氣及空氣品質",
             contents=BubbleContainer(
                 body=BoxComponent(layout="vertical", padding_all="0px",contents=[
                     ImageComponent(
-                        url="https://w.wallhaven.cc/full/x1/wallhaven-x19eeo.jpg", 
+                        url="https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip3.jpg", 
                         gravity="center",
                         margin="none",
                         size="full",
-                        aspectRatio="3:2",
+                        aspectRatio="1:1",
                         aspectMode="cover"
                     ),
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
                         TextComponent(text=wlocation[0], size="sm"),
                         TextComponent(text=weather[weatherdice], size="xxl"),
-                        TextComponent(text="溫度 "+str(temperature)+"°C", size="xl"),
-                        TextComponent(text="降雨 "+str(rain)+"%"),
-                        TextComponent(text="空氣品質 "+str(air))
+                        TextComponent(text="溫度 " + str(temperature) + "°C", size="xl"),
+                        TextComponent(text="降雨機率 " + str(rain) + "%"),
+                        TextComponent(text="空氣品質 " + airrate + " " + str(air))
                     ])
                 ])
             )
