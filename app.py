@@ -134,18 +134,20 @@ def handle_message(event):
             contents=BubbleContainer(
                 hero=ImageComponent(
                     url="https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png", 
+                    margin="none",
+                    size="full",
                     aspectRatio="16:9",
                     aspectMode="cover"
                     ),
                 body=BoxComponent(layout="vertical",contents=[
                     TextComponent(text="支那", size="sm"),
                     BoxComponent(layout="baseline", contents=[
-                        TextComponent(text="晴朗", size="xl"),
-                        TextComponent(text="99 °C", align="end")
+                        TextComponent(text="晴朗", size="xl")
                     ]),
                     BoxComponent(layout="baseline", contents=[
+                        TextComponent(text="溫度 99 °C"),
                         TextComponent(text="降雨 99%"),
-                        TextComponent(text="空氣品質 500", align="end")
+                        TextComponent(text="空氣品質 500")
                     ])
                 ])
             )
