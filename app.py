@@ -141,14 +141,12 @@ def handle_message(event):
                         aspectRatio="1:1",
                         aspectMode="cover"
                     ),
-                    TextComponent(text="支那", size="sm"),
-                    BoxComponent(layout="baseline", position="absolute", contents=[
-                        TextComponent(text="晴朗", size="xl"),
-                        TextComponent(text="溫度 99 °C")
-                    ]),
-                    BoxComponent(layout="baseline", position="absolute", contents=[
+                    BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
+                        TextComponent(text="支那", size="sm"),
+                        TextComponent(text="晴朗", size="xxl"),
+                        TextComponent(text="溫度 99 °C", size="xl"),
                         TextComponent(text="降雨 99%"),
-                        TextComponent(text="空氣品質 500", align="end")
+                        TextComponent(text="空氣品質 500")
                     ])
                 ])
             )
