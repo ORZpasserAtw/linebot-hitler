@@ -132,7 +132,7 @@ def handle_message(event):
         flex_message = FlexSendMessage(
             alt_text="Flex Message 天氣及空氣品質",
             contents=BubbleContainer(
-                body=BoxComponent(layout="vertical",contents=[
+                body=BoxComponent(layout="vertical", padding_all="0px",contents=[
                     ImageComponent(
                         url="https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png", 
                         margin="none",
