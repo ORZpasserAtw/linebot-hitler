@@ -90,7 +90,7 @@ def handle_message(event):
                     body=BoxComponent(layout="vertical", contents=[
                                       TextComponent(text=locations[0][0]+"導航")]),
                     footer=BoxComponent(layout="horizontal", contents=[ButtonComponent(action=URIAction(
-                        label="開啟 Google 地圖", uri=("https://www.google.com.tw/maps/place/"+locations[0][0])))])
+                        label="開啟 Google 地圖", uri=("https://www.google.com/maps/search/?api=1&query="+locations[0][0])))])
                 )
             )
         elif locations[1][0] in event.message.text:
@@ -100,7 +100,7 @@ def handle_message(event):
                     body=BoxComponent(layout="vertical", contents=[
                                       TextComponent(text=locations[1][0]+"導航")]),
                     footer=BoxComponent(layout="horizontal", contents=[ButtonComponent(action=URIAction(
-                        label="開啟 Google 地圖", uri=("https://www.google.com.tw/maps/place/"+locations[1][0])))])
+                        label="開啟 Google 地圖", uri=("https://www.google.com/maps/search/?api=1&query="+locations[1][0])))])
                 )
             )
         line_bot_api.reply_message(event.reply_token, flex_message)
@@ -121,8 +121,8 @@ def handle_message(event):
                     ]
                 ),
                 footer=BoxComponent(layout="horizontal", spacing="md", contents=[
-                    ButtonComponent(action=URIAction(label="開始記帳", uri="https://liff.line.me/1654167293-Epky7wGm"),style="primary"),
-                    ButtonComponent(action=URIAction(label="餘額設定", uri="https://liff.line.me/1654167293-Epky7wGm"),style="primary")
+                    ButtonComponent(action=URIAction(label="開始記帳", uri="https://liff.line.me/1654169096-Vdqa8XZZ"),style="primary"),
+                    ButtonComponent(action=URIAction(label="餘額設定", uri="https://liff.line.me/1654169096-Vdqa8XZZ"),style="primary")
                     ]
                 )
             )
