@@ -279,15 +279,15 @@ rich_menu_to_create = RichMenu(
     chat_bar_text="查看快捷鍵",
     areas=[RichMenuArea(
         bounds=RichMenuBounds(x=0, y=0, width=854, height=843),
-        action=URIAction(label="呼叫助理", uri="https://liff.line.me/1654169096-Vdqa8XZZ/manager.html")
+        action=URIAction(label="呼叫助理", uri="https://liff.line.me/1654169096-Vdqa8XZZ/manager")
         ),
         RichMenuArea(
         bounds=RichMenuBounds(x=854, y=0, width=854, height=843),
-        action=URIAction(label="推薦行程", uri="https://liff.line.me/1654169096-Vdqa8XZZ/travel.html")
+        action=URIAction(label="推薦行程", uri="https://liff.line.me/1654169096-Vdqa8XZZ/travel")
         ),
         RichMenuArea(
         bounds=RichMenuBounds(x=1707, y=0, width=854, height=843),
-        action=URIAction(label="推薦行程", uri="https://liff.line.me/1654169096-Vdqa8XZZ/account.html")
+        action=URIAction(label="推薦行程", uri="https://liff.line.me/1654169096-Vdqa8XZZ/account")
         ),
         RichMenuArea(
         bounds=RichMenuBounds(x=0, y=843, width=854, height=843),
