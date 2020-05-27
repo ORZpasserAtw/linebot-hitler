@@ -279,22 +279,28 @@ rich_menu_to_create = RichMenu(
     chat_bar_text="查看快捷鍵",
     areas=[RichMenuArea(
         bounds=RichMenuBounds(x=0, y=0, width=854, height=843),
-        action=MessageAction(label="message", text="呼叫助理")),
+        action=URIAction(label="呼叫助理", uri="https://liff.line.me/1654169096-Vdqa8XZZ/manager.html")
+        ),
         RichMenuArea(
         bounds=RichMenuBounds(x=854, y=0, width=854, height=843),
-        action=MessageAction(label="message", text="推薦行程")),
+        action=URIAction(label="推薦行程", uri="https://liff.line.me/1654169096-Vdqa8XZZ/travel.html")
+        ),
         RichMenuArea(
         bounds=RichMenuBounds(x=1707, y=0, width=854, height=843),
-        action=MessageAction(label="message", text="記帳小本本")),
+        action=URIAction(label="推薦行程", uri="https://liff.line.me/1654169096-Vdqa8XZZ/account.html")
+        ),
         RichMenuArea(
         bounds=RichMenuBounds(x=0, y=843, width=854, height=843),
-        action=MessageAction(label="message", text="天氣及空氣品質")),
+        action=MessageAction(label="message", text="天氣及空氣品質")
+        ),
         RichMenuArea(
         bounds=RichMenuBounds(x=854, y=843, width=854, height=843),
-        action=MessageAction(label="message", text="油價")),
+        action=MessageAction(label="message", text="油價")
+        ),
         RichMenuArea(
         bounds=RichMenuBounds(x=1707, y=843, width=854, height=843),
-        action=MessageAction(label="message", text="幫助"))
+        action=MessageAction(label="message", text="幫助")
+        )
     ]
 )
 rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
