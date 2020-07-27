@@ -62,11 +62,11 @@ def handle_message(event):
                 footer=BoxComponent(layout="horizontal", spacing="md", contents=[
                     ButtonComponent(action=URIAction(
                         label="我要排程", 
-                        uri="https://liff.line.me/1654169096-Vdqa8XZZ"), 
+                        uri="https://liff.line.me/1654548127-50gGKZyE/Manager"), 
                         style="primary"),
                     ButtonComponent(action=URIAction(
                         label="修改行程", 
-                        uri="https://liff.line.me/1654169096-Vdqa8XZZ"), 
+                        uri="https://liff.line.me/1654548127-50gGKZyE/Manager"), 
                         style="primary")
                     ])
             )
@@ -151,11 +151,11 @@ def handle_message(event):
                 footer=BoxComponent(layout="horizontal", spacing="md", contents=[
                     ButtonComponent(action=URIAction(
                         label="開始記帳", 
-                        uri="https://liff.line.me/1654169096-Vdqa8XZZ"), 
+                        uri="https://liff.line.me/1654548127-50gGKZyE/Account"), 
                         style="primary"),
                     ButtonComponent(action=URIAction(
                         label="餘額設定", 
-                        uri="https://liff.line.me/1654169096-Vdqa8XZZ"), 
+                        uri="https://liff.line.me/1654548127-50gGKZyE/Account"), 
                         style="primary")
                     ]
                 )
@@ -279,15 +279,15 @@ rich_menu_to_create = RichMenu(
     chat_bar_text="查看快捷鍵",
     areas=[RichMenuArea(
         bounds=RichMenuBounds(x=0, y=0, width=854, height=843),
-        action=URIAction(label="呼叫助理", uri="https://liff.line.me/1654169096-Vdqa8XZZ/manager")
+        action=URIAction(label="呼叫助理", uri="https://liff.line.me/1654548127-50gGKZyE/Manager")
         ),
         RichMenuArea(
         bounds=RichMenuBounds(x=854, y=0, width=854, height=843),
-        action=URIAction(label="推薦行程", uri="https://liff.line.me/1654169096-Vdqa8XZZ/travel")
+        action=URIAction(label="推薦行程", uri="https://liff.line.me/1654548127-50gGKZyE/Travel")
         ),
         RichMenuArea(
         bounds=RichMenuBounds(x=1707, y=0, width=854, height=843),
-        action=URIAction(label="推薦行程", uri="https://liff.line.me/1654169096-Vdqa8XZZ/account")
+        action=URIAction(label="推薦行程", uri="https://liff.line.me/1654548127-50gGKZyE/Account")
         ),
         RichMenuArea(
         bounds=RichMenuBounds(x=0, y=843, width=854, height=843),
