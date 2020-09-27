@@ -15,6 +15,7 @@ from linebot.models import (
 
 from yahoo_weather.weather import YahooWeather
 from yahoo_weather.config.units import Unit
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -216,35 +217,13 @@ def handle_message(event):
         )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "油價":
+        try:
+            readData = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[1]  # 取得網頁上的表格資訊
+        except:
+            readData = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]  # 取得網頁上的表格資訊
 
-        gas = [42.0,42.6,66.6,0.0]
-
-        flex_message = FlexSendMessage(
-            alt_text="Flex Message 油價",
-            contents=BubbleContainer(
-                body=BoxComponent(layout="vertical", contents=[
-                    TextComponent(text="今日油價", align="center", weight="bold", size="xl"),
-                    BoxComponent(layout="baseline", contents=[
-                        TextComponent(text="92無鉛汽油"),
-                        TextComponent(text=str(gas[0])+" 元", align="end")
-                        ]),
-                    BoxComponent(layout="baseline", contents=[
-                        TextComponent(text="95無鉛汽油"),
-                        TextComponent(text=str(gas[1])+" 元", align="end")
-                        ]),
-                    BoxComponent(layout="baseline", contents=[
-                        TextComponent(text="98無鉛"),
-                        TextComponent(text=str(gas[2])+" 元", align="end")
-                        ]),
-                    BoxComponent(layout="baseline", contents=[
-                        TextComponent(text="超級柴油"),
-                        TextComponent(text=str(gas[3])+" 元", align="end")
-                        ]),
-                    ]
-                )
-            )
-        )
-        line_bot_api.reply_message(event.reply_token, flex_message)
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text="官網提供歷史紀錄↓↓↓\n" + readData))
     elif event.message.text == "幫助":
         confirm_template = TemplateSendMessage(
             alt_text="Confirm Template 幫助",
