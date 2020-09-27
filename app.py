@@ -13,6 +13,9 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, URIAction, MessageAction, MessageTemplateAction, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, BoxComponent, TextComponent, ButtonComponent, ImageComponent
 )
 
+from yahoo_weather.weather import YahooWeather
+from yahoo_weather.config.units import Unit
+
 app = Flask(__name__)
 
 # Channel Access Token
@@ -163,9 +166,15 @@ def handle_message(event):
         )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "天氣及空氣品質":
+        data = YahooWeather(
+                            APP_ID='h0Hx273a',
+                            api_key='dj0yJmk9RlpXbkp0RnJKYWhmJmQ9WVdrOWFEQkllREkzTTJFbWNHbzlNQT09JnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PTgy',
+                            api_secret='a73e2929c4728b17e2527438a49740184cdc5665'
+                            )
+        data.get_yahoo_weather_by_city("台北市", Unit.celsius)
 
         weatherdice = random.randrange(5)
-        wlocation = ["支那"]
+        wlocation = ["台北市"]
         weather = ["晴朗","多雲","陰天","小雨","大雨"]
         temperature = random.randrange(-50,50)
         rain = random.randrange(100)
@@ -197,8 +206,8 @@ def handle_message(event):
                     ),
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
                         TextComponent(text=wlocation[0], size="sm"),
-                        TextComponent(text=weather[weatherdice], size="xxl"),
-                        TextComponent(text="溫度 " + str(temperature) + "°C", size="xl"),
+                        TextComponent(text=data.condition.text, size="xxl"),
+                        TextComponent(text="溫度 " + data.condition.temperature + "°C", size="xl"),
                         TextComponent(text="降雨機率 " + str(rain) + "%"),
                         TextComponent(text="空氣品質 " + airrate + " " + str(air))
                     ])
