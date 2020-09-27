@@ -222,7 +222,7 @@ def handle_message(event):
         except:
             print("ERROR")
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="官網提供歷史紀錄↓↓↓\n" + readData.to_string()))
+            event.reply_token, TextSendMessage(text="官網提供歷史紀錄↓↓↓\n" + readData.loc[1:2].to_string()))
     elif event.message.text == "幫助":
         confirm_template = TemplateSendMessage(
             alt_text="Confirm Template 幫助",
