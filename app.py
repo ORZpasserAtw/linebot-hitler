@@ -221,9 +221,8 @@ def handle_message(event):
             readData = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]  # 取得網頁上的表格資訊
         except:
             print("ERROR")
-        print(readData)
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="官網提供歷史紀錄↓↓↓\n"))
+            event.reply_token, TextSendMessage(text="官網提供歷史紀錄↓↓↓\n" + readData.to_string()))
     elif event.message.text == "幫助":
         confirm_template = TemplateSendMessage(
             alt_text="Confirm Template 幫助",
