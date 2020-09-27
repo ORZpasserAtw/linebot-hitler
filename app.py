@@ -304,8 +304,8 @@ rich_menu_to_create = RichMenu(
     ]
 )
 rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
-with open("BG.png", 'rb') as f:
-    line_bot_api.set_rich_menu_image(rich_menu_id, "image/png", f)
+with open("BG.jpg", 'rb') as f:
+    line_bot_api.set_rich_menu_image(rich_menu_id, "image/jpg", f)
 
 rich_menu = line_bot_api.get_rich_menu(rich_menu_id)
 print(rich_menu_id)
