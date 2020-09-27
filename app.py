@@ -207,7 +207,7 @@ def handle_message(event):
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
                         TextComponent(text=wlocation[0], size="sm"),
                         TextComponent(text=data.condition.text, size="xxl"),
-                        TextComponent(text="溫度 " + data.condition.temperature + "°C", size="xl"),
+                        TextComponent(text="溫度 " + str(data.condition.temperature) + "°C", size="xl"),
                         TextComponent(text="降雨機率 " + str(rain) + "%"),
                         TextComponent(text="空氣品質 " + airrate + " " + str(air))
                     ])
