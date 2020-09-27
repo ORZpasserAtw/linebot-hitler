@@ -217,11 +217,7 @@ def handle_message(event):
         )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "油價":
-        try:
-            readData = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[1]  # 取得網頁上的表格資訊
-        except:
-            readData = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]  # 取得網頁上的表格資訊
-
+        readData = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]  # 取得網頁上的表格資訊
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text="官網提供歷史紀錄↓↓↓\n" + readData))
     elif event.message.text == "幫助":
