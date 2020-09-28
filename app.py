@@ -226,7 +226,6 @@ def handle_message(event):
             contents=BubbleContainer(
                 size="giga",body=BoxComponent(layout="vertical",contents=[
                     BoxComponent(layout="horizontal", contents=[
-                        TextComponent(text="元/公升",size="xs"),
                         TextComponent(text="供應商",size="xs"),
                         TextComponent(text="98",size="xs"),
                         TextComponent(text="95",size="xs"),
@@ -234,15 +233,14 @@ def handle_message(event):
                         TextComponent(text="超柴",size="xs")
                     ]),
                     BoxComponent(layout="horizontal", contents=[
-                        TextComponent(text="G"),
+                        TextComponent(text=readData.iloc[0, 0]),
                         TextComponent(text="H"),
                         TextComponent(text="I"),
                         TextComponent(text="J"),
-                        TextComponent(text="K"),
-                        TextComponent(text="L")
+                        TextComponent(text="K")
                     ]),
                     BoxComponent(layout="horizontal", contents=[
-                        TextComponent(text="M"),
+                        TextComponent(text=(readData.iloc[0, 1]),
                         TextComponent(text="N"),
                         TextComponent(text="O"),
                         TextComponent(text="P"),
