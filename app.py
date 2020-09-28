@@ -247,7 +247,7 @@ def handle_message(event):
                         TextComponent(text=str(readData.iloc[1, 2])),
                         TextComponent(text=str(readData.iloc[1, 3])),
                         TextComponent(text=str(readData.iloc[1, 4])),
-                        TextComponent(text="元/公升",size="xs")
+                        TextComponent(text="元/公升",size="xs",gravity="bottom")
                     ])
                 ])
             )
