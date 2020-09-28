@@ -218,11 +218,33 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "油價":
         try:
-            readData = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0,index_col=0)[0]  # 取得網頁上的表格資訊
+            readData = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]  # 取得網頁上的表格資訊
         except:
             print("ERROR")
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=readData.iloc[:2, :5].to_string()))
+        flex_message = FlexSendMessage(
+            alt_text="Flex Message 油價",
+            contents=BubbleContainer(
+                body=BoxComponent(layout="vertical", padding_all="0px",contents=[
+                    BoxComponent(layout="horizontal", padding_all="0px", position="absolute", contents=[
+                        TextComponent(text="A"),
+                        TextComponent(text="B"),
+                        TextComponent(text="C"),
+                        TextComponent(text="D"),
+                        TextComponent(text="E"),
+                        TextComponent(text="F"),
+                    ]),
+                    BoxComponent(layout="horizontal", padding_all="0px", position="absolute", contents=[
+                        TextComponent(text="G"),
+                        TextComponent(text="H"),
+                        TextComponent(text="I"),
+                        TextComponent(text="J"),
+                        TextComponent(text="K"),
+                        TextComponent(text="L"),
+                    ])
+                ])
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "幫助":
         confirm_template = TemplateSendMessage(
             alt_text="Confirm Template 幫助",
