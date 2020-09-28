@@ -224,22 +224,22 @@ def handle_message(event):
         flex_message = FlexSendMessage(
             alt_text="Flex Message 油價",
             contents=BubbleContainer(
-                body=BoxComponent(layout="vertical", padding_all="0px",contents=[
-                    BoxComponent(layout="horizontal", padding_all="0px", position="absolute", contents=[
+                size="giga",body=BoxComponent(layout="vertical",contents=[
+                    BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="A"),
                         TextComponent(text="B"),
                         TextComponent(text="C"),
                         TextComponent(text="D"),
                         TextComponent(text="E"),
-                        TextComponent(text="F"),
+                        TextComponent(text="F")
                     ]),
-                    BoxComponent(layout="horizontal", padding_all="0px", position="absolute", contents=[
+                    BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="G"),
                         TextComponent(text="H"),
                         TextComponent(text="I"),
                         TextComponent(text="J"),
                         TextComponent(text="K"),
-                        TextComponent(text="L"),
+                        TextComponent(text="L")
                     ])
                 ])
             )
