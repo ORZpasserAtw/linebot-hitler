@@ -230,21 +230,24 @@ def handle_message(event):
                         TextComponent(text="98無鉛",size="xs"),
                         TextComponent(text="95無鉛",size="xs"),
                         TextComponent(text="92無鉛",size="xs"),
-                        TextComponent(text="超級柴油",size="xs")
+                        TextComponent(text="超級柴油",size="xs"),
+                        TextComponent(text="",size="xs")
                     ]),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="台塑"),
                         TextComponent(text=str(readData.iloc[0, 1])),
                         TextComponent(text=str(readData.iloc[0, 2])),
                         TextComponent(text=str(readData.iloc[0, 3])),
-                        TextComponent(text=str(readData.iloc[0, 4]))
+                        TextComponent(text=str(readData.iloc[0, 4])),
+                        TextComponent(text="元/公升")
                     ]),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="中油"),
                         TextComponent(text=str(readData.iloc[1, 1])),
                         TextComponent(text=str(readData.iloc[1, 2])),
                         TextComponent(text=str(readData.iloc[1, 3])),
-                        TextComponent(text=str(readData.iloc[1, 4]))
+                        TextComponent(text=str(readData.iloc[1, 4])),
+                        TextComponent(text="元/公升")
                     ])
                 ])
             )
