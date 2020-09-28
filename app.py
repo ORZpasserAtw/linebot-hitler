@@ -235,17 +235,16 @@ def handle_message(event):
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="台塑"),
                         TextComponent(text=str(readData.iloc[0, 1])),
-                        TextComponent(text="I"),
-                        TextComponent(text="J"),
-                        TextComponent(text="K")
+                        TextComponent(text=str(readData.iloc[0, 2])),
+                        TextComponent(text=str(readData.iloc[0, 3])),
+                        TextComponent(text=str(readData.iloc[0, 4]))
                     ]),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="中油"),
-                        TextComponent(text="N"),
-                        TextComponent(text="O"),
-                        TextComponent(text="P"),
-                        TextComponent(text="Q"),
-                        TextComponent(text="R")
+                        TextComponent(text=str(readData.iloc[1, 1])),
+                        TextComponent(text=str(readData.iloc[1, 2])),
+                        TextComponent(text=str(readData.iloc[1, 3])),
+                        TextComponent(text=str(readData.iloc[1, 4]))
                     ])
                 ])
             )
