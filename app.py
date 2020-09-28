@@ -239,7 +239,7 @@ def handle_message(event):
                         TextComponent(text=str(readData.iloc[0, 2])),
                         TextComponent(text=str(readData.iloc[0, 3])),
                         TextComponent(text=str(readData.iloc[0, 4])),
-                        TextComponent(text="元/公升",size="xs")
+                        TextComponent(text="元/公升",size="xs",gravity="bottom")
                     ]),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="中油"),
