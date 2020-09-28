@@ -226,12 +226,12 @@ def handle_message(event):
             contents=BubbleContainer(
                 size="giga",body=BoxComponent(layout="vertical",contents=[
                     BoxComponent(layout="horizontal", contents=[
-                        TextComponent(text="A"),
-                        TextComponent(text="B"),
-                        TextComponent(text="C"),
-                        TextComponent(text="D"),
-                        TextComponent(text="E"),
-                        TextComponent(text="F")
+                        TextComponent(text="元/公升"),
+                        TextComponent(text="油品供應商"),
+                        TextComponent(text=readData.columns.values[0]),
+                        TextComponent(text=readData.columns.values[1]),
+                        TextComponent(text=readData.columns.values[2]),
+                        TextComponent(text=readData.columns.values[3])
                     ]),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="G"),
@@ -240,6 +240,14 @@ def handle_message(event):
                         TextComponent(text="J"),
                         TextComponent(text="K"),
                         TextComponent(text="L")
+                    ]),
+                    BoxComponent(layout="horizontal", contents=[
+                        TextComponent(text="M"),
+                        TextComponent(text="N"),
+                        TextComponent(text="O"),
+                        TextComponent(text="P"),
+                        TextComponent(text="Q"),
+                        TextComponent(text="R")
                     ])
                 ])
             )
