@@ -227,10 +227,10 @@ def handle_message(event):
                 size="giga",body=BoxComponent(layout="vertical",contents=[
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="供應商",size="xs"),
-                        TextComponent(text="98",size="xs"),
-                        TextComponent(text="95",size="xs"),
-                        TextComponent(text="92",size="xs"),
-                        TextComponent(text="超柴",size="xs")
+                        TextComponent(text="98無鉛",size="xs"),
+                        TextComponent(text="95無鉛",size="xs"),
+                        TextComponent(text="92無鉛",size="xs"),
+                        TextComponent(text="超級柴油",size="xs")
                     ]),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="台塑"),
