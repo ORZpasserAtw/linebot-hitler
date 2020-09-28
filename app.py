@@ -240,7 +240,7 @@ def handle_message(event):
                         TextComponent(text="K")
                     ]),
                     BoxComponent(layout="horizontal", contents=[
-                        TextComponent(text=(readData.iloc[0, 1]),
+                        TextComponent(text=readData.iloc[0, 1]),
                         TextComponent(text="N"),
                         TextComponent(text="O"),
                         TextComponent(text="P"),
