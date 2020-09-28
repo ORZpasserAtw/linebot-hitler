@@ -233,14 +233,14 @@ def handle_message(event):
                         TextComponent(text="超柴",size="xs")
                     ]),
                     BoxComponent(layout="horizontal", contents=[
-                        TextComponent(text="台塑石化"),
-                        TextComponent(text="H"),
+                        TextComponent(text="台塑"),
+                        TextComponent(text=str(readData.iloc[0, 1])),
                         TextComponent(text="I"),
                         TextComponent(text="J"),
                         TextComponent(text="K")
                     ]),
                     BoxComponent(layout="horizontal", contents=[
-                        TextComponent(text="台灣中油"),
+                        TextComponent(text="中油"),
                         TextComponent(text="N"),
                         TextComponent(text="O"),
                         TextComponent(text="P"),
