@@ -231,7 +231,7 @@ def handle_message(event):
                         TextComponent(text="95無鉛",size="xs"),
                         TextComponent(text="92無鉛",size="xs"),
                         TextComponent(text="超級柴油",size="xs"),
-                        TextComponent(text="",size="xs")
+                        TextComponent(text="XXX",size="xs")
                     ]),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="台塑"),
