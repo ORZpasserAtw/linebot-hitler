@@ -210,11 +210,13 @@ def handle_message(event):
                         aspectMode="cover"
                     ),
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
+                        ImageComponent(url=w.get_weather_icon_url()),
                         TextComponent(text="台北市", size="sm"),
                         TextComponent(text=ws, size="xxl"),
+                        TextComponent(text=w.get_detailed_status(), size="xs"),
                         TextComponent(text="溫度: "+str(w.get_temperature(unit='celsius')['temp'])+"°C", size="xl"),
                         TextComponent(text="濕度: "+str(w.get_humidity())+"%"),
-                        TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,2))+"KM/H")
+                        TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,2))+"km/h")
                     ])
                 ])
             )
