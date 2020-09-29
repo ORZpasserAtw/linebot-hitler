@@ -165,7 +165,10 @@ def handle_message(event):
         )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "天氣及空氣品質":
-        w = OWM('dfbfc697f6af05f728f664111bc07551').weather_manager().weather_at_place('Taipei,TW').weather
+        owm = OWM('dfbfc697f6af05f728f664111bc07551')
+        mgr = owm.weather_manager()
+        observation = mgr.weather_at_place('London,GB')
+        w = observation.weather
         if (w.status == "Thunderstorm"):
             ws = "雷雨"
         elif (w.status == "Drizzle"):
