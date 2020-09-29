@@ -1,5 +1,4 @@
 import os
-import random
 
 from flask import Flask, request, abort
 
@@ -12,7 +11,9 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, URIAction, MessageAction, MessageTemplateAction, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, BoxComponent, TextComponent, ButtonComponent, ImageComponent
 )
+import random
 from pyowm import OWM
+import requests
 import pandas as pd
 
 app = Flask(__name__)
@@ -197,6 +198,7 @@ def handle_message(event):
             ws = "晴朗"
         elif (w.get_status() == "Clouds"):
             ws = "多雲"
+        r = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json')
         flex_message = FlexSendMessage(
             alt_text="Flex Message 天氣及空氣品質",
             contents=BubbleContainer(
@@ -212,11 +214,11 @@ def handle_message(event):
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
                         TextComponent(text="台北市", size="sm"),
                         ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs"),
-                        TextComponent(text=ws, size="xxl"),
+                        TextComponent(text=ws, size="xxl", weight="bold"),
                         TextComponent(text=w.get_detailed_status(), size="xs"),
-                        TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C", size="xl"),
-                        TextComponent(text="濕度: "+str(w.get_humidity())+"%"),
-                        TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,2))+"km/h")
+                        TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
+                        TextComponent(text="空氣品質AQI: "+r.json()['records'][11]['AQI']),
+                        TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,1))+"km/h")
                     ])
                 ])
             )
@@ -241,18 +243,18 @@ def handle_message(event):
                     ]),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="台塑"),
-                        TextComponent(text=str(readData.iloc[0, 1])),
-                        TextComponent(text=str(readData.iloc[0, 2])),
-                        TextComponent(text=str(readData.iloc[0, 3])),
-                        TextComponent(text=str(readData.iloc[0, 4])),
+                        TextComponent(text=str(readData.iloc[0, 1]), weight="bold"),
+                        TextComponent(text=str(readData.iloc[0, 2]), weight="bold"),
+                        TextComponent(text=str(readData.iloc[0, 3]), weight="bold"),
+                        TextComponent(text=str(readData.iloc[0, 4]), weight="bold"),
                         TextComponent(text="元/公升",size="xs",gravity="bottom")
                     ]),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="中油"),
-                        TextComponent(text=str(readData.iloc[1, 1])),
-                        TextComponent(text=str(readData.iloc[1, 2])),
-                        TextComponent(text=str(readData.iloc[1, 3])),
-                        TextComponent(text=str(readData.iloc[1, 4])),
+                        TextComponent(text=str(readData.iloc[1, 1]), weight="bold"),
+                        TextComponent(text=str(readData.iloc[1, 2]), weight="bold"),
+                        TextComponent(text=str(readData.iloc[1, 3]), weight="bold"),
+                        TextComponent(text=str(readData.iloc[1, 4]), weight="bold"),
                         TextComponent(text="元/公升",size="xs",gravity="bottom")
                     ])
                 ])
