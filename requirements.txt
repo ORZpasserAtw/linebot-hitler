@@ -1,5 +1,5 @@
 line-bot-sdk
 flask
-pyowm
+pyowm==3.0.0
 pandas
 lxml
