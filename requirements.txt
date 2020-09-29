@@ -1,5 +1,5 @@
 line-bot-sdk
 flask
-yahoo_weather
+pyowm
 pandas
 lxml

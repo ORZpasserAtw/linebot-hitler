@@ -12,9 +12,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, URIAction, MessageAction, MessageTemplateAction, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, BoxComponent, TextComponent, ButtonComponent, ImageComponent
 )
-
-from yahoo_weather.weather import YahooWeather
-from yahoo_weather.config.units import Unit
+from pyowm import OWM
 import pandas as pd
 
 app = Flask(__name__)
@@ -167,38 +165,44 @@ def handle_message(event):
         )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "天氣及空氣品質":
-        data = YahooWeather(
-                            APP_ID='h0Hx273a',
-                            api_key='dj0yJmk9RlpXbkp0RnJKYWhmJmQ9WVdrOWFEQkllREkzTTJFbWNHbzlNQT09JnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PTgy',
-                            api_secret='a73e2929c4728b17e2527438a49740184cdc5665'
-                            )
-        data.get_yahoo_weather_by_city("台北市", Unit.celsius)
-
-        weatherdice = random.randrange(5)
-        wlocation = ["台北市"]
-        weather = ["晴朗","多雲","陰天","小雨","大雨"]
-        temperature = random.randrange(-50,50)
-        rain = random.randrange(100)
-        air = random.randrange(500)
-        airrate = "錯誤"
-        if air <= 50:
-            airrate = "良好"
-        elif air >= 51 and air <= 100:
-            airrate = "普通"
-        elif air >= 101 and air <= 150:
-            airrate = "敏感不健康"
-        elif air >= 151 and air <= 200:
-            airrate = "所有不健康"
-        elif air >= 201 and air <= 300:
-            airrate = "非常不健康"
-        elif air >= 301:
-            airrate = "危害"
+        w = OWM('dfbfc697f6af05f728f664111bc07551').weather_manager().weather_at_place('Taipei,TW').weather
+        if (w.status == "Thunderstorm"):
+            ws = "雷雨"
+        elif (w.status == "Drizzle"):
+            ws = "細雨"
+        elif (w.status == "Rain"):
+            ws = "下雨"
+        elif (w.status == "Snow"):
+            ws = "下雪"
+        elif (w.status == "Mist"):
+            ws = "薄霧"
+        elif (w.status == "Smoke"):
+            ws = "煙霧"
+        elif (w.status == "Haze"):
+            ws = "霧霾"
+        elif (w.status == "Dust"):
+            ws = "灰塵"
+        elif (w.status == "Fog"):
+            ws = "霧氣"
+        elif (w.status == "Sand"):
+            ws = "沙塵"
+        elif (w.status == "Ash"):
+            ws = "灰燼"
+        elif (w.status == "Squall"):
+            ws = "颮"
+        elif (w.status == "Tornado"):
+            ws = "龍捲風"
+        elif (w.status == "Clear"):
+            ws = "晴朗"
+        elif (w.status == "Clouds"):
+            ws = "多雲"
+        air = 0
         flex_message = FlexSendMessage(
             alt_text="Flex Message 天氣及空氣品質",
             contents=BubbleContainer(
                 body=BoxComponent(layout="vertical", padding_all="0px",contents=[
                     ImageComponent(
-                        url="https://w.wallhaven.cc/full/47/wallhaven-477mv3.jpg", 
+                        url="https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg", 
                         gravity="center",
                         margin="none",
                         size="full",
@@ -206,11 +210,11 @@ def handle_message(event):
                         aspectMode="cover"
                     ),
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
-                        TextComponent(text=wlocation[0], size="sm"),
-                        TextComponent(text=data.condition.text, size="xxl"),
-                        TextComponent(text="溫度 " + str(data.condition.temperature) + "°C", size="xl"),
-                        TextComponent(text="降雨機率 " + str(rain) + "%"),
-                        TextComponent(text="空氣品質 " + airrate + " " + str(air))
+                        TextComponent(text="台北市", size="sm"),
+                        TextComponent(text=ws, size="xxl"),
+                        TextComponent(text="溫度 " + str(w.temperature('celsius')['temp']) + "°C", size="xl"),
+                        TextComponent(text="濕度 " + str(w.humidity) + "%"),
+                        TextComponent(text="風速: "+str(round(w.wnd['speed']*18/5,2))+"KM/H")
                     ])
                 ])
             )
