@@ -211,7 +211,7 @@ def handle_message(event):
                     ),
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
                         TextComponent(text="台北市", size="sm"),
-                        ImageComponent(url="https"+w.get_weather_icon_url()[4:]),
+                        ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs"),
                         TextComponent(text=ws, size="xxl"),
                         TextComponent(text=w.get_detailed_status(), size="xs"),
                         TextComponent(text="溫度: "+str(w.get_temperature(unit='celsius')['temp'])+"°C", size="xl"),
