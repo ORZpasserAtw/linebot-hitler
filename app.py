@@ -214,7 +214,7 @@ def handle_message(event):
                         ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs"),
                         TextComponent(text=ws, size="xxl"),
                         TextComponent(text=w.get_detailed_status(), size="xs"),
-                        TextComponent(text="溫度: "+str(w.get_temperature(unit='celsius')['temp'])+"°C", size="xl"),
+                        TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C", size="xl"),
                         TextComponent(text="濕度: "+str(w.get_humidity())+"%"),
                         TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,2))+"km/h")
                     ])
