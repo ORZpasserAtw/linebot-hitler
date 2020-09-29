@@ -165,38 +165,38 @@ def handle_message(event):
         )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "天氣及空氣品質":
-        w = OWM('dfbfc697f6af05f728f664111bc07551').weather_manager().weather_at_place('Taipei,TW').weather
-        if (w.status == "Thunderstorm"):
+        owm = OWM('dfbfc697f6af05f728f664111bc07551', version='2.5')
+        w = owm.weather_at_place('Taipei,TW').get_weather()
+        if (w.get_status() == "Thunderstorm"):
             ws = "雷雨"
-        elif (w.status == "Drizzle"):
+        elif (w.get_status() == "Drizzle"):
             ws = "細雨"
-        elif (w.status == "Rain"):
+        elif (w.get_status() == "Rain"):
             ws = "下雨"
-        elif (w.status == "Snow"):
+        elif (w.get_status() == "Snow"):
             ws = "下雪"
-        elif (w.status == "Mist"):
+        elif (w.get_status() == "Mist"):
             ws = "薄霧"
-        elif (w.status == "Smoke"):
+        elif (w.get_status() == "Smoke"):
             ws = "煙霧"
-        elif (w.status == "Haze"):
+        elif (w.get_status() == "Haze"):
             ws = "霧霾"
-        elif (w.status == "Dust"):
+        elif (w.get_status() == "Dust"):
             ws = "灰塵"
-        elif (w.status == "Fog"):
+        elif (w.get_status() == "Fog"):
             ws = "霧氣"
-        elif (w.status == "Sand"):
+        elif (w.get_status() == "Sand"):
             ws = "沙塵"
-        elif (w.status == "Ash"):
+        elif (w.get_status() == "Ash"):
             ws = "灰燼"
-        elif (w.status == "Squall"):
+        elif (w.get_status() == "Squall"):
             ws = "颮"
-        elif (w.status == "Tornado"):
+        elif (w.get_status() == "Tornado"):
             ws = "龍捲風"
-        elif (w.status == "Clear"):
+        elif (w.get_status() == "Clear"):
             ws = "晴朗"
-        elif (w.status == "Clouds"):
+        elif (w.get_status() == "Clouds"):
             ws = "多雲"
-        air = 0
         flex_message = FlexSendMessage(
             alt_text="Flex Message 天氣及空氣品質",
             contents=BubbleContainer(
@@ -212,9 +212,9 @@ def handle_message(event):
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
                         TextComponent(text="台北市", size="sm"),
                         TextComponent(text=ws, size="xxl"),
-                        TextComponent(text="溫度 " + str(w.temperature('celsius')['temp']) + "°C", size="xl"),
-                        TextComponent(text="濕度 " + str(w.humidity) + "%"),
-                        TextComponent(text="風速: "+str(round(w.wnd['speed']*18/5,2))+"KM/H")
+                        TextComponent(text="溫度: "+str(w.get_temperature(unit='celsius')['temp'])+"°C", size="xl"),
+                        TextComponent(text="濕度: "+str(w.get_humidity())+"%"),
+                        TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,2))+"KM/H")
                     ])
                 ])
             )
