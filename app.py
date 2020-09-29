@@ -198,8 +198,8 @@ def handle_message(event):
             ws = "晴朗"
         elif (w.get_status() == "Clouds"):
             ws = "多雲"
-        aqitpe = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,%E4%B8%AD%E5%B1%B1')
-        uvitpe = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,%E8%87%BA%E5%8C%97')
+        aqitp = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,%E4%B8%AD%E5%B1%B1')
+        uvitp = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,%E8%87%BA%E5%8C%97')
         flex_message = FlexSendMessage(
             alt_text="Flex Message 天氣及空氣品質",
             contents=BubbleContainer(
@@ -214,12 +214,12 @@ def handle_message(event):
                     ),
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
                         TextComponent(text="台北市", size="sm"),
-                        ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs"),
+                        ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs",align="start"),
                         TextComponent(text=ws, size="xxl", weight="bold"),
                         TextComponent(text=w.get_detailed_status(), size="xs"),
                         TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
-                        TextComponent(text="空氣品質AQI: "+aqitpe.json()['records'][0]['AQI']),
-                        TextComponent(text="紫外線UVI: "+uvitpe.json()['records'][0]['UVI']),
+                        TextComponent(text="空氣品質AQI: "+aqitp.json()['records'][0]['AQI']),
+                        TextComponent(text="紫外線UVI: "+uvitp.json()['records'][0]['UVI']),
                         TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,1))+"km/h")
                     ])
                 ])
