@@ -15,6 +15,7 @@ import random
 from pyowm import OWM
 import requests
 import pandas as pd
+import datetime
 
 app = Flask(__name__)
 
@@ -235,6 +236,8 @@ def handle_message(event):
             alt_text="Flex Message 油價",
             contents=BubbleContainer(
                 size="giga",body=BoxComponent(layout="vertical",contents=[
+                    TextComponent(text="今日油價"),
+                    TextComponent(text=str(datetime.datetime.now()),size="xs"),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="供應商",size="xs"),
                         TextComponent(text="98無鉛",size="xs"),
