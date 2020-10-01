@@ -232,7 +232,6 @@ def handle_message(event):
             )
         )
         line_bot_api.reply_message(event.reply_token, flex_message)
-    """elif event.message.text == "臺北-天氣及空氣品質":"""
     elif event.message.text == "油價":
         try:
             readData = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]  # 取得網頁上的表格資訊
