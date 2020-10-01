@@ -50,7 +50,7 @@ locations = [
     ["硫磺島", "西太平洋小笠原群島的火山島", "晴朗", 99.9,
         "https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG"],
 ]
-
+owm = OWM('dfbfc697f6af05f728f664111bc07551', version='2.5')
 def status2ct(status):
     if (status == "Thunderstorm"):
         status = "雷雨"
@@ -201,13 +201,12 @@ def handle_message(event):
             )
         )
         line_bot_api.reply_message(event.reply_token, flex_message)
-    elif event.message.text == "天氣及空氣品質":
-        owm = OWM('dfbfc697f6af05f728f664111bc07551', version='2.5')
+    elif event.message.text == "臺北-天氣及空氣品質":
         w = owm.weather_at_place('Taipei,TW').get_weather()
-        aqitp = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,%E4%B8%AD%E5%B1%B1')
-        uvitp = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,%E8%87%BA%E5%8C%97')
+        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,中山')
+        uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,臺北')
         flex_message = FlexSendMessage(
-            alt_text="Flex Message 天氣及空氣品質",
+            alt_text="Flex Message 臺北-天氣及空氣品質",
             contents=BubbleContainer(
                 body=BoxComponent(layout="vertical", padding_all="0px",contents=[
                     ImageComponent(
@@ -219,13 +218,43 @@ def handle_message(event):
                         aspectMode="cover"
                     ),
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
-                        TextComponent(text="台北市", size="sm"),
+                        TextComponent(text="臺北市", size="sm"),
                         ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs",align="start"),
                         TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
                         TextComponent(text=w.get_detailed_status(), size="xs"),
                         TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
-                        TextComponent(text="空氣品質AQI: "+aqitp.json()['records'][0]['AQI']),
-                        TextComponent(text="紫外線UVI: "+uvitp.json()['records'][0]['UVI']),
+                        TextComponent(text="空氣品質AQI: "+aqi.json()['records'][0]['AQI']),
+                        TextComponent(text="紫外線UVI: "+uvi.json()['records'][0]['UVI']),
+                        TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,1))+"km/h")
+                    ])
+                ])
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, flex_message)
+    elif event.message.text == "臺中-天氣及空氣品質":
+        w = owm.weather_at_place('Taichung, TW').get_weather()
+        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,西屯')
+        uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,%E8%87%BA%E5%8C%97')
+        flex_message = FlexSendMessage(
+            alt_text="Flex Message 臺中-天氣及空氣品質",
+            contents=BubbleContainer(
+                body=BoxComponent(layout="vertical", padding_all="0px",contents=[
+                    ImageComponent(
+                        url="https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg", 
+                        gravity="center",
+                        margin="none",
+                        size="full",
+                        aspectRatio="1:1",
+                        aspectMode="cover"
+                    ),
+                    BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
+                        TextComponent(text="臺中市", size="sm"),
+                        ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs",align="start"),
+                        TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
+                        TextComponent(text=w.get_detailed_status(), size="xs"),
+                        TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
+                        TextComponent(text="空氣品質AQI: "+aqi.json()['records'][0]['AQI']),
+                        TextComponent(text="紫外線UVI: "+uvi.json()['records'][0]['UVI']),
                         TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,1))+"km/h")
                     ])
                 ])
