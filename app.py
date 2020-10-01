@@ -85,7 +85,8 @@ def status2ct(status):
     return(status)
 
 def FlexWeather(city: str,url: str,w,aqi,uvi):
-    FlexSendMessage(
+    return(
+        FlexSendMessage(
         alt_text="Flex Message "+city+"-天氣及空氣品質",
         contents=BubbleContainer(
             body=BoxComponent(layout="vertical", padding_all="0px",contents=[
@@ -111,6 +112,7 @@ def FlexWeather(city: str,url: str,w,aqi,uvi):
             ])
         )
     )
+)
 
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
