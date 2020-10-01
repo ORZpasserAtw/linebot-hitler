@@ -262,12 +262,27 @@ def handle_message(event):
             contents=BubbleContainer(
                 size="giga",body=BoxComponent(layout="horizontal",contents=[
                     BoxComponent(layout="vertical", contents=[
-                        ButtonComponent(action=MessageAction(label="臺北", text="臺北-天氣及空氣品質"),
-                        style="primary")
+                        ButtonComponent(action=MessageAction(label="臺北", text="臺北-天氣及空氣品質")),
+                        ButtonComponent(action=MessageAction(label="新北", text="新北-天氣及空氣品質")),
+                        ButtonComponent(action=MessageAction(label="基隆", text="基隆-天氣及空氣品質")),
+                        ButtonComponent(action=MessageAction(label="桃園", text="桃園-天氣及空氣品質")),
+                        ButtonComponent(action=MessageAction(label="新竹", text="新竹-天氣及空氣品質")),
+                        ButtonComponent(action=MessageAction(label="苗栗", text="苗栗-天氣及空氣品質"))
                     ]),
                     BoxComponent(layout="vertical", contents=[
-                        ButtonComponent(action=MessageAction(label="雲林", text="雲林-天氣及空氣品質"),
-                        style="primary")
+                        ButtonComponent(action=MessageAction(label="臺中", text="臺中-天氣及空氣品質")),
+                        ButtonComponent(action=MessageAction(label="彰化", text="彰化-天氣及空氣品質")),
+                        ButtonComponent(action=MessageAction(label="南投", text="南投-天氣及空氣品質")),
+                        ButtonComponent(action=MessageAction(label="雲林", text="雲林-天氣及空氣品質")),
+                        ButtonComponent(action=MessageAction(label="嘉義", text="嘉義-天氣及空氣品質")),
+                        ButtonComponent(action=MessageAction(label="臺南", text="臺南-天氣及空氣品質"))
+                    ]),
+                    BoxComponent(layout="vertical", contents=[
+                        ButtonComponent(action=MessageAction(label="高雄", text="高雄-天氣及空氣品質")),
+                        ButtonComponent(action=MessageAction(label="屏東", text="屏東-天氣及空氣品質")),
+                        ButtonComponent(action=MessageAction(label="宜蘭", text="宜蘭-天氣及空氣品質")),
+                        ButtonComponent(action=MessageAction(label="花蓮", text="花蓮-天氣及空氣品質")),
+                        ButtonComponent(action=MessageAction(label="臺東", text="臺東-天氣及空氣品質")),
                     ])
                 ])
             )
