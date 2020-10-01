@@ -10,7 +10,7 @@ from linebot.exceptions import (
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, URIAction, MessageAction, MessageTemplateAction, 
-    RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, BoxComponent, TextComponent, ButtonComponent, ImageComponent
+    RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, CarouselContainer, BoxComponent, TextComponent, ButtonComponent, ImageComponent
 )
 import random
 from pyowm import OWM
@@ -50,6 +50,39 @@ locations = [
     ["硫磺島", "西太平洋小笠原群島的火山島", "晴朗", 99.9,
         "https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG"],
 ]
+
+def status2ct(status):
+    if (status == "Thunderstorm"):
+        status = "雷雨"
+    elif (status == "Drizzle"):
+        status = "細雨"
+    elif (status == "Rain"):
+        status = "下雨"
+    elif (status == "Snow"):
+        status = "下雪"
+    elif (status == "Mist"):
+        status = "薄霧"
+    elif (status == "Smoke"):
+        status = "煙霧"
+    elif (status == "Haze"):
+        status = "霧霾"
+    elif (status == "Dust"):
+        status = "灰塵"
+    elif (status == "Fog"):
+        status = "霧氣"
+    elif (status == "Sand"):
+        status = "沙塵"
+    elif (status == "Ash"):
+        status = "灰燼"
+    elif (status == "Squall"):
+        status = "颮"
+    elif (status == "Tornado"):
+        status = "龍捲風"
+    elif (status == "Clear"):
+        status = "晴朗"
+    elif (status == "Clouds"):
+        status = "多雲"
+    return(status)
 
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
@@ -171,36 +204,6 @@ def handle_message(event):
     elif event.message.text == "天氣及空氣品質":
         owm = OWM('dfbfc697f6af05f728f664111bc07551', version='2.5')
         w = owm.weather_at_place('Taipei,TW').get_weather()
-        if (w.get_status() == "Thunderstorm"):
-            ws = "雷雨"
-        elif (w.get_status() == "Drizzle"):
-            ws = "細雨"
-        elif (w.get_status() == "Rain"):
-            ws = "下雨"
-        elif (w.get_status() == "Snow"):
-            ws = "下雪"
-        elif (w.get_status() == "Mist"):
-            ws = "薄霧"
-        elif (w.get_status() == "Smoke"):
-            ws = "煙霧"
-        elif (w.get_status() == "Haze"):
-            ws = "霧霾"
-        elif (w.get_status() == "Dust"):
-            ws = "灰塵"
-        elif (w.get_status() == "Fog"):
-            ws = "霧氣"
-        elif (w.get_status() == "Sand"):
-            ws = "沙塵"
-        elif (w.get_status() == "Ash"):
-            ws = "灰燼"
-        elif (w.get_status() == "Squall"):
-            ws = "颮"
-        elif (w.get_status() == "Tornado"):
-            ws = "龍捲風"
-        elif (w.get_status() == "Clear"):
-            ws = "晴朗"
-        elif (w.get_status() == "Clouds"):
-            ws = "多雲"
         aqitp = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,%E4%B8%AD%E5%B1%B1')
         uvitp = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,%E8%87%BA%E5%8C%97')
         flex_message = FlexSendMessage(
@@ -218,7 +221,7 @@ def handle_message(event):
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
                         TextComponent(text="台北市", size="sm"),
                         ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs",align="start"),
-                        TextComponent(text=ws, size="xxl", weight="bold"),
+                        TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
                         TextComponent(text=w.get_detailed_status(), size="xs"),
                         TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
                         TextComponent(text="空氣品質AQI: "+aqitp.json()['records'][0]['AQI']),
@@ -229,6 +232,7 @@ def handle_message(event):
             )
         )
         line_bot_api.reply_message(event.reply_token, flex_message)
+    elif event.message.text == "臺北-天氣及空氣品質":
     elif event.message.text == "油價":
         try:
             readData = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]  # 取得網頁上的表格資訊
