@@ -238,7 +238,8 @@ def handle_message(event):
             alt_text="Flex Message 油價",
             contents=BubbleContainer(
                 size="giga",body=BoxComponent(layout="vertical",contents=[
-                    TextComponent(text="今日油價",size="xl",align="center"),
+                    TextComponent(text="今日油價",size="lg",align="center"),
+                    TextComponent(text="　",size="xxs"),
                     TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs",align="center"),
                     TextComponent(text="　",size="xxs"),
                     BoxComponent(layout="horizontal", contents=[
@@ -250,19 +251,19 @@ def handle_message(event):
                         TextComponent(text="　",size="xs")
                     ]),
                     BoxComponent(layout="horizontal", contents=[
-                        TextComponent(text="台塑"),
-                        TextComponent(text=str(readData.iloc[0, 1]), weight="bold"),
-                        TextComponent(text=str(readData.iloc[0, 2]), weight="bold"),
-                        TextComponent(text=str(readData.iloc[0, 3]), weight="bold"),
-                        TextComponent(text=str(readData.iloc[0, 4]), weight="bold"),
-                        TextComponent(text="元/公升",size="xs",gravity="bottom")
-                    ]),
-                    BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="中油"),
                         TextComponent(text=str(readData.iloc[1, 1]), weight="bold"),
                         TextComponent(text=str(readData.iloc[1, 2]), weight="bold"),
                         TextComponent(text=str(readData.iloc[1, 3]), weight="bold"),
                         TextComponent(text=str(readData.iloc[1, 4]), weight="bold"),
+                        TextComponent(text="元/公升",size="xs",gravity="bottom")
+                    ]),
+                    BoxComponent(layout="horizontal", contents=[
+                        TextComponent(text="台塑"),
+                        TextComponent(text=str(readData.iloc[0, 1]), weight="bold"),
+                        TextComponent(text=str(readData.iloc[0, 2]), weight="bold"),
+                        TextComponent(text=str(readData.iloc[0, 3]), weight="bold"),
+                        TextComponent(text=str(readData.iloc[0, 4]), weight="bold"),
                         TextComponent(text="元/公升",size="xs",gravity="bottom")
                     ])
                 ])
