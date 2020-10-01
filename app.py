@@ -98,15 +98,15 @@ def aqi2rate(aqi):
         return("危害")
 
 def uvi2rate(uvi):
-    if (int(uvi) <= 2):
+    if (float(uvi) <= 2):
         return("低量級")
-    if (int(uvi) <= 5):
+    if (float(uvi) <= 5):
         return("中量級")
-    if (int(uvi) <= 7):
+    if (float(uvi) <= 7):
         return("高量級")
-    if (int(uvi) <= 10):
+    if (float(uvi) <= 10):
         return("過量級")
-    if (int(uvi) > 10):
+    if (float(uvi) > 10):
         return("危險級")
 
 def FlexWeatherTemplate(city: str,url: str,w,aqi,uvi):
