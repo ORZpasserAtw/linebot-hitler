@@ -53,36 +53,49 @@ locations = [
 owm = OWM('dfbfc697f6af05f728f664111bc07551', version='2.5')
 def status2ct(status):
     if (status == "Thunderstorm"):
-        status = "雷雨"
+        return("雷雨")
     elif (status == "Drizzle"):
-        status = "細雨"
+        return("細雨")
     elif (status == "Rain"):
-        status = "下雨"
+        return("下雨")
     elif (status == "Snow"):
-        status = "下雪"
+        return("下雪")
     elif (status == "Mist"):
-        status = "薄霧"
+        return("薄霧")
     elif (status == "Smoke"):
-        status = "煙霧"
+        return("煙霧")
     elif (status == "Haze"):
-        status = "霧霾"
+        return("霧霾")
     elif (status == "Dust"):
-        status = "灰塵"
+        return("灰塵")
     elif (status == "Fog"):
-        status = "霧氣"
+        return("霧氣")
     elif (status == "Sand"):
-        status = "沙塵"
+        return("沙塵")
     elif (status == "Ash"):
-        status = "灰燼"
+        return("灰燼")
     elif (status == "Squall"):
-        status = "颮"
+        return("颮")
     elif (status == "Tornado"):
-        status = "龍捲風"
+        return("龍捲風")
     elif (status == "Clear"):
-        status = "晴朗"
+        return("晴朗")
     elif (status == "Clouds"):
-        status = "多雲"
-    return(status)
+        return("多雲")
+
+def aqi2rate(aqi):
+    if (aqi <= 50):
+        return("良好")
+    if (aqi <= 100):
+        return("普通")
+    if (aqi <= 150):
+        return("對敏感族群不健康")
+    if (aqi <= 200):
+        return("對所有族群不健康")
+    if (aqi <= 300):
+        return("非常不健康")
+    if (aqi > 300):
+        return("危害")
 
 def FlexWeatherTemplate(city: str,url: str,w,aqi,uvi):
     return(
@@ -105,7 +118,7 @@ def FlexWeatherTemplate(city: str,url: str,w,aqi,uvi):
                     TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
                     TextComponent(text=w.get_detailed_status(), size="xs"),
                     TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
-                    TextComponent(text="空氣品質AQI: "+aqi.json()['records'][0]['AQI']),
+                    TextComponent(text="空氣品質AQI: "+"對所有族群不健康 "+aqi.json()['records'][0]['AQI']),
                     TextComponent(text="紫外線UVI: "+uvi.json()['records'][0]['UVI']),
                     TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,1))+"km/h")
                 ])
