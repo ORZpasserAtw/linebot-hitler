@@ -282,7 +282,7 @@ def handle_message(event):
                         ButtonComponent(action=MessageAction(label="屏東", text="屏東-天氣及空氣品質")),
                         ButtonComponent(action=MessageAction(label="宜蘭", text="宜蘭-天氣及空氣品質")),
                         ButtonComponent(action=MessageAction(label="花蓮", text="花蓮-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="臺東", text="臺東-天氣及空氣品質")),
+                        ButtonComponent(action=MessageAction(label="臺東", text="臺東-天氣及空氣品質"))
                     ])
                 ])
             )
