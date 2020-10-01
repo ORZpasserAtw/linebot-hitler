@@ -247,7 +247,7 @@ def handle_message(event):
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,基隆')
         line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("基隆市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
     elif event.message.text == "桃園-天氣及空氣品質":
-        w = owm.weather_at_place('Taoyuan District, TW').get_weather()
+        w = owm.weather_at_place('Taoyuan City, TW').get_weather()
         aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,桃園')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,桃園')
         line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("桃園市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
@@ -271,6 +271,11 @@ def handle_message(event):
         aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,彰化')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,彰化')
         line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("彰化市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+    elif event.message.text == "南投-天氣及空氣品質":
+        w = owm.weather_at_place('Chang-hua, TW').get_weather()
+        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,南投')
+        uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,南投')
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("南投市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
     elif event.message.text == "油價":
         try:
             readData = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]  # 取得網頁上的表格資訊
