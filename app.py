@@ -84,7 +84,7 @@ def status2ct(status):
         status = "多雲"
     return(status)
 
-def FlexWeather(city: str,url: str,w,aqi: str,uvi: str):
+def FlexWeather(city: str,url: str,w,aqi,uvi):
     FlexSendMessage(
         alt_text="Flex Message "+city+"-天氣及空氣品質",
         contents=BubbleContainer(
