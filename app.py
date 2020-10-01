@@ -112,7 +112,7 @@ def uvi2rate(uvi):
 def FlexWeatherTemplate(city: str,url: str,w,aqi,uvi):
     return(
         FlexSendMessage(
-        alt_text="Flex Message "+city+"-天氣及空氣品質",
+        alt_text=city+"-天氣及空氣品質 Flex",
         contents=BubbleContainer(
             body=BoxComponent(layout="vertical", padding_all="0px",contents=[
                 ImageComponent(
@@ -144,7 +144,7 @@ def FlexWeatherTemplate(city: str,url: str,w,aqi,uvi):
 def handle_message(event):
     if event.message.text == "呼叫助理":
         flex_message = FlexSendMessage(
-            alt_text="Flex Message 呼叫助理",
+            alt_text="呼叫助理 Flex",
             contents=BubbleContainer(
                 body=BoxComponent(layout="vertical", contents=[
                     TextComponent(text="排程", align="center", weight="bold", size="xl"),
@@ -195,7 +195,7 @@ def handle_message(event):
     elif "開始導航" in event.message.text:
         if locations[0][0] in event.message.text:
             flex_message = FlexSendMessage(
-                alt_text="Flex Message 導航",
+                alt_text="導航 Flex",
                 contents=BubbleContainer(
                     body=BoxComponent(layout="vertical", contents=[
                         TextComponent(text=locations[0][0]+"導航")
@@ -209,7 +209,7 @@ def handle_message(event):
             )
         elif locations[1][0] in event.message.text:
             flex_message = FlexSendMessage(
-                alt_text="Flex Message 導航",
+                alt_text="導航 Flex",
                 contents=BubbleContainer(
                     body=BoxComponent(layout="vertical", contents=[
                         TextComponent(text=locations[1][0]+"導航")
@@ -228,7 +228,7 @@ def handle_message(event):
         budget = 420
 
         flex_message = FlexSendMessage(
-            alt_text="Flex Message 記帳小本本",
+            alt_text="記帳小本本 Flex",
             contents=BubbleContainer(
                 body=BoxComponent(layout="vertical", contents=[
                     TextComponent(text="記帳小本本", align="center", weight="bold", size="xl"),
@@ -253,6 +253,23 @@ def handle_message(event):
                         style="primary")
                     ]
                 )
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, flex_message)
+    elif event.message.text == "天氣及空氣品質":
+        flex_message = FlexSendMessage(
+            alt_text="天氣及空氣品質 Flex",
+            contents=BubbleContainer(
+                size="giga",body=BoxComponent(layout="horizontal",contents=[
+                    BoxComponent(layout="vertical", contents=[
+                        ButtonComponent(action=MessageAction(label="臺北", text="臺北-天氣及空氣品質"),
+                        style="primary")
+                    ]),
+                    BoxComponent(layout="vertical", contents=[
+                        ButtonComponent(action=MessageAction(label="雲林", text="雲林-天氣及空氣品質"),
+                        style="primary")
+                    ])
+                ])
             )
         )
         line_bot_api.reply_message(event.reply_token, flex_message)
@@ -347,7 +364,7 @@ def handle_message(event):
         except:
             print("ERROR")
         flex_message = FlexSendMessage(
-            alt_text="Flex Message 油價",
+            alt_text="油價 Flex",
             contents=BubbleContainer(
                 size="giga",body=BoxComponent(layout="vertical",contents=[
                     TextComponent(text="今日油價",size="lg",align="center"),
