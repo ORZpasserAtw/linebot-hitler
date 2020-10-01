@@ -16,6 +16,7 @@ from pyowm import OWM
 import requests
 import pandas as pd
 import datetime
+import pytz
 
 app = Flask(__name__)
 
@@ -236,8 +237,10 @@ def handle_message(event):
             alt_text="Flex Message 油價",
             contents=BubbleContainer(
                 size="giga",body=BoxComponent(layout="vertical",contents=[
-                    TextComponent(text="今日油價",size="md",align="center"),
-                    TextComponent(text=str(datetime.datetime.now().strftime("%Y/%m/%d %H:%M")),size="xs",align="center"),
+                    TextComponent(text="今日油價",size="xs",align="center"),
+                    TextComponent(text="　",size="xxs"),
+                    TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs",align="center"),
+                    TextComponent(text="　",size="xxs"),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="供應商",size="xs"),
                         TextComponent(text="98無鉛",size="xs"),
