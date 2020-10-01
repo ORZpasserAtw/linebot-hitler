@@ -295,7 +295,7 @@ def handle_message(event):
         )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "桃園-天氣及空氣品質":
-        w = owm.weather_at_place('Keelung, TW').get_weather()
+        w = owm.weather_at_place('Taoyuan District, TW').get_weather()
         aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,桃園')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,桃園')
         flex_message = FlexSendMessage(
@@ -312,6 +312,68 @@ def handle_message(event):
                     ),
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
                         TextComponent(text="桃園市",size="xl"),
+                        TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs"),
+                        ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs",align="start"),
+                        TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
+                        TextComponent(text=w.get_detailed_status(), size="xs"),
+                        TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
+                        TextComponent(text="空氣品質AQI: "+aqi.json()['records'][0]['AQI']),
+                        TextComponent(text="紫外線UVI: "+uvi.json()['records'][0]['UVI']),
+                        TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,1))+"km/h")
+                    ])
+                ])
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, flex_message)
+    elif event.message.text == "新竹-天氣及空氣品質":
+        w = owm.weather_at_place('Hsinchu, TW').get_weather()
+        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,新竹')
+        uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,新竹')
+        flex_message = FlexSendMessage(
+            alt_text="Flex Message 新竹-天氣及空氣品質",
+            contents=BubbleContainer(
+                body=BoxComponent(layout="vertical", padding_all="0px",contents=[
+                    ImageComponent(
+                        url="https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg", 
+                        gravity="center",
+                        margin="none",
+                        size="full",
+                        aspectRatio="1:1",
+                        aspectMode="cover"
+                    ),
+                    BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
+                        TextComponent(text="新竹市",size="xl"),
+                        TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs"),
+                        ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs",align="start"),
+                        TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
+                        TextComponent(text=w.get_detailed_status(), size="xs"),
+                        TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
+                        TextComponent(text="空氣品質AQI: "+aqi.json()['records'][0]['AQI']),
+                        TextComponent(text="紫外線UVI: "+uvi.json()['records'][0]['UVI']),
+                        TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,1))+"km/h")
+                    ])
+                ])
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, flex_message)
+    elif event.message.text == "苗栗-天氣及空氣品質":
+        w = owm.weather_at_place('Miaoli, TW').get_weather()
+        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,苗栗')
+        uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,苗栗')
+        flex_message = FlexSendMessage(
+            alt_text="Flex Message 苗栗-天氣及空氣品質",
+            contents=BubbleContainer(
+                body=BoxComponent(layout="vertical", padding_all="0px",contents=[
+                    ImageComponent(
+                        url="https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg", 
+                        gravity="center",
+                        margin="none",
+                        size="full",
+                        aspectRatio="1:1",
+                        aspectMode="cover"
+                    ),
+                    BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
+                        TextComponent(text="苗栗市",size="xl"),
                         TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs"),
                         ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs",align="start"),
                         TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
@@ -343,6 +405,37 @@ def handle_message(event):
                     ),
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
                         TextComponent(text="臺中市",size="xl"),
+                        TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs"),
+                        ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs",align="start"),
+                        TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
+                        TextComponent(text=w.get_detailed_status(), size="xs"),
+                        TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
+                        TextComponent(text="空氣品質AQI: "+aqi.json()['records'][0]['AQI']),
+                        TextComponent(text="紫外線UVI: "+uvi.json()['records'][0]['UVI']),
+                        TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,1))+"km/h")
+                    ])
+                ])
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, flex_message)
+    elif event.message.text == "彰化-天氣及空氣品質":
+        w = owm.weather_at_place('Chang-hua, TW').get_weather()
+        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,彰化')
+        uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,彰化')
+        flex_message = FlexSendMessage(
+            alt_text="Flex Message 彰化-天氣及空氣品質",
+            contents=BubbleContainer(
+                body=BoxComponent(layout="vertical", padding_all="0px",contents=[
+                    ImageComponent(
+                        url="https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg", 
+                        gravity="center",
+                        margin="none",
+                        size="full",
+                        aspectRatio="1:1",
+                        aspectMode="cover"
+                    ),
+                    BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
+                        TextComponent(text="彰化市",size="xl"),
                         TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs"),
                         ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs",align="start"),
                         TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
