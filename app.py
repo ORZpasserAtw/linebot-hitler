@@ -98,15 +98,15 @@ def aqi2rate(aqi):
         return("危害")
 
 def uvi2rate(uvi):
-    if (round(float(uvi),0) <= 2):
+    if (round(float(uvi)) <= 2):
         return("低量級")
-    if (round(float(uvi),0) <= 5):
+    if (round(float(uvi)) <= 5):
         return("中量級")
-    if (round(float(uvi),0) <= 7):
+    if (round(float(uvi)) <= 7):
         return("高量級")
-    if (round(float(uvi),0) <= 10):
+    if (round(float(uvi)) <= 10):
         return("過量級")
-    if (round(float(uvi),0) > 10):
+    if (round(float(uvi)) > 10):
         return("危險級")
 
 def FlexWeatherTemplate(city: str,url: str,w,aqi,uvi):
@@ -130,7 +130,7 @@ def FlexWeatherTemplate(city: str,url: str,w,aqi,uvi):
                     TextComponent(text=w.get_detailed_status(), size="xs"),
                     TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
                     TextComponent(text="空氣品質: "+aqi.json()['records'][0]['AQI']+"("+aqi2rate(aqi.json()['records'][0]['AQI'])+")"),
-                    TextComponent(text="紫外線: "+str(round(float(uvi.json()['records'][0]['UVI']),0))+"("+uvi2rate(uvi.json()['records'][0]['UVI'])+")"),
+                    TextComponent(text="紫外線: "+str(round(float(uvi.json()['records'][0]['UVI'])))+"("+uvi2rate(uvi.json()['records'][0]['UVI'])+")"),
                     TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,1))+"km/h")
                 ])
             ])
