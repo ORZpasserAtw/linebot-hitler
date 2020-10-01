@@ -260,7 +260,7 @@ def handle_message(event):
             alt_text="天氣及空氣品質 Flex",
             contents=BubbleContainer(body=BoxComponent(layout="horizontal",contents=[
                     ImageComponent(
-                    url="SKY.jpg", 
+                    url="https://i.imgur.com/UDyxRWK.png", 
                     gravity="center",
                     margin="none",
                     size="full",
