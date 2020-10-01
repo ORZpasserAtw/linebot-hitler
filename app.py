@@ -265,7 +265,8 @@ def handle_message(event):
                     margin="none",
                     size="full",
                     aspectRatio="320:375",
-                    aspectMode="cover"
+                    aspectMode="cover",
+                    position="absolute"
                     ),
                     BoxComponent(layout="vertical", contents=[
                         ButtonComponent(action=MessageAction(label="臺北", text="臺北-天氣及空氣品質")),
