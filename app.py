@@ -118,7 +118,7 @@ def FlexWeatherTemplate(city: str,url: str,w,aqi,uvi):
                     TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
                     TextComponent(text=w.get_detailed_status(), size="xs"),
                     TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
-                    TextComponent(text="空氣品質AQI: "+"對所有族群不健康 "+aqi.json()['records'][0]['AQI']),
+                    TextComponent(text="空氣品質AQI: "+"對所有族群不健康 500",
                     TextComponent(text="紫外線UVI: "+uvi.json()['records'][0]['UVI']),
                     TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,1))+"km/h")
                 ])
