@@ -84,6 +84,34 @@ def status2ct(status):
         status = "多雲"
     return(status)
 
+def FlexWeather(city,url,w,aqi,uvi):
+    FlexSendMessage(
+        alt_text="Flex Message "+city+"-天氣及空氣品質",
+        contents=BubbleContainer(
+            body=BoxComponent(layout="vertical", padding_all="0px",contents=[
+                ImageComponent(
+                    url=url, 
+                    gravity="center",
+                    margin="none",
+                    size="full",
+                    aspectRatio="1:1",
+                    aspectMode="cover"
+                ),
+                BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
+                    TextComponent(text=city,size="xl"),
+                    TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs"),
+                    ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs",align="start"),
+                    TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
+                    TextComponent(text=w.get_detailed_status(), size="xs"),
+                    TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
+                    TextComponent(text="空氣品質AQI: "+aqi.json()['records'][0]['AQI']),
+                    TextComponent(text="紫外線UVI: "+uvi.json()['records'][0]['UVI']),
+                    TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,1))+"km/h")
+                ])
+            ])
+        )
+    )
+
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -205,33 +233,7 @@ def handle_message(event):
         w = owm.weather_at_place('Taipei,TW').get_weather()
         aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,中山')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,臺北')
-        flex_message = FlexSendMessage(
-            alt_text="Flex Message 臺北-天氣及空氣品質",
-            contents=BubbleContainer(
-                body=BoxComponent(layout="vertical", padding_all="0px",contents=[
-                    ImageComponent(
-                        url="https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg", 
-                        gravity="center",
-                        margin="none",
-                        size="full",
-                        aspectRatio="1:1",
-                        aspectMode="cover"
-                    ),
-                    BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
-                        TextComponent(text="臺北市",size="xl"),
-                        TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs"),
-                        ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs",align="start"),
-                        TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
-                        TextComponent(text=w.get_detailed_status(), size="xs"),
-                        TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
-                        TextComponent(text="空氣品質AQI: "+aqi.json()['records'][0]['AQI']),
-                        TextComponent(text="紫外線UVI: "+uvi.json()['records'][0]['UVI']),
-                        TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,1))+"km/h")
-                    ])
-                ])
-            )
-        )
-        line_bot_api.reply_message(event.reply_token, flex_message)
+        line_bot_api.reply_message(event.reply_token, FlexWeather("臺北","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
     elif event.message.text == "新北-天氣及空氣品質":
         w = owm.weather_at_place('New Taipei, TW').get_weather()
         aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,板橋')
