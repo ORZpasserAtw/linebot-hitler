@@ -238,8 +238,7 @@ def handle_message(event):
             alt_text="Flex Message 油價",
             contents=BubbleContainer(
                 size="giga",body=BoxComponent(layout="vertical",contents=[
-                    TextComponent(text="今日油價",size="xs",align="center"),
-                    TextComponent(text="　",size="xxs"),
+                    TextComponent(text="今日油價",size="xl",align="center"),
                     TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs",align="center"),
                     TextComponent(text="　",size="xxs"),
                     BoxComponent(layout="horizontal", contents=[
