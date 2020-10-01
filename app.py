@@ -113,8 +113,7 @@ def FlexWeatherTemplate(city: str,url: str,w,aqi,uvi):
     return(
         FlexSendMessage(
         alt_text=city+"-天氣及空氣品質 Flex",
-        contents=BubbleContainer(
-            body=BoxComponent(layout="vertical", padding_all="0px",contents=[
+        contents=BubbleContainer(body=BoxComponent(layout="vertical", padding_all="0px",contents=[
                 ImageComponent(
                     url=url, 
                     gravity="center",
@@ -260,6 +259,14 @@ def handle_message(event):
         flex_message = FlexSendMessage(
             alt_text="天氣及空氣品質 Flex",
             contents=BubbleContainer(body=BoxComponent(layout="horizontal",contents=[
+                    ImageComponent(
+                    url="SKY.jpg", 
+                    gravity="center",
+                    margin="none",
+                    size="full",
+                    aspectRatio="320:375",
+                    aspectMode="cover"
+                    ),
                     BoxComponent(layout="vertical", contents=[
                         ButtonComponent(action=MessageAction(label="臺北", text="臺北-天氣及空氣品質")),
                         ButtonComponent(action=MessageAction(label="新北", text="新北-天氣及空氣品質")),
