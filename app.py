@@ -97,6 +97,18 @@ def aqi2rate(aqi):
     if (aqi > 300):
         return("危害")
 
+def uvi2rate(uvi):
+    if (uvi <= 2):
+        return("低量級")
+    if (uvi <= 5):
+        return("中量級")
+    if (uvi <= 7):
+        return("高量級")
+    if (uvi <= 10):
+        return("過量級")
+    if (uvi > 10):
+        return("危險級")
+
 def FlexWeatherTemplate(city: str,url: str,w,aqi,uvi):
     return(
         FlexSendMessage(
@@ -118,8 +130,8 @@ def FlexWeatherTemplate(city: str,url: str,w,aqi,uvi):
                     TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
                     TextComponent(text=w.get_detailed_status(), size="xs"),
                     TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
-                    TextComponent(text="空氣品質AQI: "+"對所有族群不健康 500"),
-                    TextComponent(text="紫外線UVI: "+uvi.json()['records'][0]['UVI']),
+                    TextComponent(text="空氣品質: "+aqi2rate(aqi)+" "+aqi.json()['records'][0]['AQI']),
+                    TextComponent(text="紫外線: "+uvi2rate(uvi)+" "+uvi.json()['records'][0]['UVI']),
                     TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,1))+"km/h")
                 ])
             ])
