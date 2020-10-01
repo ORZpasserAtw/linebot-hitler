@@ -259,8 +259,7 @@ def handle_message(event):
     elif event.message.text == "天氣及空氣品質":
         flex_message = FlexSendMessage(
             alt_text="天氣及空氣品質 Flex",
-            contents=BubbleContainer(
-                size="giga",body=BoxComponent(layout="horizontal",contents=[
+            contents=BubbleContainer(body=BoxComponent(layout="horizontal",contents=[
                     BoxComponent(layout="vertical", contents=[
                         ButtonComponent(action=MessageAction(label="臺北", text="臺北-天氣及空氣品質")),
                         ButtonComponent(action=MessageAction(label="新北", text="新北-天氣及空氣品質")),
@@ -380,8 +379,7 @@ def handle_message(event):
             print("ERROR")
         flex_message = FlexSendMessage(
             alt_text="油價 Flex",
-            contents=BubbleContainer(
-                size="giga",body=BoxComponent(layout="vertical",contents=[
+            contents=BubbleContainer(size="giga",body=BoxComponent(layout="vertical",contents=[
                     TextComponent(text="今日油價",size="lg",align="center"),
                     TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs",align="center"),
                     TextComponent(text="　",size="xxs"),
