@@ -218,7 +218,7 @@ def handle_message(event):
                         aspectMode="cover"
                     ),
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
-                        TextComponent(text="臺北市"),
+                        TextComponent(text="臺北市",size="lg"),
                         TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs"),
                         ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs",align="start"),
                         TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
@@ -249,7 +249,7 @@ def handle_message(event):
                         aspectMode="cover"
                     ),
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
-                        TextComponent(text="臺中市"),
+                        TextComponent(text="臺中市",size="lg"),
                         TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs"),
                         ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs",align="start"),
                         TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
