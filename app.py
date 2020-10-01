@@ -218,7 +218,8 @@ def handle_message(event):
                         aspectMode="cover"
                     ),
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
-                        TextComponent(text="臺北市", size="sm"),
+                        TextComponent(text="臺北市"),
+                        TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs"),
                         ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs",align="start"),
                         TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
                         TextComponent(text=w.get_detailed_status(), size="xs"),
@@ -234,7 +235,7 @@ def handle_message(event):
     elif event.message.text == "臺中-天氣及空氣品質":
         w = owm.weather_at_place('Taichung, TW').get_weather()
         aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,西屯')
-        uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,%E8%87%BA%E5%8C%97')
+        uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,臺中')
         flex_message = FlexSendMessage(
             alt_text="Flex Message 臺中-天氣及空氣品質",
             contents=BubbleContainer(
@@ -248,7 +249,8 @@ def handle_message(event):
                         aspectMode="cover"
                     ),
                     BoxComponent(layout="vertical", padding_all="20px", position="absolute", contents=[
-                        TextComponent(text="臺中市", size="sm"),
+                        TextComponent(text="臺中市"),
+                        TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs"),
                         ImageComponent(url="https"+w.get_weather_icon_url()[4:],size="xxs",align="start"),
                         TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
                         TextComponent(text=w.get_detailed_status(), size="xs"),
