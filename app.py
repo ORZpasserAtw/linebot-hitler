@@ -372,7 +372,11 @@ def handle_message(event):
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,臺東')
         line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("臺東市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
     elif event.message.text == "油價":
-        data = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]  # 取得網頁上的表格資訊
+        try:
+            data = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]  # 取得網頁上的表格資訊
+        except:
+            data = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]
+            print("ERROR")
         flex_message = FlexSendMessage(
             alt_text="油價 Flex",
             contents=BubbleContainer(size="giga",body=BoxComponent(layout="vertical",contents=[
