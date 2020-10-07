@@ -15,6 +15,7 @@ from linebot.models import (
 import random
 from pyowm import OWM
 import requests
+import ssl
 import pandas as pd
 import datetime
 import pytz
@@ -373,10 +374,12 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("臺東市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
     elif event.message.text == "油價":
         try:
+            ssl._create_default_https_context = ssl._create_unverified_context
             data = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]  # 取得網頁上的表格資訊
         except:
+            ssl._create_default_https_context = ssl._create_unverified_context
             data = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]
-            print("ERROR")
+            print("Second Try")
         flex_message = FlexSendMessage(
             alt_text="油價 Flex",
             contents=BubbleContainer(size="giga",body=BoxComponent(layout="vertical",contents=[
