@@ -417,8 +417,8 @@ def handle_message(event):
     elif event.message.text == "幫助":
         flex_message = FlexSendMessage(
             alt_text="幫助 Flex",
-            contents=BubbleContainer(body=BoxComponent(layout="vertical",contents=[
-                    BoxComponent(size="giga",layout="horizontal", contents=[
+            contents=BubbleContainer(size="giga",body=BoxComponent(layout="vertical",contents=[
+                    BoxComponent(layout="horizontal", contents=[
                         ButtonComponent(action=MessageAction(label="呼叫助理", text="呼叫助理-幫助")),
                         ButtonComponent(action=MessageAction(label="推薦行程", text="推薦行程-幫助")),
                         ButtonComponent(action=MessageAction(label="記帳小本本", text="記帳小本本-幫助"))
