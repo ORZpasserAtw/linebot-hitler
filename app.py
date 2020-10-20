@@ -424,8 +424,8 @@ def handle_message(event):
                         TextComponent(text="記帳小本本",action=MessageAction(text="記帳小本本-幫助"),decoration="underline",align="center",size="sm")
                     ]),
                     BoxComponent(layout="horizontal", contents=[
-                        TextComponent(text="天氣及空氣品質",action=MessageAction(text="天氣及空氣品質-幫助"),decoration="underline",align="center",size="sm"),
-                        TextComponent(text="油價",action=MessageAction(text="油價-幫助"),decoration="underline",align="center",size="sm"),
+                        TextComponent(text="天氣及空氣品質",action=MessageAction(text="天氣及空氣品質-幫助"),decoration="underline",align="center",size="sm",margin="lg"),
+                        TextComponent(text="油價",action=MessageAction(text="油價-幫助"),decoration="underline",align="center",size="sm",margin="lg"),
                         FillerComponent()
                     ])
                 ])
