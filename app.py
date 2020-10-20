@@ -416,9 +416,10 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "幫助":
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="歡迎加入Linebot\n此行動助理提供生活中常用的功能\n讓你輕鬆管理日常大小事"))
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="歡迎加入Linebot\n此行動助理提供生活中常用的功能\n讓你輕鬆管理日常大小事"))
+            event.reply_token, [
+                TextSendMessage(text="歡迎加入Linebot\n讓你輕鬆管理生活大小事\n此行動助理提供以下的功能"),
+                TextSendMessage(text="TEST")
+                ])
     elif event.message.text == "RNG":
         RNGmsg = ""
         ran = random.randrange(3)
