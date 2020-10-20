@@ -419,14 +419,13 @@ def handle_message(event):
             alt_text="幫助 Flex",
             contents=BubbleContainer(body=BoxComponent(layout="vertical",contents=[
                     BoxComponent(layout="horizontal", contents=[
-                        ButtonComponent(action=MessageAction(label="桃園", text="桃園-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="新竹", text="新竹-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="苗栗", text="苗栗-天氣及空氣品質"))
+                        ButtonComponent(action=MessageAction(label="呼叫助理", text="呼叫助理-幫助")),
+                        ButtonComponent(action=MessageAction(label="推薦行程", text="推薦行程-幫助")),
+                        ButtonComponent(action=MessageAction(label="記帳小本本", text="記帳小本本-幫助"))
                     ]),
                     BoxComponent(layout="horizontal", contents=[
-                        ButtonComponent(action=MessageAction(label="宜蘭", text="宜蘭-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="花蓮", text="花蓮-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="臺東", text="臺東-天氣及空氣品質"))
+                        ButtonComponent(action=MessageAction(label="天氣及空氣品質", text="天氣及空氣品質-幫助")),
+                        ButtonComponent(action=MessageAction(label="油價", text="油價-幫助"))
                     ])
                 ])
             )
@@ -478,15 +477,15 @@ rich_menu_to_create = RichMenu(
         ),
         RichMenuArea(
         bounds=RichMenuBounds(x=1707, y=0, width=854, height=843),
-        action=URIAction(label="推薦行程", uri="https://liff.line.me/1654548127-50gGKZyE/Account")
+        action=URIAction(label="記帳小本本", uri="https://liff.line.me/1654548127-50gGKZyE/Account")
         ),
         RichMenuArea(
         bounds=RichMenuBounds(x=0, y=843, width=854, height=843),
-        action=MessageAction(label="message", text="天氣及空氣品質")
+        action=MessageAction(label="天氣及空氣品質", text="天氣及空氣品質")
         ),
         RichMenuArea(
         bounds=RichMenuBounds(x=854, y=843, width=854, height=843),
-        action=MessageAction(label="message", text="油價")
+        action=MessageAction(label="油價", text="油價")
         ),
         RichMenuArea(
         bounds=RichMenuBounds(x=1707, y=843, width=854, height=843),
