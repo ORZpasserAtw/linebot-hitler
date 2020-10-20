@@ -419,12 +419,13 @@ def handle_message(event):
             alt_text="幫助 Flex",
             contents=BubbleContainer(size="giga",body=BoxComponent(layout="vertical",contents=[
                     BoxComponent(layout="horizontal", contents=[
-
-                        TextComponent(text="記帳小本本",action=MessageAction(text="記帳小本本-幫助"))
+                        TextComponent(text="呼叫助理",action=MessageAction(text="呼叫助理-幫助"),decoration="underline"),
+                        TextComponent(text="推薦行程",action=MessageAction(text="推薦行程-幫助"),decoration="underline"),
+                        TextComponent(text="記帳小本本",action=MessageAction(text="記帳小本本-幫助"),decoration="underline")
                     ]),
                     BoxComponent(layout="horizontal", contents=[
-                        ButtonComponent(action=MessageAction(label="天氣及空氣品質", text="天氣及空氣品質-幫助")),
-                        ButtonComponent(action=MessageAction(label="油價", text="油價-幫助")),
+                        TextComponent(text="天氣及空氣品質",action=MessageAction(text="天氣及空氣品質-幫助"),decoration="underline"),
+                        TextComponent(text="油價",action=MessageAction(text="油價-幫助"),decoration="underline"),
                         FillerComponent()
                     ])
                 ])
