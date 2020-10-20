@@ -415,14 +415,10 @@ def handle_message(event):
         )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "幫助":
-        confirm_template = TemplateSendMessage(
-            alt_text="Confirm Template 幫助",
-            template=ConfirmTemplate(text="你是智障嗎？", actions=[
-                MessageTemplateAction(label="是", text="我是智障"), 
-                MessageTemplateAction(label="否", text="我不是智障")
-                ])
-        )
-        line_bot_api.reply_message(event.reply_token, confirm_template)
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text="歡迎加入Linebot\n此行動助理提供生活中常用的功能\n讓你輕鬆管理日常大小事"))
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text="歡迎加入Linebot\n此行動助理提供生活中常用的功能\n讓你輕鬆管理日常大小事"))
     elif event.message.text == "RNG":
         RNGmsg = ""
         ran = random.randrange(3)
