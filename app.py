@@ -9,8 +9,9 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, URIAction, MessageAction, MessageTemplateAction, 
-    RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, CarouselContainer, BoxComponent, TextComponent, ButtonComponent, ImageComponent
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, 
+    URIAction, MessageAction, MessageTemplateAction, RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, 
+    CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, CarouselContainer, BoxComponent, TextComponent, ButtonComponent, ImageComponent
 )
 import random
 from pyowm import OWM
@@ -431,11 +432,26 @@ def handle_message(event):
                 ])
             )
         )
-        line_bot_api.reply_message(
-            event.reply_token, [
+        line_bot_api.reply_message(event.reply_token, [
                 TextSendMessage(text="歡迎加入Linebot\n讓你輕鬆管理生活大小事\n此行動助理提供以下的功能"),
                 flex_message
                 ])
+    elif event.message.text == "呼叫助理-幫助":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=
+        """【呼叫助理】\n
+        現代人生活忙碌，有時會忘記重要的約會，利用「我要排程」把重要的行程紀錄起來，使生活變得井使序，
+        檢視「查詢行程」可知今天、本週、本月的所有行程，讓行程不遺漏，行程有變動時，點擊「修改」就可變更和刪除。"""))
+    elif event.message.text == "推薦行程-幫助":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=
+        """【推薦行程】\n
+        台灣好玩的地方真的很多，這裡推薦北、中、南適合親子同遊的景點，點擊「了解更多」可以知道更多的景點資訊，
+        點擊「我不喜歡」會有多個景點讓你選擇！"""))
+    elif event.message.text == "推薦行程-幫助":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=
+        """【記帳小本本】\n
+        點擊「開始記帳」把收支的資訊記錄下來，透過「日期的查詢」，
+        可知當日、本週、本月的結餘和收支的明細。點擊「明細」可知每筆金錢的流向，也可做收支的修改與刪除。\n
+        養成記帳的好習慣，了解自身錢財的流動和消費習慣，進而做好財務的管理。"""))
     elif event.message.text == "RNG":
         RNGmsg = ""
         ran = random.randrange(3)
@@ -459,8 +475,7 @@ def handle_message(event):
                                    preview_image_url="https://cdn.donmai.us/preview/cc/24/cc246a8e793daf930446af915c187774.jpg")
         line_bot_api.reply_message(event.reply_token, message)
     else:
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="未知指令：\n" + event.message.text))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="未知指令：\n" + event.message.text))
 
 
 rich_menu_to_create = RichMenu(
