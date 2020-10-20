@@ -10,7 +10,7 @@ from linebot.exceptions import (
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, URIAction, MessageAction, MessageTemplateAction, 
-    RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, CarouselContainer, BoxComponent, TextComponent, ButtonComponent, ImageComponent, FillerComponent
+    RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, CarouselContainer, BoxComponent, TextComponent, ButtonComponent, ImageComponent
 )
 import random
 from pyowm import OWM
@@ -424,9 +424,12 @@ def handle_message(event):
                         TextComponent(text="記帳小本本",action=MessageAction(text="記帳小本本-幫助"),decoration="underline",align="center",size="sm",margin="xxl")
                     ]),
                     BoxComponent(layout="horizontal", contents=[
+                        TextComponent(text="　",size="xxs")
+                    ]),
+                    BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="天氣及空氣品質",action=MessageAction(text="天氣及空氣品質-幫助"),decoration="underline",align="center",size="sm",margin="xxl"),
                         TextComponent(text="油價",action=MessageAction(text="油價-幫助"),decoration="underline",align="center",size="sm",margin="xxl"),
-                        FillerComponent()
+                        TextComponent(text="　",size="sm")
                     ])
                 ])
             )
