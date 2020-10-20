@@ -417,13 +417,13 @@ def handle_message(event):
     elif event.message.text == "幫助":
         flex_message = FlexSendMessage(
             alt_text="幫助 Flex",
-            contents=BubbleContainer(size="lg",body=BoxComponent(layout="vertical",contents=[
+            contents=BubbleContainer(body=BoxComponent(layout="vertical",contents=[
                     BoxComponent(layout="horizontal", contents=[
                         ButtonComponent(action=MessageAction(label="桃園", text="桃園-天氣及空氣品質")),
                         ButtonComponent(action=MessageAction(label="新竹", text="新竹-天氣及空氣品質")),
                         ButtonComponent(action=MessageAction(label="苗栗", text="苗栗-天氣及空氣品質"))
                     ]),
-                    BoxComponent(layout="vertical", contents=[
+                    BoxComponent(layout="horizontal", contents=[
                         ButtonComponent(action=MessageAction(label="宜蘭", text="宜蘭-天氣及空氣品質")),
                         ButtonComponent(action=MessageAction(label="花蓮", text="花蓮-天氣及空氣品質")),
                         ButtonComponent(action=MessageAction(label="臺東", text="臺東-天氣及空氣品質"))
