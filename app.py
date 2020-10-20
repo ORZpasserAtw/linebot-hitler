@@ -434,7 +434,7 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token, [
                 TextSendMessage(text="歡迎加入Linebot\n讓你輕鬆管理生活大小事\n此行動助理提供以下的功能"),
-                TextSendMessage(text="TEST")
+                flex_message
                 ])
     elif event.message.text == "RNG":
         RNGmsg = ""
