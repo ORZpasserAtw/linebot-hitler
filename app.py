@@ -425,7 +425,8 @@ def handle_message(event):
                     ]),
                     BoxComponent(layout="horizontal", contents=[
                         ButtonComponent(action=MessageAction(label="天氣及空氣品質", text="天氣及空氣品質-幫助")),
-                        ButtonComponent(action=MessageAction(label="油價", text="油價-幫助"))
+                        ButtonComponent(action=MessageAction(label="油價", text="油價-幫助")),
+                        ButtonComponent(action=MessageAction(label=""))
                     ])
                 ])
             )
