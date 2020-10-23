@@ -418,13 +418,20 @@ def handle_message(event):
         flex_message = FlexSendMessage(
             alt_text="幫助 Flex",
             contents=CarouselContainer(contents=[
-                    BubbleContainer(size="giga",body=BoxComponent(layout="horizontal",contents=[
-                    BoxComponent(layout="vertical", contents=[
-                        ButtonComponent(action=MessageAction(label="呼叫助理", text="呼叫助理-幫助")),
-                        ButtonComponent(action=MessageAction(label="推薦行程", text="推薦行程-幫助")),
-                        ButtonComponent(action=MessageAction(label="記帳小本本", text="記帳小本本-幫助"))
+                    BubbleContainer(body=BoxComponent(layout="horizontal",contents=[
+                        BoxComponent(layout="vertical", contents=[
+                            ButtonComponent(action=MessageAction(label="呼叫助理", text="呼叫助理-幫助")),
+                            ButtonComponent(action=MessageAction(label="推薦行程", text="推薦行程-幫助")),
+                            ButtonComponent(action=MessageAction(label="記帳小本本", text="記帳小本本-幫助"))
                         ])
-                    ]))
+                    ])),
+                    BubbleContainer(body=BoxComponent(layout="horizontal",contents=[
+                        BoxComponent(layout="vertical", contents=[
+                            ButtonComponent(action=MessageAction(label="天氣及空氣品質", text="天氣及空氣品質-幫助")),
+                            ButtonComponent(action=MessageAction(label="油價", text="油價-幫助")),
+                            TextComponent(text="　")
+                        ])
+                    ])),
                 ])
             )
         line_bot_api.reply_message(event.reply_token, [
