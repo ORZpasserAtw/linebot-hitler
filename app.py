@@ -262,35 +262,35 @@ def handle_message(event):
             contents=CarouselContainer(contents=[
                     BubbleContainer(size="kilo",body=BoxComponent(layout="vertical", spacing="sm",contents=[
                         BoxComponent(layout="horizontal", spacing="sm", contents=[
-                            ButtonComponent(action=PostbackAction(label="臺北", data="臺北-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=PostbackAction(label="新北", data="新北-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=PostbackAction(label="基隆", data="基隆-天氣及空氣品質"),style="secondary")
+                            ButtonComponent(action=PostbackAction(label="臺北", data="臺北-天氣及空氣品質"),style="secondary", color="#94d3e2"),
+                            ButtonComponent(action=PostbackAction(label="新北", data="新北-天氣及空氣品質"),style="secondary", color="#94d3e2"),
+                            ButtonComponent(action=PostbackAction(label="基隆", data="基隆-天氣及空氣品質"),style="secondary", color="#94d3e2")
                         ]),
                         BoxComponent(layout="horizontal", spacing="sm", contents=[
-                            ButtonComponent(action=PostbackAction(label="桃園", data="桃園-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=PostbackAction(label="新竹", data="新竹-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=PostbackAction(label="苗栗", data="苗栗-天氣及空氣品質"),style="secondary")
+                            ButtonComponent(action=PostbackAction(label="桃園", data="桃園-天氣及空氣品質"),style="secondary", color="#94d3e2"),
+                            ButtonComponent(action=PostbackAction(label="新竹", data="新竹-天氣及空氣品質"),style="secondary", color="#94d3e2"),
+                            ButtonComponent(action=PostbackAction(label="苗栗", data="苗栗-天氣及空氣品質"),style="secondary", color="#94d3e2")
                         ]),
                         BoxComponent(layout="horizontal", spacing="sm", contents=[
-                            ButtonComponent(action=PostbackAction(label="臺中", data="臺中-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=PostbackAction(label="彰化", data="彰化-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=PostbackAction(label="南投", data="南投-天氣及空氣品質"),style="secondary")
+                            ButtonComponent(action=PostbackAction(label="臺中", data="臺中-天氣及空氣品質"),style="secondary", color="#94d3e2"),
+                            ButtonComponent(action=PostbackAction(label="彰化", data="彰化-天氣及空氣品質"),style="secondary", color="#94d3e2"),
+                            ButtonComponent(action=PostbackAction(label="南投", data="南投-天氣及空氣品質"),style="secondary", color="#94d3e2")
                         ]),
                     ])),
                     BubbleContainer(size="kilo",body=BoxComponent(layout="vertical", spacing="sm",contents=[
                         BoxComponent(layout="horizontal", spacing="sm", contents=[
-                            ButtonComponent(action=PostbackAction(label="雲林", data="雲林-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=PostbackAction(label="嘉義", data="嘉義-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=PostbackAction(label="臺南", data="臺南-天氣及空氣品質"),style="secondary")
+                            ButtonComponent(action=PostbackAction(label="雲林", data="雲林-天氣及空氣品質"),style="secondary", color="#94d3e2"),
+                            ButtonComponent(action=PostbackAction(label="嘉義", data="嘉義-天氣及空氣品質"),style="secondary", color="#94d3e2"),
+                            ButtonComponent(action=PostbackAction(label="臺南", data="臺南-天氣及空氣品質"),style="secondary", color="#94d3e2")
                         ]),
                         BoxComponent(layout="horizontal", spacing="sm", contents=[
-                            ButtonComponent(action=PostbackAction(label="高雄", data="高雄-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=PostbackAction(label="屏東", data="屏東-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=PostbackAction(label="宜蘭", data="宜蘭-天氣及空氣品質"),style="secondary"),
+                            ButtonComponent(action=PostbackAction(label="高雄", data="高雄-天氣及空氣品質"),style="secondary", color="#94d3e2"),
+                            ButtonComponent(action=PostbackAction(label="屏東", data="屏東-天氣及空氣品質"),style="secondary", color="#94d3e2"),
+                            ButtonComponent(action=PostbackAction(label="宜蘭", data="宜蘭-天氣及空氣品質"),style="secondary", color="#94d3e2"),
                         ]),
                         BoxComponent(layout="horizontal", spacing="sm", contents=[
-                            ButtonComponent(action=PostbackAction(label="花蓮", data="花蓮-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=PostbackAction(label="臺東", data="臺東-天氣及空氣品質"),style="secondary"),
+                            ButtonComponent(action=PostbackAction(label="花蓮", data="花蓮-天氣及空氣品質"),style="secondary", color="#94d3e2"),
+                            ButtonComponent(action=PostbackAction(label="臺東", data="臺東-天氣及空氣品質"),style="secondary", color="#94d3e2"),
                             TextComponent(text="　")
                         ]),
                     ]))
