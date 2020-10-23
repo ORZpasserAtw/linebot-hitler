@@ -260,24 +260,24 @@ def handle_message(event):
         flex_message = FlexSendMessage(
             alt_text="天氣及空氣品質 Flex",
             contents=CarouselContainer(contents=[
-                    BubbleContainer(size="kilo",body=BoxComponent(layout="vertical",spacing="sm",contents=[
+                    BubbleContainer(size="kilo",body=BoxComponent(layout="vertical",contents=[
                         BoxComponent(layout="horizontal", contents=[
-                            ButtonComponent(action=MessageAction(label="臺北", text="臺北-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=MessageAction(label="新北", text="新北-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=MessageAction(label="基隆", text="基隆-天氣及空氣品質"),style="secondary")
+                            ButtonComponent(action=MessageAction(label="臺北", text="臺北-天氣及空氣品質")),
+                            ButtonComponent(action=MessageAction(label="新北", text="新北-天氣及空氣品質")),
+                            ButtonComponent(action=MessageAction(label="基隆", text="基隆-天氣及空氣品質"))
                         ]),
                         BoxComponent(layout="horizontal", contents=[
-                            ButtonComponent(action=MessageAction(label="桃園", text="桃園-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=MessageAction(label="新竹", text="新竹-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=MessageAction(label="苗栗", text="苗栗-天氣及空氣品質"),style="secondary")
+                            ButtonComponent(action=MessageAction(label="桃園", text="桃園-天氣及空氣品質")),
+                            ButtonComponent(action=MessageAction(label="新竹", text="新竹-天氣及空氣品質")),
+                            ButtonComponent(action=MessageAction(label="苗栗", text="苗栗-天氣及空氣品質"))
                         ]),
                         BoxComponent(layout="horizontal", contents=[
-                            ButtonComponent(action=MessageAction(label="臺中", text="臺中-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=MessageAction(label="彰化", text="彰化-天氣及空氣品質"),style="secondary"),
-                            ButtonComponent(action=MessageAction(label="南投", text="南投-天氣及空氣品質"),style="secondary")
+                            ButtonComponent(action=MessageAction(label="臺中", text="臺中-天氣及空氣品質")),
+                            ButtonComponent(action=MessageAction(label="彰化", text="彰化-天氣及空氣品質")),
+                            ButtonComponent(action=MessageAction(label="南投", text="南投-天氣及空氣品質"))
                         ]),
                     ])),
-                    BubbleContainer(size="kilo",body=BoxComponent(layout="vertical",spacing="sm",contents=[
+                    BubbleContainer(size="kilo",body=BoxComponent(layout="vertical",contents=[
                         BoxComponent(layout="horizontal", contents=[
                             ButtonComponent(action=MessageAction(label="雲林", text="雲林-天氣及空氣品質")),
                             ButtonComponent(action=MessageAction(label="嘉義", text="嘉義-天氣及空氣品質")),
@@ -290,7 +290,8 @@ def handle_message(event):
                         ]),
                         BoxComponent(layout="horizontal", contents=[
                             ButtonComponent(action=MessageAction(label="花蓮", text="花蓮-天氣及空氣品質")),
-                            ButtonComponent(action=MessageAction(label="臺東", text="臺東-天氣及空氣品質"))
+                            ButtonComponent(action=MessageAction(label="臺東", text="臺東-天氣及空氣品質")),
+                            TextComponent(text="　")
                         ]),
                     ]))
                 ])
