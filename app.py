@@ -420,12 +420,12 @@ def handle_message(event):
             contents=CarouselContainer(contents=[
                     BubbleContainer(size="kilo",body=BoxComponent(layout="vertical",spacing="sm",contents=[
                         ButtonComponent(action=PostbackAction(label="呼叫助理", data="呼叫助理-幫助"),style="secondary"),
-                        ButtonComponent(action=MessageAction(label="推薦行程", text="推薦行程-幫助"),style="secondary"),
-                        ButtonComponent(action=MessageAction(label="記帳小本本", text="記帳小本本-幫助"),style="secondary")
+                        ButtonComponent(action=PostbackAction(label="推薦行程", data="推薦行程-幫助"),style="secondary"),
+                        ButtonComponent(action=PostbackAction(label="記帳小本本", data="記帳小本本-幫助"),style="secondary")
                     ])),
                     BubbleContainer(size="kilo",body=BoxComponent(layout="vertical",spacing="sm",contents=[
-                        ButtonComponent(action=MessageAction(label="天氣及空氣品質", text="天氣及空氣品質-幫助"),style="secondary"),
-                        ButtonComponent(action=MessageAction(label="油價", text="油價-幫助"),style="secondary"),
+                        ButtonComponent(action=PostbackAction(label="天氣及空氣品質", data="天氣及空氣品質-幫助"),style="secondary"),
+                        ButtonComponent(action=PostbackAction(label="油價", data="油價-幫助"),style="secondary"),
                         TextComponent(text="　")
                     ])),
                 ])
@@ -434,21 +434,7 @@ def handle_message(event):
                 TextSendMessage(text="歡迎加入Linebot\n讓你輕鬆管理生活大小事\n以下是此行動助理的功能說明"),
                 flex_message
                 ])
-    elif event.message.text == "呼叫助理-幫助":
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=
-        "【呼叫助理】\n現代人生活忙碌，有時會忘記重要的約會，利用「我要排程」把重要的行程紀錄起來，使生活變得井然有序，檢視「查詢行程」可知今天、本週、本月的所有行程，讓行程不遺漏，行程有變動時，點擊「修改」就可變更和刪除。"))
-    elif event.message.text == "推薦行程-幫助":
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=
-        "【推薦行程】\n台灣好玩的地方真的很多，這裡推薦北、中、南適合親子同遊的景點，點擊「了解更多」可以知道更多的景點資訊，點擊「我不喜歡」會有多個景點讓你選擇！"))
-    elif event.message.text == "記帳小本本-幫助":
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=
-        "【記帳小本本】\n點擊「開始記帳」把收支的資訊記錄下來，透過「日期」的查詢，可知當日、本週、本月的結餘和收支的金額。點擊「明細」可知每筆金錢的流向，也可做每筆帳的修改與刪除。\n養成記帳的好習慣，了解自身錢財的流動和消費習慣，進而做好財務的管理。"))
-    elif event.message.text == "天氣及空氣品質-幫助":
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=
-        "【天氣及空氣品質】\n提供台灣主要城市，每日的天氣概況、空氣品質、紫外線。"))
-    elif event.message.text == "油價-幫助":
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=
-        "【油價】\n提供當日中油、台塑主要油價。"))
+
     elif event.message.text == "RNG":
         RNGmsg = ""
         ran = random.randrange(3)
@@ -479,6 +465,18 @@ def handle_postback(event):
     if event.postback.data == "呼叫助理-幫助":
          line_bot_api.reply_message(event.reply_token, TextSendMessage(text=
         "【呼叫助理】\n現代人生活忙碌，有時會忘記重要的約會，利用「我要排程」把重要的行程紀錄起來，使生活變得井然有序，檢視「查詢行程」可知今天、本週、本月的所有行程，讓行程不遺漏，行程有變動時，點擊「修改」就可變更和刪除。"))
+    elif event.postback.data == "推薦行程-幫助":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=
+        "【推薦行程】\n台灣好玩的地方真的很多，這裡推薦北、中、南適合親子同遊的景點，點擊「了解更多」可以知道更多的景點資訊，點擊「我不喜歡」會有多個景點讓你選擇！"))
+    elif event.postback.data == "記帳小本本-幫助":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=
+        "【記帳小本本】\n點擊「開始記帳」把收支的資訊記錄下來，透過「日期」的查詢，可知當日、本週、本月的結餘和收支的金額。點擊「明細」可知每筆金錢的流向，也可做每筆帳的修改與刪除。\n養成記帳的好習慣，了解自身錢財的流動和消費習慣，進而做好財務的管理。"))
+    elif event.postback.data == "天氣及空氣品質-幫助":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=
+        "【天氣及空氣品質】\n提供台灣主要城市，每日的天氣概況、空氣品質、紫外線。"))
+    elif event.postback.data == "油價-幫助":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=
+        "【油價】\n提供當日中油、台塑主要油價。"))
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage("未知Postback：\n" + event.postback.data))  
 
