@@ -10,7 +10,7 @@ from linebot.exceptions import (
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, URIAction, MessageAction, MessageTemplateAction, 
-    RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, ConfirmTemplate, BubbleContainer, CarouselContainer, BoxComponent, TextComponent, ButtonComponent, ImageComponent
+    RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, CarouselContainer, ConfirmTemplate, BubbleContainer, CarouselContainer, BoxComponent, TextComponent, ButtonComponent, ImageComponent
 )
 import random
 from pyowm import OWM
@@ -417,20 +417,16 @@ def handle_message(event):
     elif event.message.text == "幫助":
         flex_message = FlexSendMessage(
             alt_text="幫助 Flex",
-            contents=BubbleContainer(size="giga",body=BoxComponent(layout="horizontal",contents=[
-                    BoxComponent(layout="vertical",spacing="none", contents=[
+            contents=CarouselContainer(contents=[
+                    BubbleContainer(size="giga",body=BoxComponent(layout="horizontal",contents=[
+                    BoxComponent(layout="vertical", contents=[
                         ButtonComponent(action=MessageAction(label="呼叫助理", text="呼叫助理-幫助")),
                         ButtonComponent(action=MessageAction(label="推薦行程", text="推薦行程-幫助")),
                         ButtonComponent(action=MessageAction(label="記帳小本本", text="記帳小本本-幫助"))
-                    ]),
-                    BoxComponent(layout="vertical", contents=[
-                        ButtonComponent(action=MessageAction(label="天氣及空氣品質", text="天氣及空氣品質-幫助")),
-                        ButtonComponent(action=MessageAction(label="油價", text="油價-幫助")),
-                        TextComponent(text="　")
-                    ])
+                        ])
+                    ]))
                 ])
             )
-        )
         line_bot_api.reply_message(event.reply_token, [
                 TextSendMessage(text="歡迎加入Linebot\n讓你輕鬆管理生活大小事\n以下是此行動助理的功能說明"),
                 flex_message
