@@ -259,33 +259,26 @@ def handle_message(event):
     elif event.message.text == "天氣及空氣品質":
         flex_message = FlexSendMessage(
             alt_text="天氣及空氣品質 Flex",
-            contents=BubbleContainer(body=BoxComponent(layout="horizontal",contents=[
-                    BoxComponent(layout="vertical", contents=[
-                        ButtonComponent(action=MessageAction(label="臺北", text="臺北-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="新北", text="新北-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="基隆", text="基隆-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="桃園", text="桃園-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="新竹", text="新竹-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="苗栗", text="苗栗-天氣及空氣品質"))
-                    ]),
-                    BoxComponent(layout="vertical", contents=[
-                        ButtonComponent(action=MessageAction(label="臺中", text="臺中-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="彰化", text="彰化-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="南投", text="南投-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="雲林", text="雲林-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="嘉義", text="嘉義-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="臺南", text="臺南-天氣及空氣品質"))
-                    ]),
-                    BoxComponent(layout="vertical", contents=[
-                        ButtonComponent(action=MessageAction(label="高雄", text="高雄-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="屏東", text="屏東-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="宜蘭", text="宜蘭-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="花蓮", text="花蓮-天氣及空氣品質")),
-                        ButtonComponent(action=MessageAction(label="臺東", text="臺東-天氣及空氣品質"))
-                    ])
+            contents=CarouselContainer(contents=[
+                    BubbleContainer(size="kilo",body=BoxComponent(layout="vertical",spacing="sm",contents=[
+                        BoxComponent(layout="horizontal", contents=[
+                            ButtonComponent(action=MessageAction(label="臺北", text="臺北-天氣及空氣品質")),
+                            ButtonComponent(action=MessageAction(label="新北", text="新北-天氣及空氣品質")),
+                            ButtonComponent(action=MessageAction(label="基隆", text="基隆-天氣及空氣品質"))
+                        ]),
+                        BoxComponent(layout="horizontal", contents=[
+                            ButtonComponent(action=MessageAction(label="桃園", text="桃園-天氣及空氣品質")),
+                            ButtonComponent(action=MessageAction(label="新竹", text="新竹-天氣及空氣品質")),
+                            ButtonComponent(action=MessageAction(label="苗栗", text="苗栗-天氣及空氣品質"))
+                        ]),
+                        BoxComponent(layout="horizontal", contents=[
+                            ButtonComponent(action=MessageAction(label="臺中", text="臺中-天氣及空氣品質")),
+                            ButtonComponent(action=MessageAction(label="彰化", text="彰化-天氣及空氣品質")),
+                            ButtonComponent(action=MessageAction(label="南投", text="南投-天氣及空氣品質"))
+                        ]),
+                    ]))
                 ])
             )
-        )
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif event.message.text == "臺北-天氣及空氣品質":
         w = owm.weather_at_place('Taipei,TW').get_weather()
@@ -454,8 +447,8 @@ def handle_message(event):
         except:
             line_bot_api.reply_message(event.reply_token, "計算有誤")
     elif event.message.text == "send nudes":
-        message = ImageSendMessage(original_content_url="https://cdn.donmai.us/original/cc/24/__bismarck_kantai_collection_drawn_by_kuon_kwonchanji__cc246a8e793daf930446af915c187774.jpg",
-                                   preview_image_url="https://cdn.donmai.us/preview/cc/24/cc246a8e793daf930446af915c187774.jpg")
+        message = ImageSendMessage(original_content_url="https://danbooru.donmai.us/data/__atlanta_kantai_collection_drawn_by_rui_shi_rayze_ray__c62475e083da5351641192f3569a3412.jpg",
+                                   preview_image_url="https://pbs.twimg.com/media/EdNl79IUYAAh_68?format=jpg&name=small")
         line_bot_api.reply_message(event.reply_token, message)
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text="未知Message：\n" + event.message.text))
