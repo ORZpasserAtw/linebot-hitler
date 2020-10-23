@@ -419,7 +419,7 @@ def handle_message(event):
             alt_text="幫助 Flex",
             contents=CarouselContainer(contents=[
                     BubbleContainer(size="kilo",body=BoxComponent(layout="vertical",spacing="sm",contents=[
-                        ButtonComponent(action=PostbackAction(label="呼叫助理", data="helper=manager"),style="secondary"),
+                        ButtonComponent(action=PostbackAction(label="呼叫助理", data="呼叫助理-幫助"),style="secondary"),
                         ButtonComponent(action=MessageAction(label="推薦行程", text="推薦行程-幫助"),style="secondary"),
                         ButtonComponent(action=MessageAction(label="記帳小本本", text="記帳小本本-幫助"),style="secondary")
                     ])),
@@ -472,13 +472,15 @@ def handle_message(event):
                                    preview_image_url="https://cdn.donmai.us/preview/cc/24/cc246a8e793daf930446af915c187774.jpg")
         line_bot_api.reply_message(event.reply_token, message)
     else:
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="未知指令：\n" + event.message.text))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="未知Message：\n" + event.message.text))
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
-        text_message = TextSendMessage(text=event.postback.data)
-
-        line_bot_api.reply_message(event.reply_token, text_message)        
+    if event.postback.data == "呼叫助理-幫助":
+         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=
+        "【呼叫助理】\n現代人生活忙碌，有時會忘記重要的約會，利用「我要排程」把重要的行程紀錄起來，使生活變得井然有序，檢視「查詢行程」可知今天、本週、本月的所有行程，讓行程不遺漏，行程有變動時，點擊「修改」就可變更和刪除。"))
+    else:
+        line_bot_api.reply_message(event.reply_token, TextSendMessage("未知Postback：\n" + event.postback.data))  
 
 rich_menu_to_create = RichMenu(
     size=RichMenuSize(width=2500, height=1686),
