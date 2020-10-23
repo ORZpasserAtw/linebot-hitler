@@ -9,7 +9,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, URIAction, MessageAction, MessageTemplateAction, 
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, URIAction, MessageAction, PostbackAction, MessageTemplateAction, PostbackEvent,
     RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, CarouselContainer, ConfirmTemplate, BubbleContainer, CarouselContainer, BoxComponent, TextComponent, ButtonComponent, ImageComponent
 )
 import random
@@ -419,7 +419,7 @@ def handle_message(event):
             alt_text="幫助 Flex",
             contents=CarouselContainer(contents=[
                     BubbleContainer(size="kilo",body=BoxComponent(layout="vertical",spacing="sm",contents=[
-                        ButtonComponent(action=MessageAction(label="呼叫助理", text="呼叫助理-幫助"),style="secondary"),
+                        ButtonComponent(action=PostbackAction(label="呼叫助理", data="helper=manager"),style="secondary"),
                         ButtonComponent(action=MessageAction(label="推薦行程", text="推薦行程-幫助"),style="secondary"),
                         ButtonComponent(action=MessageAction(label="記帳小本本", text="記帳小本本-幫助"),style="secondary")
                     ])),
@@ -474,6 +474,11 @@ def handle_message(event):
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text="未知指令：\n" + event.message.text))
 
+@handler.add(PostbackEvent)
+def handle_postback(event):
+        text_message = TextSendMessage(text=event.postback.data)
+
+        line_bot_api.reply_message(event.reply_token, text_message)        
 
 rich_menu_to_create = RichMenu(
     size=RichMenuSize(width=2500, height=1686),
