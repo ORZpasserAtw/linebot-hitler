@@ -110,7 +110,7 @@ def uvi2rate(uvi):
     if (round(float(uvi)) > 10):
         return("危險級")
 
-def FlexWeatherTemplate(city: str,url: str,w,aqi,uvi):
+def FlexWeatherTemplate(city,url,w,aqiindex,uvi):
     return(
         FlexSendMessage(
         alt_text=city+"-天氣及空氣品質 Flex",
@@ -130,7 +130,7 @@ def FlexWeatherTemplate(city: str,url: str,w,aqi,uvi):
                     TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
                     TextComponent(text=w.get_detailed_status(), size="xs"),
                     TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
-                    TextComponent(text="空氣品質: "+aqi.json()['records'][0]['AQI']+"("+aqi2rate(aqi.json()['records'][0]['AQI'])+")"),
+                    TextComponent(text="空氣品質: "+requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&limit=100').json()['records'][aqiindex]['AQI']+"("+aqi2rate(requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&limit=100').json()['records'][aqiindex]['AQI'])+")"),
                     TextComponent(text="紫外線: "+str(round(float(uvi.json()['records'][0]['UVI'])))+"("+uvi2rate(uvi.json()['records'][0]['UVI'])+")"),
                     TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,1))+"km/h")
                 ])
@@ -390,89 +390,72 @@ def handle_message(event):
 def handle_postback(event):
     if event.postback.data == "臺北-天氣及空氣品質":
         w = owm.weather_at_place('Taipei,TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,中山')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,臺北')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("臺北市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("臺北市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,11,uvi))
     elif event.postback.data == "新北-天氣及空氣品質":
         w = owm.weather_at_place('New Taipei, TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,板橋')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,板橋')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("新北市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("新北市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,5,uvi))
     elif event.postback.data == "基隆-天氣及空氣品質":
         w = owm.weather_at_place('Keelung, TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,基隆')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,基隆')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("基隆市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("基隆市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,0,uvi))
     elif event.postback.data == "桃園-天氣及空氣品質":
         w = owm.weather_at_place('Taoyuan, TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,桃園')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,桃園')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("桃園市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("桃園市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,16,uvi))
     elif event.postback.data == "新竹-天氣及空氣品質":
         w = owm.weather_at_place('Hsinchu, TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,新竹')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,新竹')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("新竹市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("新竹市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,23,uvi))
     elif event.postback.data == "苗栗-天氣及空氣品質":
         w = owm.weather_at_place('Miaoli, TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,苗栗')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,苗栗')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("苗栗市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("苗栗市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,25,uvi))
     elif event.postback.data == "臺中-天氣及空氣品質":
         w = owm.weather_at_place('Taichung, TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,西屯')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,臺中')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("臺中市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("臺中市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,31,uvi))
     elif event.postback.data == "彰化-天氣及空氣品質":
         w = owm.weather_at_place('Chang-hua, TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,彰化')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,彰化')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("彰化市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("彰化市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,32,uvi))
     elif event.postback.data == "南投-天氣及空氣品質":
         w = owm.weather_at_place('Nantou, TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,南投')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,南投')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("南投市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("南投市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,35,uvi))
     elif event.postback.data == "雲林-天氣及空氣品質":
         w = owm.weather_at_place('Douliu, TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,斗六')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,斗六')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("雲林縣","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("雲林縣","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,36,uvi))
     elif event.postback.data == "嘉義-天氣及空氣品質":
         w = owm.weather_at_place('Chiayi, TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,嘉義')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,嘉義')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("嘉義市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("嘉義市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,41,uvi))
     elif event.postback.data == "臺南-天氣及空氣品質":
         w = owm.weather_at_place('Tainan, TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,臺南')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,臺南')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("臺南市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("臺南市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,45,uvi))
     elif event.postback.data == "高雄-天氣及空氣品質":
         w = owm.weather_at_place('Kaohsiung, TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,前鎮')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,高雄')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("高雄市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("高雄市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,55,uvi))
     elif event.postback.data == "屏東-天氣及空氣品質":
         w = owm.weather_at_place('Hengchun, TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,屏東')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,屏東')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("屏東市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("屏東市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,57,uvi))
     elif event.postback.data == "宜蘭-天氣及空氣品質":
         w = owm.weather_at_place('Yilan, TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,宜蘭')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,宜蘭')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("宜蘭市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("宜蘭市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,63,uvi))
     elif event.postback.data == "花蓮-天氣及空氣品質":
         w = owm.weather_at_place('Hualien, TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,花蓮')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,花蓮')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("花蓮市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("花蓮市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,61,uvi))
     elif event.postback.data == "臺東-天氣及空氣品質":
         w = owm.weather_at_place('Taitung, TW').get_weather()
-        aqi = requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&filters=SiteName,EQ,臺東')
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,臺東')
-        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("臺東市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,aqi,uvi))
+        line_bot_api.reply_message(event.reply_token, FlexWeatherTemplate("臺東市","https://www.tilingtextures.com/wp-content/uploads/2017/03/0504.jpg",w,60,uvi))
     elif event.postback.data == "呼叫助理-幫助":
          line_bot_api.reply_message(event.reply_token, TextSendMessage(text=
         "【呼叫助理】\n現代人生活忙碌，有時會忘記重要的約會，利用「我要排程」把重要的行程紀錄起來，使生活變得井然有序，檢視「查詢行程」可知今天、本週、本月的所有行程，讓行程不遺漏，行程有變動時，點擊「修改」就可變更和刪除。"))
