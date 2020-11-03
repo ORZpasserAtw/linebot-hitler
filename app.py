@@ -53,6 +53,8 @@ locations = [
         "https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG"],
 ]
 owm = OWM('dfbfc697f6af05f728f664111bc07551', version='2.5')
+pregas = ""
+prediesel = ""
 def status2ct(status):
     if (status == "Thunderstorm"):
         return("雷雨")
@@ -308,8 +310,6 @@ def handle_message(event):
             data = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]
             print("Second Try")
 
-            pregas = ""
-            prediesel = ""
             response = requests.get(
                 "https://m.gas.goodlife.tw/")
             soup = BeautifulSoup(response.text, "html.parser")
