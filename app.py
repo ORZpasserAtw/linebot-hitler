@@ -10,7 +10,7 @@ from linebot.exceptions import (
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, TemplateSendMessage, FlexSendMessage, URIAction, MessageAction, PostbackAction, MessageTemplateAction, PostbackEvent,
-    RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, CarouselContainer, ConfirmTemplate, BubbleContainer, CarouselContainer, BoxComponent, TextComponent, ButtonComponent, ImageComponent
+    RichMenu, RichMenuSize, RichMenuArea, RichMenuBounds, CarouselTemplate, CarouselColumn, CarouselContainer, ConfirmTemplate, BubbleContainer, BoxComponent, TextComponent, ButtonComponent, ImageComponent
 )
 import random
 from pyowm import OWM
@@ -19,6 +19,7 @@ import ssl
 import pandas as pd
 import datetime
 import pytz
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
@@ -306,11 +307,36 @@ def handle_message(event):
             ssl._create_default_https_context = ssl._create_unverified_context
             data = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]
             print("Second Try")
+
+            response = requests.get(
+                "https://m.gas.goodlife.tw/")
+            soup = BeautifulSoup(response.text, "html.parser")
+
+            if soup.find("h2",{"class": "down"}) != None:
+                pregas = "汽油每公升預計降："
+            elif soup.find("h2",{"class": "up"}) != None:
+                pregas = "汽油每公升預計漲："
+            gas = soup.find("h2").find("em").get_text()
+
+            diesel = soup.find("ul",{"id": "gas-price"}).find_all("li")[1]
+            unwanted = diesel.find('h3')
+            unwanted.extract()
+            diesel = diesel.get_text().replace(" ", "").strip("元").strip("\n")
+            if "-" in diesel:
+                prediesel = "柴油每公升預計降："
+                diesel = diesel.strip("-")
+            else:
+                prediesel = "柴油每公升預計漲："
+
+            print(pregas + gas)
+            print(prediesel + diesel)
+
         flex_message = FlexSendMessage(
             alt_text="油價 Flex",
             contents=BubbleContainer(size="giga",body=BoxComponent(layout="vertical",contents=[
                     TextComponent(text="今日油價",size="lg",align="center"),
                     TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs",align="center"),
+                    TextComponent(text=pregas + gas + "元　"+ prediesel + diesel + "元",align="center"),
                     TextComponent(text="　",size="xxs"),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="供應商",size="xs"),
