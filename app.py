@@ -363,7 +363,7 @@ def handle_message(event):
                         TextComponent(text="元/公升",size="xs",gravity="bottom")
                     ]),
                     TextComponent(text=printt(response,soup),align="center"),
-                    TextComponent(text=str(printgas(response,soup)+printdiesel(response,soup)),align="center"),
+                    TextComponent(text=str(printgas(response,soup)+printdiesel(response,soup)),align="center")
                 ])
             )
         )
