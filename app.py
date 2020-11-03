@@ -311,12 +311,14 @@ def handle_message(event):
         response = requests.get(
             "https://m.gas.goodlife.tw/")
         soup = BeautifulSoup(response.text, "html.parser")
+        def printt(response,soup):
+            timer = soup.find("ul",{"id": "gas-price"}).find("li").find("p")
+            return timer.get_text().replace(" ", "")[:-10]
         def printgas(response,soup):
-            soup = BeautifulSoup(response.text, "html.parser")
             if soup.find("h2",{"class": "down"}) != None:
-                pregas = "汽油每公升預計降"
+                pregas = "汽油每公升降"
             elif soup.find("h2",{"class": "up"}) != None:
-                pregas = "汽油每公升預計漲"
+                pregas = "汽油每公升漲"
             gas = soup.find("h2").find("em").get_text()
             return pregas+gas+"元"
         def printdiesel(response,soup):
@@ -325,19 +327,16 @@ def handle_message(event):
             unwanted.extract()
             diesel = diesel.get_text().replace(" ", "").strip("元").strip("\n")
             if "-" in diesel:
-                prediesel = "柴油每公升預計降"
+                prediesel = "柴油每公升降"
                 diesel = diesel.strip("-")
             else:
-                prediesel = "柴油每公升預計漲"
+                prediesel = "柴油每公升漲"
             return prediesel+diesel+"元"
 
         flex_message = FlexSendMessage(
             alt_text="油價 Flex",
             contents=BubbleContainer(size="giga",body=BoxComponent(layout="vertical",contents=[
                     TextComponent(text="今日油價",size="lg",align="center"),
-                    TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs",align="center"),
-                    TextComponent(text=printgas(response,soup),align="center"),
-                    TextComponent(text=printdiesel(response,soup),align="center"),
                     TextComponent(text="　",size="xxs"),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="供應商",size="xs"),
@@ -362,7 +361,9 @@ def handle_message(event):
                         TextComponent(text=str(data.iloc[0, 3]), weight="bold"),
                         TextComponent(text=str(data.iloc[0, 4]), weight="bold"),
                         TextComponent(text="元/公升",size="xs",gravity="bottom")
-                    ])
+                    ]),
+                    TextComponent(text=printt(response,soup),align="center"),
+                    TextComponent(text=str(printgas(response,soup)+printdiesel(response,soup)),align="center"),
                 ])
             )
         )
