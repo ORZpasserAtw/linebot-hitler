@@ -318,7 +318,7 @@ def handle_message(event):
             elif soup.find("h2",{"class": "up"}) != None:
                 pregas = "汽油每公升預計漲"
             gas = soup.find("h2").find("em").get_text()
-            return pregas+gas
+            return pregas+gas+"元"
         def printdiesel(response,soup):
             diesel = soup.find("ul",{"id": "gas-price"}).find_all("li")[1]
             unwanted = diesel.find('h3')
@@ -329,14 +329,14 @@ def handle_message(event):
                 diesel = diesel.strip("-")
             else:
                 prediesel = "柴油每公升預計漲"
-            return prediesel+diesel
+            return prediesel+diesel+"元"
 
         flex_message = FlexSendMessage(
             alt_text="油價 Flex",
             contents=BubbleContainer(size="giga",body=BoxComponent(layout="vertical",contents=[
                     TextComponent(text="今日油價",size="lg",align="center"),
                     TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs",align="center"),
-                    TextComponent(text=str(printgas(response,soup)),align="center"),
+                    TextComponent(text=str(printgas(response,soup)+"　"+printdiesel(response,soup)),align="center"),
                     TextComponent(text="　",size="xxs"),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="供應商",size="xs"),
