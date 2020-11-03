@@ -308,7 +308,8 @@ def handle_message(event):
             data = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]
             print("Second Try")
 
-            pregas,prediesel = "",""
+            pregas = ""
+            prediesel = ""
             response = requests.get(
                 "https://m.gas.goodlife.tw/")
             soup = BeautifulSoup(response.text, "html.parser")
@@ -328,9 +329,6 @@ def handle_message(event):
                 diesel = diesel.strip("-")
             else:
                 prediesel = "柴油每公升預計漲："
-
-            print(pregas + gas)
-            print(prediesel + diesel)
 
         flex_message = FlexSendMessage(
             alt_text="油價 Flex",
