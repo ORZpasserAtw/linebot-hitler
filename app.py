@@ -336,7 +336,8 @@ def handle_message(event):
             contents=BubbleContainer(size="giga",body=BoxComponent(layout="vertical",contents=[
                     TextComponent(text="今日油價",size="lg",align="center"),
                     TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs",align="center"),
-                    TextComponent(text=str(printgas(response,soup)+"　"+printdiesel(response,soup)),align="center"),
+                    TextComponent(text=printgas(response,soup),align="center"),
+                    TextComponent(text=printdiesel(response,soup),align="center"),
                     TextComponent(text="　",size="xxs"),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="供應商",size="xs"),
