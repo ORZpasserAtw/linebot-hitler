@@ -312,28 +312,34 @@ def handle_message(event):
                 "https://m.gas.goodlife.tw/")
             soup = BeautifulSoup(response.text, "html.parser")
 
-            if soup.find("h2",{"class": "down"}) != None:
-                pregas = "汽油每公升預計降："
-            elif soup.find("h2",{"class": "up"}) != None:
-                pregas = "汽油每公升預計漲："
-            gas = soup.find("h2").find("em").get_text()
 
+        def printgas(response,soup):
+            soup = BeautifulSoup(response.text, "html.parser")
+            if soup.find("h2",{"class": "down"}) != None:
+                pregas = "汽油每公升預計降"
+            elif soup.find("h2",{"class": "up"}) != None:
+                pregas = "汽油每公升預計漲"
+            gas = soup.find("h2").find("em").get_text()
+            return pregas+gas
+
+        def printdiesel(response,soup):
             diesel = soup.find("ul",{"id": "gas-price"}).find_all("li")[1]
             unwanted = diesel.find('h3')
             unwanted.extract()
             diesel = diesel.get_text().replace(" ", "").strip("元").strip("\n")
             if "-" in diesel:
-                prediesel = "柴油每公升預計降："
+                prediesel = "柴油每公升預計降"
                 diesel = diesel.strip("-")
             else:
-                prediesel = "柴油每公升預計漲："
+                prediesel = "柴油每公升預計漲"
+            return prediesel+diesel
 
         flex_message = FlexSendMessage(
             alt_text="油價 Flex",
             contents=BubbleContainer(size="giga",body=BoxComponent(layout="vertical",contents=[
                     TextComponent(text="今日油價",size="lg",align="center"),
                     TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs",align="center"),
-                    TextComponent(text=str(gas + diesel),align="center"),
+                    TextComponent(text=str(printgas(response,soup)),align="center"),
                     TextComponent(text="　",size="xxs"),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="供應商",size="xs"),
