@@ -308,11 +308,9 @@ def handle_message(event):
             data = pd.read_html('https://www2.moeaboe.gov.tw/oil102/oil2017/A01/A0108/tablesprices.asp',header=0)[0]
             print("Second Try")
 
-            response = requests.get(
-                "https://m.gas.goodlife.tw/")
-            soup = BeautifulSoup(response.text, "html.parser")
-
-
+        response = requests.get(
+            "https://m.gas.goodlife.tw/")
+        soup = BeautifulSoup(response.text, "html.parser")
         def printgas(response,soup):
             soup = BeautifulSoup(response.text, "html.parser")
             if soup.find("h2",{"class": "down"}) != None:
@@ -321,7 +319,6 @@ def handle_message(event):
                 pregas = "汽油每公升預計漲"
             gas = soup.find("h2").find("em").get_text()
             return pregas+gas
-
         def printdiesel(response,soup):
             diesel = soup.find("ul",{"id": "gas-price"}).find_all("li")[1]
             unwanted = diesel.find('h3')
