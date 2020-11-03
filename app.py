@@ -52,9 +52,7 @@ locations = [
     ["硫磺島", "西太平洋小笠原群島的火山島", "晴朗", 99.9,
         "https://upload.wikimedia.org/wikipedia/commons/4/44/Iwo_Jima_Suribachi_DN-SD-03-11845.JPEG"],
 ]
-owm = OWM('dfbfc697f6af05f728f664111bc07551', version='2.5')
-pregas = ""
-prediesel = ""
+
 def status2ct(status):
     if (status == "Thunderstorm"):
         return("雷雨")
@@ -335,7 +333,7 @@ def handle_message(event):
             contents=BubbleContainer(size="giga",body=BoxComponent(layout="vertical",contents=[
                     TextComponent(text="今日油價",size="lg",align="center"),
                     TextComponent(text=str(datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y/%m/%d %H:%M")),size="xs",align="center"),
-                    TextComponent(text=pregas + gas + "元　"+ prediesel + diesel + "元",align="center"),
+                    TextComponent(text=str(pregas + gas + "元　" + prediesel + diesel + "元"),align="center"),
                     TextComponent(text="　",size="xxs"),
                     BoxComponent(layout="horizontal", contents=[
                         TextComponent(text="供應商",size="xs"),
@@ -413,6 +411,7 @@ def handle_message(event):
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
+    owm = OWM('dfbfc697f6af05f728f664111bc07551', version='2.5')
     if event.postback.data == "臺北-天氣及空氣品質":
         w = owm.weather_at_place('Taipei,TW').get_weather()
         uvi = requests.get('https://data.epa.gov.tw/api/v1/uv_s_01?format=json&limit=1&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&filters=SiteName,EQ,臺北')
