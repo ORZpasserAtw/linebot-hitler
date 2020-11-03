@@ -3,3 +3,4 @@ flask
 pyowm==2.10.0
 pandas
 lxml
+bs4
