@@ -131,7 +131,7 @@ def FlexWeatherTemplate(city,url,w,aqiindex,uvi):
                     TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
                     TextComponent(text=w.get_detailed_status(), size="xs"),
                     TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
-                    TextComponent(text="空氣品質: "+requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&limit=1000').json()['records'][aqiindex]['AQI']+"("+aqi2rate(requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&limit=100').json()['records'][aqiindex]['AQI'])+")"),
+                    TextComponent(text="空氣品質: "+requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&limit=1337').json()['records'][aqiindex]['AQI']+"("+aqi2rate(requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&limit=100').json()['records'][aqiindex]['AQI'])+")"),
                     TextComponent(text="紫外線: "+str(round(float(uvi.json()['records'][0]['UVI'])))+"("+uvi2rate(uvi.json()['records'][0]['UVI'])+")"),
                     TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,1))+"km/h")
                 ])
@@ -387,8 +387,21 @@ def handle_message(event):
                         ButtonComponent(action=PostbackAction(label="天氣及空氣品質", data="天氣及空氣品質-幫助"),style="secondary"),
                         ButtonComponent(action=PostbackAction(label="油價", data="油價-幫助"),style="secondary"),
                         TextComponent(text="　")
-                    ])),
+                    ]))
                 ])
+            )
+    elif event.message.text == "小遊戲":
+        flex_message = FlexSendMessage(
+            alt_text="小遊戲 Flex",
+            contents=[
+                    BubbleContainer(size="kilo",body=BoxComponent(layout="vertical",spacing="sm",contents=[
+                        ButtonComponent(action=URIAction(label="snake", uri="https://snake-pwa.github.io/"),style="secondary"),
+                        ButtonComponent(action=URIAction(label="Little Alchemy 2", uri="https://littlealchemy2.com/"),style="secondary"),
+                        ButtonComponent(action=URIAction(label="Tower Game", uri="https://www.towergame.app/"),style="secondary"),
+                        ButtonComponent(action=URIAction(label="Tetris", uri="https://binaryify.github.io/vue-tetris/"),style="secondary"),
+                        ButtonComponent(action=URIAction(label="Gartic", uri="https://gartic.io/"),style="secondary")
+                    ]))
+                ]
             )
         line_bot_api.reply_message(event.reply_token, [
                 TextSendMessage(text="歡迎加入Linebot\n讓你輕鬆管理生活大小事\n以下是此行動助理的功能說明"),
@@ -536,7 +549,7 @@ rich_menu_to_create = RichMenu(
         ),
         RichMenuArea(
         bounds=RichMenuBounds(x=1707, y=843, width=854, height=843),
-        action=MessageAction(label="message", text="幫助")
+        action=MessageAction(label="message", text="小遊戲")
         )
     ]
 )
