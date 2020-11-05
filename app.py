@@ -409,7 +409,7 @@ def handle_message(event):
                         ButtonComponent(action=URIAction(label="Tetris", uri="https://binaryify.github.io/vue-tetris/"))
                     ])),
                     BubbleContainer(size="micro",action=URIAction(label="Tower Game", uri="https://binaryify.github.io/vue-tetris/"),
-                    hero=ImageComponent(url="https://d3frsattnbx5l6.cloudfront.net/1539284406589-towergame1.png",size="full",aspectMode="cover"),
+                    hero=ImageComponent(url="https://i.imgur.com/uzzivML.png",size="full",aspectMode="cover"),
                     body=BoxComponent(layout="vertical",contents=[
                         ButtonComponent(action=URIAction(label="Tower Game", uri="https://www.towergame.app/"))
                     ]))
