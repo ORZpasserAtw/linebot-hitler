@@ -403,10 +403,14 @@ def handle_message(event):
                     body=BoxComponent(layout="vertical",contents=[
                         ButtonComponent(action=URIAction(label="snake", uri="https://www.google.com/fbx?fbx=snake_arcade"))
                     ])),
-                    BubbleContainer(size="micro",body=BoxComponent(layout="vertical",contents=[
+                    BubbleContainer(size="micro",action=URIAction(label="Tetris", uri="https://binaryify.github.io/vue-tetris/"),
+                    hero=ImageComponent(url="https://camo.githubusercontent.com/8980082e6edae22933d63d58e02af96e7056fb89/68747470733a2f2f696d672e616c6963646e2e636f6d2f7470732f544231416737434e5858585858616f5858585858585858585858582d3332302d3438332e676966",size="full",aspectMode="cover"),
+                    body=BoxComponent(layout="vertical",contents=[
                         ButtonComponent(action=URIAction(label="Tetris", uri="https://binaryify.github.io/vue-tetris/"))
                     ])),
-                    BubbleContainer(size="micro",body=BoxComponent(layout="vertical",contents=[
+                    BubbleContainer(size="micro",action=URIAction(label="Tower Game", uri="https://binaryify.github.io/vue-tetris/"),
+                    hero=ImageComponent(url="https://www.towergame.app/assets/main-index-title.png",size="full",aspectMode="cover"),
+                    body=BoxComponent(layout="vertical",contents=[
                         ButtonComponent(action=URIAction(label="Tower Game", uri="https://www.towergame.app/"))
                     ]))
                 ])
@@ -422,6 +426,10 @@ def handle_message(event):
             RNGmsg = "https://youtu.be/EWKX3wass9s"
         elif ran == 2:
             RNGmsg = "https://youtu.be/1snEYPg8TXs"
+        elif ran == 3:
+            RNGmsg = "https://youtu.be/joZaJqyl2S0"
+        elif ran == 4:
+            RNGmsg = "https://youtu.be/96HtY9XJSMA"
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=RNGmsg))
     elif "=" in event.message.text:
