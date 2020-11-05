@@ -319,6 +319,8 @@ def handle_message(event):
                 pregas = "汽油每公升降"
             elif soup.find("h2",{"class": "up"}) != None:
                 pregas = "汽油每公升漲"
+            if soup.find("h2").find("em") == None:
+                return "汽油每公升不調整"
             gas = soup.find("h2").find("em").get_text()
             return pregas+gas+"元"
         def printdiesel(response,soup):
