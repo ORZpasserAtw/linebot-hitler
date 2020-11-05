@@ -397,11 +397,17 @@ def handle_message(event):
     elif event.message.text == "小遊戲":
         flex_message = FlexSendMessage(
             alt_text="小遊戲 Flex",
-            contents=BubbleContainer(size="kilo",body=BoxComponent(layout="vertical",spacing="sm",contents=[
-                        ButtonComponent(action=URIAction(label="snake", uri="https://www.google.com/fbx?fbx=snake_arcade"),style="secondary"),
-                        ButtonComponent(action=URIAction(label="Tower Game", uri="https://www.towergame.app/"),style="secondary"),
+            contents=CarouselContainer(contents=[
+                    BubbleContainer(body=BoxComponent(layout="vertical",spacing="sm",contents=[
+                        ButtonComponent(action=URIAction(label="snake", uri="https://www.google.com/fbx?fbx=snake_arcade"),style="secondary")
+                    ])),
+                    BubbleContainer(body=BoxComponent(layout="vertical",spacing="sm",contents=[
                         ButtonComponent(action=URIAction(label="Tetris", uri="https://binaryify.github.io/vue-tetris/"),style="secondary")
+                    ])),
+                    BubbleContainer(body=BoxComponent(layout="vertical",spacing="sm",contents=[
+                        ButtonComponent(action=URIAction(label="Tower Game", uri="https://www.towergame.app/"),style="secondary")
                     ]))
+                ])
             )
         line_bot_api.reply_message(event.reply_token, flex_message)
 
