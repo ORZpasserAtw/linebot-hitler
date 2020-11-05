@@ -399,7 +399,7 @@ def handle_message(event):
             alt_text="小遊戲 Flex",
             contents=CarouselContainer(contents=[
                     BubbleContainer(size="micro",action=URIAction(label="snake", uri="https://www.google.com/fbx?fbx=snake_arcade"),
-                    hero=ImageComponent(url="https://zoomscred.com/wp-content/uploads/2020/07/google-snake-awesome.png",size="full",aspectMode="cover"),
+                    hero=ImageComponent(url="https://i.imgur.com/tUXJI3R.png",size="full",aspectMode="cover"),
                     body=BoxComponent(layout="vertical",contents=[
                         ButtonComponent(action=URIAction(label="snake", uri="https://www.google.com/fbx?fbx=snake_arcade"))
                     ])),
