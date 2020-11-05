@@ -398,13 +398,14 @@ def handle_message(event):
         flex_message = FlexSendMessage(
             alt_text="小遊戲 Flex",
             contents=CarouselContainer(contents=[
-                    BubbleContainer(body=BoxComponent(layout="vertical",spacing="sm",contents=[
+                    BubbleContainer(size="micro",body=BoxComponent(layout="vertical",contents=[
+                        ImageComponent(url="https://zoomscred.com/wp-content/uploads/2020/07/google-snake-awesome.png",size="full",align="cover"),
                         ButtonComponent(action=URIAction(label="snake", uri="https://www.google.com/fbx?fbx=snake_arcade"),style="secondary")
                     ])),
-                    BubbleContainer(body=BoxComponent(layout="vertical",spacing="sm",contents=[
+                    BubbleContainer(size="micro",body=BoxComponent(layout="vertical",contents=[
                         ButtonComponent(action=URIAction(label="Tetris", uri="https://binaryify.github.io/vue-tetris/"),style="secondary")
                     ])),
-                    BubbleContainer(body=BoxComponent(layout="vertical",spacing="sm",contents=[
+                    BubbleContainer(size="micro",body=BoxComponent(layout="vertical",contents=[
                         ButtonComponent(action=URIAction(label="Tower Game", uri="https://www.towergame.app/"),style="secondary")
                     ]))
                 ])
