@@ -367,7 +367,7 @@ def handle_message(event):
                     TextComponent(text="　",size="xxs"),
                     TextComponent(text=printt(response,soup),align="center",size="sm"),
                     TextComponent(text=str(printgas(response,soup)+"　"+printdiesel(response,soup)),align="center"),
-                    TextComponent(text="＊實際漲幅受亞洲鄰國油價限制",size="xxs")
+                    TextComponent(text="＊實際漲幅受亞洲鄰國油價限制",size="xs",align="center")
                 ])
             )
         )
