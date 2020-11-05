@@ -387,7 +387,7 @@ def handle_message(event):
                         ButtonComponent(action=PostbackAction(label="天氣及空氣品質", data="天氣及空氣品質-幫助"),style="secondary"),
                         ButtonComponent(action=PostbackAction(label="油價", data="油價-幫助"),style="secondary"),
                         TextComponent(text="　")
-                    ])),
+                    ]))
                 ])
             )
         line_bot_api.reply_message(event.reply_token, [
@@ -398,11 +398,9 @@ def handle_message(event):
         flex_message = FlexSendMessage(
             alt_text="小遊戲 Flex",
             contents=BubbleContainer(size="kilo",body=BoxComponent(layout="vertical",spacing="sm",contents=[
-                        ButtonComponent(action=URIAction(label="snake", uri="https://snake-pwa.github.io/"),style="secondary"),
-                        ButtonComponent(action=URIAction(label="Little Alchemy 2", uri="https://littlealchemy2.com/"),style="secondary"),
+                        ButtonComponent(action=URIAction(label="snake", uri="https://www.google.com/fbx?fbx=snake_arcade"),style="secondary"),
                         ButtonComponent(action=URIAction(label="Tower Game", uri="https://www.towergame.app/"),style="secondary"),
-                        ButtonComponent(action=URIAction(label="Tetris", uri="https://binaryify.github.io/vue-tetris/"),style="secondary"),
-                        ButtonComponent(action=URIAction(label="Gartic", uri="https://gartic.io/"),style="secondary")
+                        ButtonComponent(action=URIAction(label="Tetris", uri="https://binaryify.github.io/vue-tetris/"),style="secondary")
                     ]))
             )
         line_bot_api.reply_message(event.reply_token, flex_message)
