@@ -403,10 +403,10 @@ def handle_message(event):
                     body=BoxComponent(layout="vertical",contents=[
                         ButtonComponent(action=URIAction(label="Snake", uri="https://www.google.com/fbx?fbx=snake_arcade"))
                     ])),
-                    BubbleContainer(size="micro",action=URIAction(label="Tetris", uri="https://binaryify.github.io/vue-tetris/"),
+                    BubbleContainer(size="micro",action=URIAction(label="Tetris", uri="https://binaryify.github.io/vue-tetris/?lan=en"),
                     hero=ImageComponent(url="https://camo.githubusercontent.com/8980082e6edae22933d63d58e02af96e7056fb89/68747470733a2f2f696d672e616c6963646e2e636f6d2f7470732f544231416737434e5858585858616f5858585858585858585858582d3332302d3438332e676966",size="full",aspectMode="cover"),
                     body=BoxComponent(layout="vertical",contents=[
-                        ButtonComponent(action=URIAction(label="Tetris", uri="https://binaryify.github.io/vue-tetris/"))
+                        ButtonComponent(action=URIAction(label="Tetris", uri="https://binaryify.github.io/vue-tetris/?lan=en"))
                     ])),
                     BubbleContainer(size="micro",action=URIAction(label="Tower Game", uri="https://www.towergame.app/"),
                     hero=ImageComponent(url="https://i.imgur.com/uzzivML.png",size="full",aspectMode="cover"),
