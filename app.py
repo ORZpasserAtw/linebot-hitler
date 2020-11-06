@@ -562,7 +562,7 @@ rich_menu_to_create = RichMenu(
         ),
         RichMenuArea(
         bounds=RichMenuBounds(x=1707, y=843, width=854, height=843),
-        action=MessageAction(label="message", text="小遊戲")
+        action=MessageAction(label="message", text="幫助")
         )
     ]
 )
