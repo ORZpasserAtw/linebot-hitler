@@ -327,15 +327,16 @@ def handle_message(event):
             diesel = soup.find("ul",{"id": "gas-price"}).find_all("li")[1]
             unwanted = diesel.find('h3')
             unwanted.extract()
-            if "元" not in diesel.get_text():
-                return "柴油每公升不調整"
             diesel = diesel.get_text().replace(" ", "").strip("元").strip("\n")
-            if "-" in diesel:
+            if "0.0" in diesel:
+                return "柴油每公升不調整"
+            elif "-" in diesel:
                 prediesel = "柴油每公升降"
                 diesel = diesel.strip("-")
+                return prediesel+diesel+"元"
             else:
                 prediesel = "柴油每公升漲"
-            return prediesel+diesel+"元"
+                return prediesel+diesel+"元"
 
         flex_message = FlexSendMessage(
             alt_text="油價 Flex",
