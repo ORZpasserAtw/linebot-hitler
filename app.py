@@ -312,7 +312,7 @@ def handle_message(event):
             "https://m.gas.goodlife.tw/")
         soup = BeautifulSoup(response.text, "html.parser")
         def printt(response,soup):
-            timer = soup.find("ul",{"id": "gas-price"}).find("li").find("p")
+        timer = soup.find("ul",{"id": "gas-price"}).find("li").find("p")
         if "明日" in timer.get_text():
             return timer.get_text().replace(" ", "")[8:-5]
         else:
