@@ -316,7 +316,7 @@ def handle_message(event):
             if "明日" in timer.get_text():
                 return timer.get_text().replace(" ", "")[8:-5]
             else:
-                return timer.get_text().replace(" ", "")[:-10] 
+                return timer.get_text().replace(" ", "")[:-10]
         def printgas(response,soup):
             if soup.find("h2",{"class": "down"}) != None:
                 pregas = "汽油每公升降"
