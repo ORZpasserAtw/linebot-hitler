@@ -312,11 +312,11 @@ def handle_message(event):
             "https://m.gas.goodlife.tw/")
         soup = BeautifulSoup(response.text, "html.parser")
         def printt(response,soup):
-        timer = soup.find("ul",{"id": "gas-price"}).find("li").find("p")
-        if "明日" in timer.get_text():
-            return timer.get_text().replace(" ", "")[8:-5]
-        else:
-            return timer.get_text().replace(" ", "")[:-10] 
+            timer = soup.find("ul",{"id": "gas-price"}).find("li").find("p")
+            if "明日" in timer.get_text():
+                return timer.get_text().replace(" ", "")[8:-5]
+            else:
+                return timer.get_text().replace(" ", "")[:-10] 
         def printgas(response,soup):
             if soup.find("h2",{"class": "down"}) != None:
                 pregas = "汽油每公升降"
