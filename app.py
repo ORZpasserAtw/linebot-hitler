@@ -334,8 +334,9 @@ def handle_message(event):
                 prediesel = "柴油每公升降"
                 diesel = diesel.strip("-")
                 return prediesel+diesel+"元"
-            else:
+            elif "+" in diesel:
                 prediesel = "柴油每公升漲"
+                diesel = diesel.strip("+")
                 return prediesel+diesel+"元"
 
         flex_message = FlexSendMessage(
