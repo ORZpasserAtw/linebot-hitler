@@ -315,8 +315,10 @@ def handle_message(event):
             timer = soup.find("ul",{"id": "gas-price"}).find("li").find("p")
             if "明日" in timer.get_text():
                 return timer.get_text().replace(" ", "")[8:-5]
+            elif "今日" in timer.get_text():
+                return timer.get_text().replace(" ", "")[8:-5]
             else:
-                return timer.get_text().replace(" ", "")[:-10]
+                return timer.get_text().replace(" ", "")[:-10] 
         def printgas(response,soup):
             if soup.find("h2",{"class": "down"}) != None:
                 pregas = "汽油每公升降"
