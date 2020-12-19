@@ -398,7 +398,7 @@ def handle_message(event):
                 ])
             )
         line_bot_api.reply_message(event.reply_token, [
-                TextSendMessage(text="歡迎加入Linebot\n讓你輕鬆管理生活大小事\n以下是此行動助理的功能說明"),
+                TextSendMessage(text="歡迎加入行動助理\n讓你輕鬆管理生活大小事\n以下是此助理的功能說明"),
                 flex_message
                 ])
     elif event.message.text == "小遊戲":
