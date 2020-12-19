@@ -131,7 +131,7 @@ def FlexWeatherTemplate(city,url,w,aqiindex,uvi):
                     TextComponent(text=status2ct(w.get_status()), size="xxl", weight="bold"),
                     TextComponent(text=w.get_detailed_status(), size="xs"),
                     TextComponent(text="溫度: "+str(round(w.get_temperature(unit='celsius')['temp'],1))+"°C"+"　濕度: "+str(w.get_humidity())+"%", size="xl"),
-                    TextComponent(text="空氣品質: "+requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&limit=1337').json()['records'][aqiindex]['AQI']+"("+aqi2rate(requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&limit=100').json()['records'][aqiindex]['AQI'])+")"),
+                    TextComponent(text="空氣品質: "+requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&limit=1234').json()['records'][aqiindex]['AQI']+"("+aqi2rate(requests.get('https://data.epa.gov.tw/api/v1/aqx_p_432?api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json&limit=100').json()['records'][aqiindex]['AQI'])+")"),
                     TextComponent(text="紫外線: "+str(round(float(uvi.json()['records'][0]['UVI'])))+"("+uvi2rate(uvi.json()['records'][0]['UVI'])+")"),
                     TextComponent(text="風速: "+str(round(w.get_wind()['speed']*18/5,1))+"km/h")
                 ])
